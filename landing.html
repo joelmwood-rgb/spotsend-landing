@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SpotSend — Spot It. Send It. Win It.</title>
+  <meta name="description" content="The AI-powered prospecting platform for contractors. Spot damage, reach that homeowner, win the job."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{--black:#0e0d0b;--ink:#1c1a17;--stone:#7a7670;--concrete:#b8b4ac;--cream:#f5f0e6;--orange:#e8560a;--orange2:#f4823c;--green:#2a7a52;--green2:#3eb87c;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Syne',sans-serif;background:var(--black);color:var(--cream);overflow-x:hidden;}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(14,13,11,0.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(232,86,10,0.12);}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+    .nav-logo-icon{width:30px;height:30px;display:flex;align-items:center;justify-content:center;}
+    .nav-wordmark{font-family:'Arial Black',sans-serif;font-size:20px;font-weight:900;letter-spacing:-0.5px;color:var(--cream);}
+    .nav-wordmark span{color:var(--orange);}
+    .nav-links{display:flex;align-items:center;gap:8px;}
+    .nav-link{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;color:var(--stone);text-decoration:none;transition:all 0.15s;}
+    .nav-link:hover{color:var(--cream);background:rgba(255,255,255,0.05);}
+    .nav-cta{background:linear-gradient(135deg,#f05a14,#e8560a,#d44d08);color:white;padding:9px 20px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:0 4px 14px rgba(232,86,10,0.4);transition:all 0.15s;}
+    .nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,86,10,0.5);}
+    .nav-signin{color:var(--cream);padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;border:1px solid rgba(184,180,172,0.2);background:rgba(255,255,255,0.04);transition:all 0.15s;}
+    .nav-signin:hover{background:rgba(255,255,255,0.08);border-color:rgba(184,180,172,0.35);}
+    .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 40px 80px;text-align:center;overflow:hidden;}
+    .hero-glow{position:absolute;width:900px;height:700px;background:radial-gradient(ellipse,rgba(232,86,10,0.11) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-55%);pointer-events:none;}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(232,86,10,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(232,86,10,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%);}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(232,86,10,0.1);border:1px solid rgba(232,86,10,0.25);border-radius:20px;padding:6px 18px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange2);margin-bottom:32px;position:relative;z-index:1;}
+    .hero-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);animation:pulse 2s infinite;}
+    @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(232,86,10,0.4);}50%{box-shadow:0 0 0 6px rgba(232,86,10,0);}}
+    .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,9vw,118px);line-height:0.9;letter-spacing:2px;margin-bottom:10px;position:relative;z-index:1;}
+    .hero-title-accent{color:var(--orange);display:block;filter:drop-shadow(0 0 40px rgba(232,86,10,0.25));}
+    .hero-slogan{font-family:'Bebas Neue',sans-serif;font-size:clamp(14px,2.2vw,22px);letter-spacing:8px;color:rgba(245,240,230,0.3);margin-bottom:36px;position:relative;z-index:1;}
+    .hero-sub{font-size:clamp(15px,1.8vw,19px);color:var(--stone);max-width:580px;line-height:1.75;margin-bottom:52px;position:relative;z-index:1;}
+    .hero-sub strong{color:var(--concrete);}
+    .hero-ctas{display:flex;align-items:center;gap:12px;position:relative;z-index:1;flex-wrap:wrap;justify-content:center;margin-bottom:80px;}
+    .cta-primary{background:linear-gradient(135deg,#f05a14 0%,#e8560a 50%,#d44d08 100%);color:white;padding:16px 36px;border-radius:10px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;text-decoration:none;box-shadow:0 6px 24px rgba(232,86,10,0.5),0 2px 8px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.15);transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1);display:inline-flex;align-items:center;gap:10px;}
+    .cta-primary:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(232,86,10,0.6),0 4px 12px rgba(0,0,0,0.4);}
+    .cta-secondary{color:var(--stone);padding:16px 28px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;border:1px solid rgba(184,180,172,0.15);transition:all 0.15s;display:inline-flex;align-items:center;gap:8px;}
+    .cta-secondary:hover{color:var(--cream);border-color:rgba(184,180,172,0.3);background:rgba(255,255,255,0.04);}
+    .proof-strip{position:relative;z-index:1;display:flex;align-items:center;background:rgba(255,255,255,0.02);border:1px solid rgba(184,180,172,0.08);border-radius:16px;overflow:hidden;flex-wrap:wrap;}
+    .proof-stat{padding:24px 40px;text-align:center;border-right:1px solid rgba(184,180,172,0.08);flex:1;min-width:120px;}
+    .proof-stat:last-child{border-right:none;}
+    .proof-number{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:2px;color:var(--cream);line-height:1;margin-bottom:4px;}
+    .proof-number span{color:var(--orange);}
+    .proof-label{font-size:10px;color:var(--stone);letter-spacing:1.5px;text-transform:uppercase;}
+    .section{padding:100px 40px;max-width:1200px;margin:0 auto;}
+    .section-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange2);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+    .section-label::before{content:'';flex:0 0 20px;height:1px;background:var(--orange);}
+    .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);letter-spacing:2px;line-height:0.95;margin-bottom:16px;}
+    .section-sub{font-size:16px;color:var(--stone);max-width:500px;line-height:1.75;margin-bottom:64px;}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(184,180,172,0.06);border-radius:16px;overflow:hidden;}
+    .step{background:var(--black);padding:40px 32px;position:relative;overflow:hidden;transition:all 0.25s;}
+    .step::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--orange),transparent);transform:scaleX(0);transition:transform 0.3s;}
+    .step:hover::after{transform:scaleX(1);}
+    .step:hover{background:rgba(232,86,10,0.03);}
+    .step-num{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:3px;color:var(--orange);opacity:0.6;margin-bottom:20px;}
+    .step-icon{font-size:36px;margin-bottom:20px;display:block;}
+    .step-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;color:var(--cream);margin-bottom:12px;}
+    .step-desc{font-size:14px;color:var(--stone);line-height:1.75;}
+    .step-desc strong{color:var(--concrete);}
+    .diff-section{padding:100px 40px;border-top:1px solid rgba(184,180,172,0.06);border-bottom:1px solid rgba(184,180,172,0.06);background:linear-gradient(180deg,transparent,rgba(232,86,10,0.03),transparent);}
+    .diff-inner{max-width:1200px;margin:0 auto;}
+    .diff-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px;}
+    .diff-card{background:linear-gradient(145deg,rgba(255,255,255,0.03),rgba(0,0,0,0.2));border:1px solid rgba(184,180,172,0.08);border-radius:14px;padding:28px;transition:all 0.2s;}
+    .diff-card:hover{border-color:rgba(232,86,10,0.18);transform:translateY(-2px);}
+    .diff-card-icon{font-size:28px;margin-bottom:14px;}
+    .diff-card-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--cream);margin-bottom:8px;}
+    .diff-card p{font-size:13px;color:var(--stone);line-height:1.7;}
+    .roi-section{padding:100px 40px;}
+    .roi-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+    .roi-math{background:linear-gradient(145deg,rgba(255,255,255,0.03),rgba(0,0,0,0.25));border:1px solid rgba(184,180,172,0.1);border-radius:16px;padding:36px;}
+    .roi-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(184,180,172,0.06);}
+    .roi-row:last-child{border-bottom:none;padding-bottom:0;}
+    .roi-row-label{font-size:13px;color:var(--stone);}
+    .roi-row-val{font-family:'DM Mono',monospace;font-size:14px;color:var(--concrete);}
+    .roi-row.highlight .roi-row-label{color:var(--cream);font-weight:600;}
+    .roi-row.highlight .roi-row-val{color:var(--green2);font-size:18px;font-weight:700;}
+    .pricing-section{padding:100px 40px;text-align:center;}
+    .pricing-inner{max-width:640px;margin:0 auto;}
+    .pricing-card{background:linear-gradient(145deg,rgba(255,255,255,0.04),rgba(0,0,0,0.3));border:1px solid rgba(232,86,10,0.2);border-radius:20px;padding:48px;position:relative;overflow:hidden;margin-top:48px;}
+    .pricing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--orange),transparent);}
+    .pricing-label{display:inline-block;background:rgba(232,86,10,0.12);border:1px solid rgba(232,86,10,0.25);border-radius:20px;padding:4px 16px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange2);margin-bottom:24px;}
+    .pricing-amount{font-family:'Bebas Neue',sans-serif;font-size:80px;letter-spacing:2px;line-height:1;color:var(--cream);margin-bottom:4px;}
+    .pricing-amount sup{font-size:36px;vertical-align:top;margin-top:14px;}
+    .pricing-period{font-size:14px;color:var(--stone);margin-bottom:36px;}
+    .pricing-features{list-style:none;text-align:left;margin-bottom:32px;display:flex;flex-direction:column;gap:14px;}
+    .pricing-features li{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--concrete);}
+    .pricing-features li::before{content:'✓';color:var(--green2);font-weight:700;flex-shrink:0;margin-top:1px;}
+    .pricing-usage{background:rgba(0,0,0,0.25);border:1px solid rgba(184,180,172,0.08);border-radius:10px;padding:18px;margin-bottom:32px;text-align:left;}
+    .pricing-usage-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--stone);margin-bottom:14px;}
+    .pricing-usage-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--concrete);margin-bottom:10px;}
+    .pricing-usage-row:last-child{margin-bottom:0;}
+    .pricing-usage-price{font-family:'DM Mono',monospace;color:var(--orange2);}
+    .pricing-note{font-size:11px;color:var(--stone);margin-top:12px;}
+    .final-cta{padding:120px 40px;text-align:center;position:relative;overflow:hidden;}
+    .final-glow{position:absolute;width:700px;height:500px;background:radial-gradient(ellipse,rgba(232,86,10,0.13) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+    .final-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,6vw,88px);letter-spacing:2px;line-height:0.95;margin-bottom:24px;position:relative;z-index:1;}
+    .final-title span{color:var(--orange);}
+    .final-sub{font-size:17px;color:var(--stone);max-width:460px;margin:0 auto 52px;line-height:1.75;position:relative;z-index:1;}
+    .final-sub strong{color:var(--concrete);}
+    footer{padding:32px 40px;border-top:1px solid rgba(184,180,172,0.06);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+    .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;color:var(--concrete);}
+    .footer-logo span{color:var(--orange);}
+    .footer-slogan{font-size:11px;color:var(--stone);letter-spacing:2px;text-transform:uppercase;}
+    .footer-copy{font-size:11px;color:var(--stone);}
+    @media(max-width:768px){nav{padding:0 20px;}.nav-link{display:none;}.hero{padding:90px 24px 60px;}.section,.roi-section,.pricing-section,.final-cta{padding:64px 24px;}.diff-section{padding:64px 24px;}.steps{grid-template-columns:1fr;}.roi-inner{grid-template-columns:1fr;gap:40px;}.diff-grid{grid-template-columns:1fr;}.proof-stat{padding:20px 24px;min-width:50%;}footer{padding:24px;flex-direction:column;text-align:center;}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+    .hero-eyebrow{animation:fadeUp 0.6s 0.1s both ease;}
+    .hero-title{animation:fadeUp 0.6s 0.2s both ease;}
+    .hero-slogan{animation:fadeUp 0.6s 0.3s both ease;}
+    .hero-sub{animation:fadeUp 0.6s 0.4s both ease;}
+    .hero-ctas{animation:fadeUp 0.6s 0.5s both ease;}
+    .proof-strip{animation:fadeUp 0.6s 0.6s both ease;}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <rect x="1" y="1" width="26" height="26" rx="3" stroke="#e8560a" stroke-width="1.5"/>
+        <path d="M1 8 L1 1 L8 1" fill="none" stroke="#f4823c" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M20 1 L27 1 L27 8" fill="none" stroke="#f4823c" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M1 20 L1 27 L8 27" fill="none" stroke="#f4823c" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M20 27 L27 27 L27 20" fill="none" stroke="#f4823c" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="14" y1="5" x2="14" y2="23" stroke="#e8560a" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="5" y1="14" x2="23" y2="14" stroke="#e8560a" stroke-width="1" stroke-dasharray="3,2"/>
+        <circle cx="14" cy="14" r="4.5" fill="#e8560a"/>
+        <circle cx="14" cy="14" r="2" fill="#0e0d0b"/>
+      </svg>
+    </div>
+    <div class="nav-wordmark">spot<span>send</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="#how" class="nav-link">How It Works</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+    <a href="/app" class="nav-signin">Sign In</a>
+    <a href="/app" class="nav-cta">Start Here →</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-eyebrow">
+    <div class="hero-dot"></div>
+    AI-Powered Prospecting for Contractors
+  </div>
+  <h1 class="hero-title">
+    Turn What You<br/>
+    <span class="hero-title-accent">Drive Past Into Jobs.</span>
+  </h1>
+  <div class="hero-slogan">SPOT IT · SEND IT · WIN IT</div>
+  <p class="hero-sub">
+    See damage on the road. Take a photo. <strong>SpotSend reaches that homeowner</strong> with personalized outreach — automatically, before your competition knows they exist.
+  </p>
+  <div class="hero-ctas">
+    <a href="/app" class="cta-primary">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M9 1C6.24 1 4 3.24 4 6C4 9.75 9 17 9 17C9 17 14 9.75 14 6C14 3.24 11.76 1 9 1Z" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1.4"/>
+        <circle cx="9" cy="6" r="2" fill="white"/>
+      </svg>
+      Start Spotting Free
+    </a>
+    <a href="#how" class="cta-secondary">See how it works →</a>
+  </div>
+  <div class="proof-strip">
+    <div class="proof-stat"><div class="proof-number">30<span>s</span></div><div class="proof-label">Spot to sent</div></div>
+    <div class="proof-stat"><div class="proof-number">$<span>35</span></div><div class="proof-label">To win a $2k job</div></div>
+    <div class="proof-stat"><div class="proof-number">13<span>x</span></div><div class="proof-label">Average ROI</div></div>
+    <div class="proof-stat"><div class="proof-number">$<span>99</span></div><div class="proof-label">Per month</div></div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title">Three Steps.<br/>One Job Won.</h2>
+  <p class="section-sub">SpotSend turns your daily drive into a revenue engine. No desk. No cold calls. No lead lists.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">STEP 01</div>
+      <span class="step-icon">📍</span>
+      <div class="step-title">Spot It</div>
+      <p class="step-desc">Drive your route. See a cracked driveway, sunken slab, or damaged concrete. Tap the address on our <strong>live satellite map</strong> or type it in. Snap a photo for AI analysis — optional but powerful.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">STEP 02</div>
+      <span class="step-icon">✨</span>
+      <div class="step-title">Send It</div>
+      <p class="step-desc">AI analyzes the damage, writes a <strong>personalized message to that specific homeowner</strong>, and reaches them automatically. You stay on the road.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">STEP 03</div>
+      <span class="step-icon">🏆</span>
+      <div class="step-title">Win It</div>
+      <p class="step-desc">The homeowner hears from you <strong>before anyone else</strong>. Your name. Their damage. Your price. Personalized and professional. They call. You win the job.</p>
+    </div>
+  </div>
+</section>
+
+<div class="diff-section">
+  <div class="diff-inner">
+    <div class="section-label">Why SpotSend</div>
+    <h2 class="section-title">Built for the<br/><span style="color:var(--orange)">Field, Not the Office.</span></h2>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-card-icon">🎯</div>
+        <div class="diff-card-title">You Pick Every Lead</div>
+        <p>No shared lead pools. No competing with 5 other contractors on the same job. You spot the damage, you own the contact. Every outreach is exclusive to you.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-card-icon">🤖</div>
+        <div class="diff-card-title">AI Does the Writing</div>
+        <p>SpotSend analyzes your photo, identifies the damage type, and writes a personalized note that sounds like it came from you — because the details come from what you actually saw.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-card-icon">⚡</div>
+        <div class="diff-card-title">30 Seconds Per Lead</div>
+        <p>Tap the address. Take a photo. Hit send. No typing, no CRM entry, no templates to fill out. SpotSend handles everything from your phone between jobs.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-card-icon">📈</div>
+        <div class="diff-card-title">Built to Scale</div>
+        <p>Queue 50 leads at once. Bulk send at end of day. Track every prospect from spot to win. SpotSend grows with your operation — from solo to multi-crew.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="roi-section">
+  <div class="roi-inner">
+    <div>
+      <div class="section-label">The Math</div>
+      <h2 class="section-title">$35 to Win a<br/><span style="color:var(--orange)">$2,000 Job.</span></h2>
+      <p style="font-size:16px;color:var(--stone);line-height:1.8;margin-top:20px;max-width:420px;">
+        Send 20 prospects at $1.75 each. One converts. You pocket $2,000. Your prospecting cost was <strong style="color:var(--cream)">1.75% of revenue.</strong><br/><br/>
+        No leads platform, no Google Ad, no referral network comes close to that math.
+      </p>
+    </div>
+    <div class="roi-math">
+      <div class="roi-row"><span class="roi-row-label">Spot bids sent</span><span class="roi-row-val">20</span></div>
+      <div class="roi-row"><span class="roi-row-label">Cost per outreach</span><span class="roi-row-val">$1.75</span></div>
+      <div class="roi-row"><span class="roi-row-label">Total prospecting cost</span><span class="roi-row-val">$35.00</span></div>
+      <div class="roi-row"><span class="roi-row-label">Typical conversion rate</span><span class="roi-row-val">5%</span></div>
+      <div class="roi-row"><span class="roi-row-label">Jobs won</span><span class="roi-row-val">1</span></div>
+      <div class="roi-row"><span class="roi-row-label">Average job value</span><span class="roi-row-val">$2,000</span></div>
+      <div class="roi-row highlight"><span class="roi-row-label">Return on investment</span><span class="roi-row-val">57x</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="pricing-section" id="pricing">
+  <div class="pricing-inner">
+    <div class="section-label" style="justify-content:center;">Pricing</div>
+    <h2 class="section-title">Simple.<br/>No Surprises.</h2>
+    <p class="section-sub" style="margin:12px auto 0;max-width:420px;">One plan. Everything included. Pay per outreach only when you send.</p>
+    <div class="pricing-card">
+      <div class="pricing-label">SpotSend Pro</div>
+      <div class="pricing-amount"><sup>$</sup>99</div>
+      <div class="pricing-period">per month + usage</div>
+      <ul class="pricing-features">
+        <li>EDDM Scout — live satellite map with GPS house flagging</li>
+        <li>AI Spot Bid — photo analysis + personalized outreach in 30 seconds</li>
+        <li>Neighborhood campaigns — area-wide prospecting at scale</li>
+        <li>AI Phone Agent — answers inbound calls, qualifies leads, transfers</li>
+        <li>Pipeline CRM — track every lead from spot to close</li>
+        <li>Bulk queue + batch send — prospect all day, send at once</li>
+        <li>Job board + revenue tracking dashboard</li>
+      </ul>
+      <div class="pricing-usage">
+        <div class="pricing-usage-title">Usage — Pay Only When You Send</div>
+        <div class="pricing-usage-row"><span>Spot Bid outreach (personalized postcard, printed + mailed)</span><span class="pricing-usage-price">$1.75</span></div>
+        <div class="pricing-usage-row"><span>Neighborhood campaign (per home)</span><span class="pricing-usage-price">$0.82</span></div>
+        <div class="pricing-usage-row"><span>AI phone calls</span><span class="pricing-usage-price">Included</span></div>
+      </div>
+      <a href="/app" class="cta-primary" style="width:100%;justify-content:center;font-size:20px;letter-spacing:2px;">Start Free Trial →</a>
+      <p class="pricing-note">No credit card required. Cancel anytime.</p>
+    </div>
+  </div>
+</div>
+
+<section class="final-cta">
+  <div class="final-glow"></div>
+  <h2 class="final-title">Stop Driving Past<br/><span>Your Next Job.</span></h2>
+  <p class="final-sub">Every piece of damage you pass without reaching out is <strong>money left on the road.</strong> SpotSend turns your drive into a prospecting machine.</p>
+  <a href="/app" class="cta-primary" style="font-size:22px;letter-spacing:3px;padding:18px 52px;position:relative;z-index:1;">SPOT IT. SEND IT. WIN IT. →</a>
+</section>
+
+<footer>
+  <div class="footer-logo">spot<span>send</span></div>
+  <div class="footer-slogan">AI-Powered Prospecting for Contractors</div>
+  <div class="footer-copy">© 2026 SpotSend · spotsend.io</div>
+</footer>
+
+</body>
+</html>
