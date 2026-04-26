@@ -1,302 +1,1314 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SpotSend — Spot It. Send It. Win It.</title>
-  <meta name="description" content="The AI-powered prospecting platform for contractors. Spot damage, reach that homeowner, win the job."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;}
-    :root{--black:#0e0d0b;--ink:#1c1a17;--stone:#7a7670;--concrete:#b8b4ac;--cream:#f5f0e6;--orange:#e8560a;--orange2:#f4823c;--green:#2a7a52;--green2:#3eb87c;}
-    html{scroll-behavior:smooth;}
-    body{font-family:'Syne',sans-serif;background:var(--black);color:var(--cream);overflow-x:hidden;}
-    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(14,13,11,0.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(232,86,10,0.12);}
-    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-    .nav-logo-icon{width:30px;height:30px;display:flex;align-items:center;justify-content:center;}
-    .nav-wordmark{font-family:'Arial Black',sans-serif;font-size:20px;font-weight:900;letter-spacing:-0.5px;color:var(--cream);}
-    .nav-wordmark span{color:var(--orange);}
-    .nav-links{display:flex;align-items:center;gap:8px;}
-    .nav-link{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;color:var(--stone);text-decoration:none;transition:all 0.15s;}
-    .nav-link:hover{color:var(--cream);background:rgba(255,255,255,0.05);}
-    .nav-cta{background:linear-gradient(135deg,#f05a14,#e8560a,#d44d08);color:white;padding:9px 20px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:0 4px 14px rgba(232,86,10,0.4);transition:all 0.15s;}
-    .nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,86,10,0.5);}
-    .nav-signin{color:var(--cream);padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;border:1px solid rgba(184,180,172,0.2);background:rgba(255,255,255,0.04);transition:all 0.15s;}
-    .nav-signin:hover{background:rgba(255,255,255,0.08);border-color:rgba(184,180,172,0.35);}
-    .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 40px 80px;text-align:center;overflow:hidden;}
-    .hero-glow{position:absolute;width:900px;height:700px;background:radial-gradient(ellipse,rgba(232,86,10,0.11) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-55%);pointer-events:none;}
-    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(232,86,10,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(232,86,10,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%);}
-    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(232,86,10,0.1);border:1px solid rgba(232,86,10,0.25);border-radius:20px;padding:6px 18px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange2);margin-bottom:32px;position:relative;z-index:1;}
-    .hero-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);animation:pulse 2s infinite;}
-    @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(232,86,10,0.4);}50%{box-shadow:0 0 0 6px rgba(232,86,10,0);}}
-    .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,9vw,118px);line-height:0.9;letter-spacing:2px;margin-bottom:10px;position:relative;z-index:1;}
-    .hero-title-accent{color:var(--orange);display:block;filter:drop-shadow(0 0 40px rgba(232,86,10,0.25));}
-    .hero-slogan{font-family:'Bebas Neue',sans-serif;font-size:clamp(14px,2.2vw,22px);letter-spacing:8px;color:rgba(245,240,230,0.3);margin-bottom:36px;position:relative;z-index:1;}
-    .hero-sub{font-size:clamp(15px,1.8vw,19px);color:var(--stone);max-width:580px;line-height:1.75;margin-bottom:52px;position:relative;z-index:1;}
-    .hero-sub strong{color:var(--concrete);}
-    .hero-ctas{display:flex;align-items:center;gap:12px;position:relative;z-index:1;flex-wrap:wrap;justify-content:center;margin-bottom:80px;}
-    .cta-primary{background:linear-gradient(135deg,#f05a14 0%,#e8560a 50%,#d44d08 100%);color:white;padding:16px 36px;border-radius:10px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;text-decoration:none;box-shadow:0 6px 24px rgba(232,86,10,0.5),0 2px 8px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.15);transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1);display:inline-flex;align-items:center;gap:10px;}
-    .cta-primary:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(232,86,10,0.6),0 4px 12px rgba(0,0,0,0.4);}
-    .cta-secondary{color:var(--stone);padding:16px 28px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;border:1px solid rgba(184,180,172,0.15);transition:all 0.15s;display:inline-flex;align-items:center;gap:8px;}
-    .cta-secondary:hover{color:var(--cream);border-color:rgba(184,180,172,0.3);background:rgba(255,255,255,0.04);}
-    .proof-strip{position:relative;z-index:1;display:flex;align-items:center;background:rgba(255,255,255,0.02);border:1px solid rgba(184,180,172,0.08);border-radius:16px;overflow:hidden;flex-wrap:wrap;}
-    .proof-stat{padding:24px 40px;text-align:center;border-right:1px solid rgba(184,180,172,0.08);flex:1;min-width:120px;}
-    .proof-stat:last-child{border-right:none;}
-    .proof-number{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:2px;color:var(--cream);line-height:1;margin-bottom:4px;}
-    .proof-number span{color:var(--orange);}
-    .proof-label{font-size:10px;color:var(--stone);letter-spacing:1.5px;text-transform:uppercase;}
-    .section{padding:100px 40px;max-width:1200px;margin:0 auto;}
-    .section-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange2);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
-    .section-label::before{content:'';flex:0 0 20px;height:1px;background:var(--orange);}
-    .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);letter-spacing:2px;line-height:0.95;margin-bottom:16px;}
-    .section-sub{font-size:16px;color:var(--stone);max-width:500px;line-height:1.75;margin-bottom:64px;}
-    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(184,180,172,0.06);border-radius:16px;overflow:hidden;}
-    .step{background:var(--black);padding:40px 32px;position:relative;overflow:hidden;transition:all 0.25s;}
-    .step::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--orange),transparent);transform:scaleX(0);transition:transform 0.3s;}
-    .step:hover::after{transform:scaleX(1);}
-    .step:hover{background:rgba(232,86,10,0.03);}
-    .step-num{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:3px;color:var(--orange);opacity:0.6;margin-bottom:20px;}
-    .step-icon{font-size:36px;margin-bottom:20px;display:block;}
-    .step-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;color:var(--cream);margin-bottom:12px;}
-    .step-desc{font-size:14px;color:var(--stone);line-height:1.75;}
-    .step-desc strong{color:var(--concrete);}
-    .diff-section{padding:100px 40px;border-top:1px solid rgba(184,180,172,0.06);border-bottom:1px solid rgba(184,180,172,0.06);background:linear-gradient(180deg,transparent,rgba(232,86,10,0.03),transparent);}
-    .diff-inner{max-width:1200px;margin:0 auto;}
-    .diff-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px;}
-    .diff-card{background:linear-gradient(145deg,rgba(255,255,255,0.03),rgba(0,0,0,0.2));border:1px solid rgba(184,180,172,0.08);border-radius:14px;padding:28px;transition:all 0.2s;}
-    .diff-card:hover{border-color:rgba(232,86,10,0.18);transform:translateY(-2px);}
-    .diff-card-icon{font-size:28px;margin-bottom:14px;}
-    .diff-card-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--cream);margin-bottom:8px;}
-    .diff-card p{font-size:13px;color:var(--stone);line-height:1.7;}
-    .roi-section{padding:100px 40px;}
-    .roi-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
-    .roi-math{background:linear-gradient(145deg,rgba(255,255,255,0.03),rgba(0,0,0,0.25));border:1px solid rgba(184,180,172,0.1);border-radius:16px;padding:36px;}
-    .roi-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(184,180,172,0.06);}
-    .roi-row:last-child{border-bottom:none;padding-bottom:0;}
-    .roi-row-label{font-size:13px;color:var(--stone);}
-    .roi-row-val{font-family:'DM Mono',monospace;font-size:14px;color:var(--concrete);}
-    .roi-row.highlight .roi-row-label{color:var(--cream);font-weight:600;}
-    .roi-row.highlight .roi-row-val{color:var(--green2);font-size:18px;font-weight:700;}
-    .pricing-section{padding:100px 40px;text-align:center;}
-    .pricing-inner{max-width:640px;margin:0 auto;}
-    .pricing-card{background:linear-gradient(145deg,rgba(255,255,255,0.04),rgba(0,0,0,0.3));border:1px solid rgba(232,86,10,0.2);border-radius:20px;padding:48px;position:relative;overflow:hidden;margin-top:48px;}
-    .pricing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--orange),transparent);}
-    .pricing-label{display:inline-block;background:rgba(232,86,10,0.12);border:1px solid rgba(232,86,10,0.25);border-radius:20px;padding:4px 16px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange2);margin-bottom:24px;}
-    .pricing-amount{font-family:'Bebas Neue',sans-serif;font-size:80px;letter-spacing:2px;line-height:1;color:var(--cream);margin-bottom:4px;}
-    .pricing-amount sup{font-size:36px;vertical-align:top;margin-top:14px;}
-    .pricing-period{font-size:14px;color:var(--stone);margin-bottom:36px;}
-    .pricing-features{list-style:none;text-align:left;margin-bottom:32px;display:flex;flex-direction:column;gap:14px;}
-    .pricing-features li{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--concrete);}
-    .pricing-features li::before{content:'✓';color:var(--green2);font-weight:700;flex-shrink:0;margin-top:1px;}
-    .pricing-usage{background:rgba(0,0,0,0.25);border:1px solid rgba(184,180,172,0.08);border-radius:10px;padding:18px;margin-bottom:32px;text-align:left;}
-    .pricing-usage-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--stone);margin-bottom:14px;}
-    .pricing-usage-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--concrete);margin-bottom:10px;}
-    .pricing-usage-row:last-child{margin-bottom:0;}
-    .pricing-usage-price{font-family:'DM Mono',monospace;color:var(--orange2);}
-    .pricing-note{font-size:11px;color:var(--stone);margin-top:12px;}
-    .final-cta{padding:120px 40px;text-align:center;position:relative;overflow:hidden;}
-    .final-glow{position:absolute;width:700px;height:500px;background:radial-gradient(ellipse,rgba(232,86,10,0.13) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
-    .final-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,6vw,88px);letter-spacing:2px;line-height:0.95;margin-bottom:24px;position:relative;z-index:1;}
-    .final-title span{color:var(--orange);}
-    .final-sub{font-size:17px;color:var(--stone);max-width:460px;margin:0 auto 52px;line-height:1.75;position:relative;z-index:1;}
-    .final-sub strong{color:var(--concrete);}
-    footer{padding:32px 40px;border-top:1px solid rgba(184,180,172,0.06);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
-    .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;color:var(--concrete);}
-    .footer-logo span{color:var(--orange);}
-    .footer-slogan{font-size:11px;color:var(--stone);letter-spacing:2px;text-transform:uppercase;}
-    .footer-copy{font-size:11px;color:var(--stone);}
-    @media(max-width:768px){nav{padding:0 20px;}.nav-link{display:none;}.hero{padding:90px 24px 60px;}.section,.roi-section,.pricing-section,.final-cta{padding:64px 24px;}.diff-section{padding:64px 24px;}.steps{grid-template-columns:1fr;}.roi-inner{grid-template-columns:1fr;gap:40px;}.diff-grid{grid-template-columns:1fr;}.proof-stat{padding:20px 24px;min-width:50%;}footer{padding:24px;flex-direction:column;text-align:center;}}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
-    .hero-eyebrow{animation:fadeUp 0.6s 0.1s both ease;}
-    .hero-title{animation:fadeUp 0.6s 0.2s both ease;}
-    .hero-slogan{animation:fadeUp 0.6s 0.3s both ease;}
-    .hero-sub{animation:fadeUp 0.6s 0.4s both ease;}
-    .hero-ctas{animation:fadeUp 0.6s 0.5s both ease;}
-    .proof-strip{animation:fadeUp 0.6s 0.6s both ease;}
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SpotSend — Turn What You Drive Past Into Jobs</title>
+<meta name="description" content="Snap a photo. We mail that homeowner by Friday. AI-powered prospecting for contractors. $1.75 per send, postage included."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600;1,700&family=Barlow+Condensed:wght@700;800;900&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════
+   TOKENS
+════════════════════════════════════ */
+:root {
+  --bg:    #0f1114;
+  --bg2:   #161920;
+  --bg3:   #1d2128;
+  --edge:  rgba(255,255,255,.06);
+  --edge2: rgba(255,255,255,.03);
+  --cu:    #d06830;
+  --cu2:   rgba(208,104,48,.12);
+  --cu3:   rgba(208,104,48,.06);
+  --hi:    #e8d5c0;     /* warm off-white headline */
+  --body:  #8a9099;
+  --dim:   #4a5260;
+  --line:  rgba(208,104,48,.15);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--hi);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ════════════════════════════════════
+   KEYFRAMES
+════════════════════════════════════ */
+@keyframes fadeUp   { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
+@keyframes glow     { 0%,100%{opacity:.4;} 50%{opacity:1;} }
+@keyframes ticker   { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+@keyframes scanDown { 0%{top:-4px;} 100%{top:100%;} }
+@keyframes rotateCH { 0%{transform:rotate(0deg);} 100%{transform:rotate(90deg);} }
+@keyframes countNum { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
+@keyframes barGrow  { from{width:0;} to{width:var(--w);} }
+
+/* Scroll-reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-d1 { transition-delay: .1s; }
+.reveal-d2 { transition-delay: .2s; }
+.reveal-d3 { transition-delay: .3s; }
+.reveal-d4 { transition-delay: .4s; }
+
+/* ════════════════════════════════════
+   NAV
+════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  background: rgba(15,17,20,.95);
+  backdrop-filter: blur(20px);
+  border-bottom: .5px solid var(--edge);
+}
+.nav-logo { display:flex; align-items:center; gap:9px; text-decoration:none; }
+.nav-mark { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:18px; letter-spacing:3px; text-transform:uppercase; color:var(--hi); }
+.nav-mark em { color:var(--cu); font-style:normal; }
+.nav-links { display:flex; gap:32px; }
+.nav-links a { font-family:'DM Mono',monospace; font-size:9.5px; color:var(--dim); letter-spacing:2px; text-transform:uppercase; text-decoration:none; transition:color .2s; }
+.nav-links a:hover, .nav-links a.on { color:var(--cu); }
+.nav-r { display:flex; gap:10px; align-items:center; }
+.nav-in { font-family:'DM Mono',monospace; font-size:9.5px; color:var(--dim); letter-spacing:1.5px; text-transform:uppercase; text-decoration:none; padding:7px 16px; border:.5px solid rgba(255,255,255,.08); border-radius:3px; transition:all .2s; }
+.nav-in:hover { color:var(--hi); border-color:var(--dim); }
+.nav-cta { background:var(--cu); color:#0f1114; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:12px; letter-spacing:2px; text-transform:uppercase; text-decoration:none; padding:8px 20px; border-radius:3px; transition:all .15s; }
+.nav-cta:hover { background:#e07840; transform:translateY(-1px); }
+
+/* ════════════════════════════════════
+   HERO — FULL VIEWPORT CINEMATIC
+════════════════════════════════════ */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 48px 80px;
+  overflow: hidden;
+}
+
+/* Background: subtle grid */
+.h-grid {
+  position: absolute; inset:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(208,104,48,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(208,104,48,.018) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Giant 48× watermark behind everything */
+.h-wm {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(280px, 38vw, 520px);
+  line-height: 1;
+  letter-spacing: -16px;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(208,104,48,.06);
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* Radial atmosphere */
+.h-atm {
+  position: absolute; inset:0; pointer-events:none;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(208,104,48,.05) 0%, transparent 70%);
+}
+
+/* Hero content */
+.h-inner {
+  position: relative; z-index: 2;
+  max-width: 900px;
+}
+
+.h-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(208,104,48,.08);
+  border: .5px solid rgba(208,104,48,.25);
+  border-radius: 100px;
+  padding: 5px 16px;
+  margin-bottom: 36px;
+}
+.h-pill-dot { width:5px; height:5px; border-radius:50%; background:var(--cu); animation: glow 2s ease-in-out infinite; }
+.h-pill-txt { font-family:'DM Mono',monospace; font-size:9.5px; color:var(--cu); letter-spacing:3px; text-transform:uppercase; }
+
+/* THE BIG HEADLINE */
+.h-h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(72px, 10.5vw, 150px);
+  line-height: .88;
+  letter-spacing: -3px;
+  text-transform: uppercase;
+  color: var(--hi);
+  margin-bottom: 40px;
+}
+.h-h1 .cu { color: var(--cu); }
+.h-h1 .ghost {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(232,213,192,.18);
+}
+
+/* Sub copy */
+.h-sub {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--body);
+  line-height: 1.8;
+  max-width: 480px;
+  margin-bottom: 40px;
+}
+.h-sub strong { color: var(--hi); font-weight: 400; }
+
+/* CTA row */
+.h-ctas { display:flex; gap:14px; align-items:center; margin-bottom: 64px; }
+.btn-cu {
+  display: inline-flex; align-items:center; gap:8px;
+  background: var(--cu); color: #0f1114;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform:uppercase;
+  padding: 14px 32px; border:none; border-radius:3px;
+  cursor:pointer; text-decoration:none;
+  position:relative; overflow:hidden;
+  transition: transform .15s, box-shadow .15s;
+}
+.btn-cu::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,.15),transparent 55%); }
+.btn-cu:hover { transform:translateY(-2px); box-shadow:0 16px 48px rgba(208,104,48,.3); }
+.btn-ghost {
+  display: inline-flex; align-items:center; gap:8px;
+  background:none; color:var(--body);
+  font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase;
+  padding:14px 20px; border:.5px solid var(--dim); border-radius:3px;
+  cursor:pointer; text-decoration:none;
+  transition:all .2s;
+}
+.btn-ghost:hover { color:var(--hi); border-color:var(--body); }
+
+/* Proof strip */
+.h-proof {
+  display: flex; gap:0;
+  border-top: .5px solid rgba(208,104,48,.1);
+  padding-top: 28px;
+}
+.hp-item {
+  padding-right: 32px;
+  border-right: .5px solid rgba(255,255,255,.05);
+  margin-right: 32px;
+}
+.hp-item:last-child { border-right:none; padding-right:0; margin-right:0; }
+.hp-n {
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900; font-size:34px; line-height:1;
+  letter-spacing:-1px; color:var(--cu); margin-bottom:4px;
+}
+.hp-l { font-family:'DM Mono',monospace; font-size:8.5px; color:var(--dim); letter-spacing:1.5px; text-transform:uppercase; }
+
+/* ════════════════════════════════════
+   TICKER STRIP
+════════════════════════════════════ */
+#ticker {
+  position:relative;
+  border-top: .5px solid var(--edge);
+  border-bottom: .5px solid var(--edge);
+  background: var(--bg2);
+  overflow: hidden;
+  padding: 0;
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 40s linear infinite;
+}
+.ticker-track:hover { animation-play-state:paused; }
+.ticker-item {
+  display: flex; align-items:center; gap:14px;
+  padding: 18px 48px;
+  border-right: .5px solid var(--edge2);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.ti-quote { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:var(--body); }
+.ti-attr { font-family:'DM Mono',monospace; font-size:9px; color:var(--dim); letter-spacing:1.5px; text-transform:uppercase; }
+.ti-dot { width:3px; height:3px; border-radius:50%; background:var(--cu); opacity:.5; }
+
+/* ════════════════════════════════════
+   OLD WAY / SPOTSEND WAY
+════════════════════════════════════ */
+#split {
+  position:relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 600px;
+  overflow:hidden;
+}
+/* LEFT — OLD WAY */
+.split-old {
+  position:relative;
+  background: var(--bg2);
+  padding: 80px 60px;
+  border-right: .5px solid var(--edge);
+  display:flex; flex-direction:column; justify-content:center;
+}
+/* Desaturated driving scene */
+.split-scene {
+  position:absolute; inset:0;
+  background: linear-gradient(160deg, #141618 0%, #0c0e10 100%);
+  overflow:hidden;
+}
+/* Road lines going into distance */
+.split-scene::after {
+  content:'';
+  position:absolute; bottom:0; left:50%; transform:translateX(-50%);
+  width:2px; height:60%;
+  background: linear-gradient(to top, rgba(255,255,255,.08), transparent);
+  box-shadow: -40px 0 0 rgba(255,255,255,.04), 40px 0 0 rgba(255,255,255,.04);
+}
+.split-old-overlay { position:absolute; inset:0; background: linear-gradient(to right, rgba(14,16,18,.6) 0%, rgba(14,16,18,.3) 100%); }
+.split-old-content { position:relative; z-index:2; }
+.split-tag { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; margin-bottom:20px; display:flex; align-items:center; gap:10px; }
+.split-tag.bad { color:var(--dim); }
+.split-tag.bad::before { content:''; display:block; width:24px; height:1px; background:var(--dim); }
+.split-tag.good { color:var(--cu); }
+.split-tag.good::before { content:''; display:block; width:24px; height:1px; background:var(--cu); }
+.split-h {
+  font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:700;
+  font-size:clamp(32px,3.5vw,52px); line-height:.9; letter-spacing:-1px;
+  margin-bottom:24px;
+}
+.split-h.bad { color:rgba(232,213,192,.4); }
+.split-h.good { color:var(--hi); }
+.split-items { list-style:none; display:flex; flex-direction:column; gap:12px; }
+.split-items li { font-size:13px; font-weight:300; color:var(--body); padding-left:20px; position:relative; line-height:1.55; }
+.split-items li::before { position:absolute; left:0; font-family:'DM Mono',monospace; font-size:11px; }
+.split-items.bad li { color:var(--dim); }
+.split-items.bad li::before { content:'—'; color:rgba(255,255,255,.15); }
+.split-items.good li::before { content:'◎'; color:var(--cu); font-size:9px; top:2px; }
+
+/* RIGHT — SPOTSEND WAY */
+.split-new {
+  position:relative;
+  background: var(--bg);
+  padding: 80px 60px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+/* Property scene with crosshair */
+.split-property {
+  position:absolute; inset:0;
+  background: linear-gradient(160deg,#141c28 0%,#0c1018 100%);
+  overflow:hidden;
+}
+.split-new-overlay { position:absolute; inset:0; background: linear-gradient(to left, rgba(15,17,20,.65) 0%, rgba(15,17,20,.25) 100%); }
+.split-new-content { position:relative; z-index:2; }
+
+/* Crosshair targeting mark */
+.ch-wrap { position:absolute; top:50%; left:46%; transform:translate(-50%,-50%); pointer-events:none; z-index:1; }
+.ch {
+  width:110px; height:110px; position:relative;
+}
+.ch-r1 { position:absolute; inset:0; border:1.5px solid rgba(208,104,48,.5); border-radius:50%; animation:glow 2s ease-in-out infinite; }
+.ch-r2 { position:absolute; inset:18px; border:1px solid rgba(208,104,48,.25); border-radius:50%; }
+.ch-dot { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:5px; height:5px; border-radius:50%; background:var(--cu); animation:glow 1.5s ease-in-out infinite; }
+.ch-lh { position:absolute; top:50%; left:-14px; right:-14px; height:1px; background:linear-gradient(90deg,transparent,rgba(208,104,48,.6),transparent); transform:translateY(-50%); }
+.ch-lv { position:absolute; left:50%; top:-14px; bottom:-14px; width:1px; background:linear-gradient(180deg,transparent,rgba(208,104,48,.6),transparent); transform:translateX(-50%); }
+.ch-c { position:absolute; width:14px; height:14px; border-color:var(--cu); border-style:solid; border-width:0; }
+.ch-c.tl { top:6px; left:6px; border-top-width:2px; border-left-width:2px; }
+.ch-c.tr { top:6px; right:6px; border-top-width:2px; border-right-width:2px; }
+.ch-c.bl { bottom:6px; left:6px; border-bottom-width:2px; border-left-width:2px; }
+.ch-c.br { bottom:6px; right:6px; border-bottom-width:2px; border-right-width:2px; }
+/* Scan line */
+.ch-scan { position:absolute; left:0; right:0; height:1.5px; background:linear-gradient(90deg,transparent,rgba(208,104,48,.4),transparent); animation:scanDown 2.8s ease-in-out infinite; top:0; }
+
+/* ════════════════════════════════════
+   HOW IT WORKS — 3 BIG CARDS
+════════════════════════════════════ */
+#how {
+  position:relative;
+  padding: 120px 48px;
+  background: var(--bg2);
+  overflow:hidden;
+}
+.how-inner { max-width:1200px; margin:0 auto; }
+.sec-tag { font-family:'DM Mono',monospace; font-size:9.5px; color:var(--cu); letter-spacing:3.5px; text-transform:uppercase; margin-bottom:20px; display:flex; align-items:center; gap:12px; }
+.sec-tag::before { content:''; display:block; width:28px; height:1px; background:var(--cu); flex-shrink:0; }
+.sec-h {
+  font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:700;
+  font-size:clamp(42px,5.5vw,72px); line-height:.88; letter-spacing:-2px;
+  color:var(--hi); margin-bottom:60px;
+}
+.sec-h .cu { color:var(--cu); }
+.how-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(208,104,48,.04); border-radius:8px; overflow:hidden; }
+.hc {
+  background:var(--bg2); padding:44px 36px;
+  position:relative; overflow:hidden;
+  transition:background .25s;
+}
+.hc:hover { background:var(--bg3); }
+.hc::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--cu),rgba(208,104,48,.3)); opacity:0; transition:opacity .25s; }
+.hc:hover::before { opacity:1; }
+.hc-n { font-family:'DM Mono',monospace; font-size:9px; color:var(--cu); letter-spacing:3px; margin-bottom:24px; display:flex; align-items:center; gap:10px; }
+.hc-n::after { content:''; flex:1; height:1px; background:rgba(208,104,48,.1); }
+.hc-ico { width:44px; height:44px; background:rgba(208,104,48,.07); border:.5px solid rgba(208,104,48,.2); border-radius:7px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; }
+.hc-h { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:22px; letter-spacing:.5px; text-transform:uppercase; color:var(--hi); margin-bottom:12px; }
+.hc-b { font-size:13px; font-weight:300; color:var(--body); line-height:1.75; }
+.hc-b strong { color:rgba(232,213,192,.75); font-weight:400; }
+.hc-t { font-family:'DM Mono',monospace; font-size:8.5px; color:var(--cu); letter-spacing:2px; text-transform:uppercase; margin-top:20px; padding-top:16px; border-top:.5px solid rgba(208,104,48,.07); }
+
+/* ════════════════════════════════════
+   ECONOMICS — THE SHOWSTOPPER
+════════════════════════════════════ */
+#econ {
+  position:relative;
+  background: var(--bg);
+  overflow:hidden;
+}
+.econ-top { height:1px; background:linear-gradient(90deg,transparent,rgba(208,104,48,.4),rgba(208,104,48,.6),rgba(208,104,48,.4),transparent); }
+
+/* GIANT NUMBER PANEL */
+.econ-hero {
+  position:relative;
+  padding: 100px 48px 80px;
+  text-align:center;
+  overflow:hidden;
+}
+.econ-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(208,104,48,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(208,104,48,.015) 1px,transparent 1px); background-size:52px 52px; pointer-events:none; }
+.econ-glow { position:absolute; inset:0; background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(208,104,48,.07) 0%,transparent 70%); pointer-events:none; }
+.econ-label { font-family:'DM Mono',monospace; font-size:10px; color:var(--cu); letter-spacing:4px; text-transform:uppercase; margin-bottom:28px; display:flex; align-items:center; justify-content:center; gap:16px; }
+.econ-label::before, .econ-label::after { content:''; display:block; width:48px; height:1px; background:var(--cu); }
+.econ-num-wrap { position:relative; display:inline-block; }
+.econ-48 {
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;
+  font-size:clamp(130px,20vw,240px);
+  line-height:.85; letter-spacing:-8px;
+  color:var(--cu);
+  position:relative; z-index:1;
+}
+.econ-x { font-size:.5em; color:rgba(208,104,48,.55); letter-spacing:-2px; }
+/* Rings behind number */
+.econ-ring { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:50%; border:1px solid rgba(208,104,48,.08); pointer-events:none; }
+.econ-hl { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(20px,2.5vw,30px); color:var(--hi); letter-spacing:-1px; margin-bottom:10px; }
+.econ-note { font-family:'DM Mono',monospace; font-size:10px; color:var(--dim); letter-spacing:1.5px; }
+
+/* IO SPLIT */
+.econ-io {
+  max-width:1160px; margin:0 auto;
+  padding: 0 48px 80px;
+  display:grid; grid-template-columns:1fr 56px 1fr; gap:0; align-items:start;
+}
+.io-card { background:var(--bg2); border:.5px solid var(--edge); border-radius:6px; overflow:hidden; }
+.io-head { padding:20px 28px; border-bottom:.5px solid var(--edge); }
+.io-head.in { background:rgba(208,104,48,.04); }
+.io-head.out { background:rgba(208,104,48,.08); }
+.io-tag { font-family:'DM Mono',monospace; font-size:8.5px; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:5px; }
+.io-tag.in { color:var(--dim); }
+.io-tag.out { color:var(--cu); }
+.io-total { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:34px; letter-spacing:-1px; }
+.io-total.in { color:var(--hi); }
+.io-total.out { color:var(--cu); }
+.io-row { display:flex; justify-content:space-between; align-items:center; padding:13px 28px; border-bottom:.5px solid rgba(255,255,255,.03); font-size:13px; font-weight:300; color:var(--body); }
+.io-row:last-child { border-bottom:none; }
+.io-row-v { font-family:'DM Mono',monospace; font-size:11.5px; }
+.io-row-v.cu { color:var(--cu); }
+.io-row-v.hi { color:var(--hi); }
+.io-eq { display:flex; align-items:center; justify-content:center; padding-top:48px; }
+.io-eq-sign { font-family:'Barlow Condensed',sans-serif; font-size:48px; font-weight:900; color:rgba(208,104,48,.2); }
+
+/* BAR CHART */
+.econ-bars {
+  max-width:1160px; margin:0 auto;
+  padding:0 48px 80px;
+}
+.bar-wrap { background:var(--bg2); border:.5px solid var(--edge); border-radius:6px; padding:40px 44px; }
+.bar-hd { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--dim); margin-bottom:36px; display:flex; align-items:center; gap:12px; }
+.bar-hd::after { content:''; flex:1; height:1px; background:rgba(255,255,255,.04); }
+.bar-row { margin-bottom:32px; }
+.bar-row:last-child { margin-bottom:0; }
+.bar-meta { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; }
+.bar-name { font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; }
+.bar-name.dim { color:var(--dim); }
+.bar-name.cu { color:var(--cu); }
+.bar-pct { font-family:'Barlow Condensed',sans-serif; font-size:26px; font-weight:800; letter-spacing:-1px; }
+.bar-pct.dim { color:var(--dim); }
+.bar-pct.cu { color:var(--cu); }
+.bar-track { height:8px; background:rgba(255,255,255,.04); border-radius:4px; overflow:hidden; }
+.bar-fill { height:100%; border-radius:4px; transition:width 2s cubic-bezier(.16,1,.3,1); width:0; }
+.bar-fill.dim { background:var(--bg3); }
+.bar-fill.cu { background:linear-gradient(90deg,#b05820,#d06830,#e88040); }
+.bar-sub { font-family:'DM Mono',monospace; font-size:8.5px; color:rgba(74,82,96,.8); letter-spacing:1px; margin-top:7px; }
+
+/* QUOTES */
+.econ-qs {
+  max-width:1160px; margin:0 auto;
+  padding:0 48px 80px;
+  display:grid; grid-template-columns:1fr 1fr; gap:16px;
+}
+.eq {
+  position:relative;
+  background:var(--bg2); border:.5px solid var(--edge);
+  border-radius:6px; padding:36px 40px 32px;
+  overflow:hidden;
+}
+.eq-bg { position:absolute; top:12px; left:20px; font-family:'Barlow Condensed',sans-serif; font-size:120px; font-weight:900; color:rgba(208,104,48,.06); line-height:.7; pointer-events:none; }
+.eq-txt { position:relative; z-index:1; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:var(--hi); line-height:1.6; margin-bottom:16px; }
+.eq-attr { position:relative; z-index:1; display:flex; align-items:center; gap:10px; }
+.eq-line { width:24px; height:1px; background:rgba(208,104,48,.4); }
+.eq-name { font-family:'DM Mono',monospace; font-size:8.5px; color:var(--dim); letter-spacing:1.5px; text-transform:uppercase; }
+
+/* STAT TICKER */
+.econ-stats {
+  border-top:.5px solid rgba(208,104,48,.08);
+  background:var(--bg2);
+  display:grid; grid-template-columns:repeat(4,1fr);
+}
+.es { padding:28px 36px; border-right:.5px solid rgba(255,255,255,.04); text-align:center; }
+.es:last-child { border-right:none; }
+.es-n { font-family:'Barlow Condensed',sans-serif; font-size:44px; font-weight:900; color:var(--cu); line-height:1; letter-spacing:-2px; }
+.es-l { font-family:'DM Mono',monospace; font-size:8px; color:var(--dim); letter-spacing:2px; text-transform:uppercase; margin-top:5px; }
+
+/* ════════════════════════════════════
+   PLATFORM GRID
+════════════════════════════════════ */
+#platform {
+  position:relative;
+  padding:120px 48px;
+  background: var(--bg2);
+  overflow:hidden;
+}
+.plat-inner { max-width:1200px; margin:0 auto; }
+.plat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(208,104,48,.04); border-radius:8px; overflow:hidden; margin-top:56px; }
+.pg { background:var(--bg2); padding:36px 30px; transition:background .2s; }
+.pg:hover { background:var(--bg3); }
+.pg-tag { font-family:'DM Mono',monospace; font-size:8px; color:var(--dim); letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; }
+.pg-ico { width:36px; height:36px; margin-bottom:14px; background:rgba(232,213,192,.04); border:.5px solid rgba(232,213,192,.08); border-radius:6px; display:flex; align-items:center; justify-content:center; }
+.pg.feat .pg-ico { background:rgba(208,104,48,.07); border-color:rgba(208,104,48,.2); }
+.pg-h { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:700; letter-spacing:.3px; text-transform:uppercase; color:var(--hi); margin-bottom:8px; }
+.pg-b { font-size:13px; font-weight:300; color:var(--body); line-height:1.7; }
+
+/* ════════════════════════════════════
+   PRICING
+════════════════════════════════════ */
+#pricing {
+  position:relative;
+  padding:120px 48px;
+  background: var(--bg);
+  overflow:hidden;
+}
+.pricing-inner { max-width:1200px; margin:0 auto; }
+.price-cards { display:grid; grid-template-columns:1fr 1fr; gap:2px; max-width:800px; background:rgba(208,104,48,.06); border-radius:8px; overflow:hidden; border:.5px solid rgba(208,104,48,.12); margin-top:52px; }
+.pc { background:var(--bg2); padding:44px 40px; }
+.pc.feat { background:rgba(208,104,48,.05); }
+.pc-tag { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; margin-bottom:20px; display:flex; align-items:center; gap:10px; }
+.pc-tag::before { content:''; width:14px; height:1px; background:currentColor; flex-shrink:0; }
+.pc-tag.cu { color:var(--cu); }
+.pc-tag.cr { color:rgba(221,227,234,.6); }
+.pc-big { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:72px; line-height:1; letter-spacing:-3px; margin-bottom:4px; }
+.pc-big.cu { color:var(--cu); }
+.pc-big.cr { color:rgba(221,227,234,.7); }
+.pc-per { font-family:'DM Mono',monospace; font-size:9.5px; color:var(--dim); letter-spacing:1px; margin-bottom:28px; }
+.pc-items { display:flex; flex-direction:column; }
+.pc-i { display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:.5px solid rgba(255,255,255,.04); font-size:13.5px; font-weight:300; color:var(--body); }
+.pc-i:last-child { border-bottom:none; }
+.pc-iv { font-family:'DM Mono',monospace; font-size:10.5px; font-weight:400; }
+.pc-iv.cu { color:var(--cu); }
+.pc-iv.cr { color:rgba(221,227,234,.6); }
+.price-cta { display:flex; align-items:center; gap:16px; margin-top:32px; }
+.price-note { font-family:'DM Mono',monospace; font-size:9.5px; color:var(--dim); letter-spacing:.8px; }
+
+/* ════════════════════════════════════
+   FINAL CTA
+════════════════════════════════════ */
+#cta {
+  position:relative;
+  padding:160px 48px;
+  background: var(--bg2);
+  text-align:center;
+  overflow:hidden;
+}
+.cta-glow { position:absolute; inset:0; background:radial-gradient(ellipse 55% 50% at 50% 50%,rgba(208,104,48,.07) 0%,transparent 100%); pointer-events:none; }
+.cta-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(208,104,48,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(208,104,48,.015) 1px,transparent 1px); background-size:52px 52px; pointer-events:none; }
+.cta-top { position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(208,104,48,.4),rgba(208,104,48,.6),rgba(208,104,48,.4),transparent); }
+.cta-mark { margin:0 auto 40px; display:block; }
+.cta-h { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(56px,8vw,110px); letter-spacing:-3px; line-height:.88; text-transform:uppercase; color:var(--hi); margin-bottom:24px; position:relative; z-index:1; }
+.cta-h .cu { color:var(--cu); }
+.cta-p { font-size:16px; font-weight:300; color:var(--body); max-width:480px; margin:0 auto 48px; line-height:1.8; position:relative; z-index:1; }
+.cta-btns { display:flex; align-items:center; justify-content:center; gap:16px; position:relative; z-index:1; }
+.cta-note { font-family:'DM Mono',monospace; font-size:9.5px; color:var(--dim); letter-spacing:1px; margin-top:20px; position:relative; z-index:1; }
+
+/* ════════════════════════════════════
+   FOOTER
+════════════════════════════════════ */
+footer {
+  background:var(--bg);
+  border-top:.5px solid var(--edge);
+  padding:24px 48px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.ft-brand { font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:900; letter-spacing:2.5px; text-transform:uppercase; color:var(--dim); }
+.ft-brand em { color:var(--cu); font-style:normal; }
+.ft-tag { font-family:'DM Mono',monospace; font-size:8.5px; color:var(--dim); letter-spacing:3px; text-transform:uppercase; }
+.ft-copy { font-family:'DM Mono',monospace; font-size:9.5px; color:var(--dim); }
+
+/* ════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════ */
+@media(max-width:900px){
+  nav { padding:0 20px; }
+  .nav-links { display:none; }
+  #hero { padding:100px 24px 60px; }
+  .h-wm { display:none; }
+  #split { grid-template-columns:1fr; }
+  .split-old { display:none; }
+  #how { padding:80px 24px; }
+  .how-cards { grid-template-columns:1fr; }
+  #econ .econ-io { grid-template-columns:1fr; padding:0 24px 60px; }
+  .io-eq { display:none; }
+  #econ .econ-bars,#econ .econ-qs,#econ .econ-hero { padding-left:24px; padding-right:24px; }
+  .econ-qs { grid-template-columns:1fr; }
+  .econ-stats { grid-template-columns:1fr 1fr; }
+  #platform,#pricing { padding:80px 24px; }
+  .plat-grid { grid-template-columns:1fr; }
+  .price-cards { grid-template-columns:1fr; }
+  #cta { padding:100px 24px; }
+  footer { flex-direction:column; gap:10px; text-align:center; padding:20px; }
+}
+</style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a href="https://app.spotsend.io" class="nav-logo">
-    <div class="nav-logo-icon">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <rect x="1" y="1" width="26" height="26" rx="3" stroke="#e8560a" stroke-width="1.5"/>
-        <path d="M1 8 L1 1 L8 1" fill="none" stroke="#f4823c" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M20 1 L27 1 L27 8" fill="none" stroke="#f4823c" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M1 20 L1 27 L8 27" fill="none" stroke="#f4823c" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M20 27 L27 27 L27 20" fill="none" stroke="#f4823c" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="14" y1="5" x2="14" y2="23" stroke="#e8560a" stroke-width="1" stroke-dasharray="3,2"/>
-        <line x1="5" y1="14" x2="23" y2="14" stroke="#e8560a" stroke-width="1" stroke-dasharray="3,2"/>
-        <circle cx="14" cy="14" r="4.5" fill="#e8560a"/>
-        <circle cx="14" cy="14" r="2" fill="#0e0d0b"/>
-      </svg>
-    </div>
-    <div class="nav-wordmark">spot<span>send</span></div>
+  <a href="#" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+      <path d="M20 4L36 16V38H4V16Z" fill="rgba(208,104,48,.1)" stroke="#d06830" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M12 38V26H28V38" stroke="#d06830" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="20" cy="17" r="6.5" stroke="#d06830" stroke-width="1.2" stroke-dasharray="3 2.5"/>
+      <circle cx="20" cy="17" r="2.5" fill="#d06830"/>
+      <line x1="20" y1="1" x2="20" y2="9" stroke="rgba(232,213,192,.5)" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="1" y1="20" x2="9" y2="20" stroke="rgba(232,213,192,.5)" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="31" y1="20" x2="39" y2="20" stroke="rgba(232,213,192,.5)" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+    <div class="nav-mark"><em>SPOT</em>SEND</div>
   </a>
   <div class="nav-links">
-    <a href="#how" class="nav-link">How It Works</a>
-    <a href="#pricing" class="nav-link">Pricing</a>
-    <a href="https://app.spotsend.io" class="nav-signin">Sign In</a>
-    <a href="https://app.spotsend.io" class="nav-cta">Start Here →</a>
+    <a href="#split" class="on">◎ Why SpotSend</a>
+    <a href="#how">How It Works</a>
+    <a href="#econ">Economics</a>
+    <a href="#pricing">Pricing</a>
+  </div>
+  <div class="nav-r">
+    <a href="#" class="nav-in">Sign In</a>
+    <a href="#access-form" class="nav-cta">Request Access</a>
   </div>
 </nav>
 
-<section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-eyebrow">
-    <div class="hero-dot"></div>
-    AI-Powered Prospecting for Contractors
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <div class="h-grid"></div>
+  <div class="h-atm"></div>
+  <div class="h-wm" aria-hidden="true">48×</div>
+
+  <div class="h-inner">
+    <div class="h-pill" style="animation:fadeIn .5s ease both;">
+      <div class="h-pill-dot"></div>
+      <span class="h-pill-txt">AI-Powered Prospecting · Any Exterior Trade</span>
+    </div>
+
+    <h1 class="h-h1" style="animation:fadeUp .7s .1s ease both;">
+      Turn What<br>
+      You Drive Past<br>
+      <span class="cu">Into Jobs.</span>
+    </h1>
+
+    <p class="h-sub" style="animation:fadeUp .7s .2s ease both;">
+      You see the worn siding, the overgrown yard, the property that needs work.
+      <strong>You keep driving. That stops now.</strong>
+      Snap a photo — we mail that homeowner a personalized postcard by Friday.
+    </p>
+
+    <div class="h-ctas" style="animation:fadeUp .7s .3s ease both;">
+      <a href="#access-form" class="btn-cu">Request Early Access</a>
+      <a href="#how" class="btn-ghost">See How It Works →</a>
+    </div>
+
+    <div class="h-proof" style="animation:fadeUp .7s .4s ease both;">
+      <div class="hp-item"><div class="hp-n">30s</div><div class="hp-l">Spot to Send</div></div>
+      <div class="hp-item"><div class="hp-n">4-7 days</div><div class="hp-l">In Mailbox</div></div>
+      <div class="hp-item"><div class="hp-n">18%</div><div class="hp-l">Callback Rate</div></div>
+      <div class="hp-item"><div class="hp-n">$99</div><div class="hp-l">Per Month</div></div>
+    </div>
   </div>
-  <h1 class="hero-title">
-    Turn What You<br/>
-    <span class="hero-title-accent">Drive Past Into Jobs.</span>
-  </h1>
-  <div class="hero-slogan">SPOT IT · SEND IT · WIN IT</div>
-  <p class="hero-sub">
-    See damage on the road. Take a photo. <strong>SpotSend reaches that homeowner</strong> with personalized outreach — automatically, before your competition knows they exist.
-  </p>
-  <div class="hero-ctas">
-    <a href="https://app.spotsend.io" class="cta-primary">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <path d="M9 1C6.24 1 4 3.24 4 6C4 9.75 9 17 9 17C9 17 14 9.75 14 6C14 3.24 11.76 1 9 1Z" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1.4"/>
-        <circle cx="9" cy="6" r="2" fill="white"/>
+</section>
+
+<!-- ══════════ TICKER ══════════ -->
+<section id="ticker">
+  <div class="ticker-track">
+    <!-- First set -->
+    <div class="ticker-item"><span class="ti-quote">"18% callback rate. Crazy good for direct mail."</span><div class="ti-dot"></div><span class="ti-attr">Cody Willard · Tree Love LLC</span></div>
+    <div class="ticker-item"><span class="ti-quote">"One $11K job off a single card."</span><div class="ti-dot"></div><span class="ti-attr">John Tomlinson · Southern Charm</span></div>
+    <div class="ticker-item"><span class="ti-quote">"Less than a minute to send a postcard when we see a hazard tree."</span><div class="ti-dot"></div><span class="ti-attr">Nick Araya · TreeCare LA</span></div>
+    <div class="ticker-item"><span class="ti-quote">"The picture and authenticity of the postcard is what sells it."</span><div class="ti-dot"></div><span class="ti-attr">Dallas Stephens · Arb Tech</span></div>
+    <div class="ticker-item"><span class="ti-quote">"Now my whole team can pursue leads in the field."</span><div class="ti-dot"></div><span class="ti-attr">Jeremy Wagener · Urban Timber</span></div>
+    <div class="ticker-item"><span class="ti-quote">"I'd rather generate my own high quality leads than pay HomeAdvisor."</span><div class="ti-dot"></div><span class="ti-attr">Andrew Bachman · Trout Brook Arborists</span></div>
+    <!-- Duplicate for seamless loop -->
+    <div class="ticker-item"><span class="ti-quote">"18% callback rate. Crazy good for direct mail."</span><div class="ti-dot"></div><span class="ti-attr">Cody Willard · Tree Love LLC</span></div>
+    <div class="ticker-item"><span class="ti-quote">"One $11K job off a single card."</span><div class="ti-dot"></div><span class="ti-attr">John Tomlinson · Southern Charm</span></div>
+    <div class="ticker-item"><span class="ti-quote">"Less than a minute to send a postcard when we see a hazard tree."</span><div class="ti-dot"></div><span class="ti-attr">Nick Araya · TreeCare LA</span></div>
+    <div class="ticker-item"><span class="ti-quote">"The picture and authenticity of the postcard is what sells it."</span><div class="ti-dot"></div><span class="ti-attr">Dallas Stephens · Arb Tech</span></div>
+    <div class="ticker-item"><span class="ti-quote">"Now my whole team can pursue leads in the field."</span><div class="ti-dot"></div><span class="ti-attr">Jeremy Wagener · Urban Timber</span></div>
+    <div class="ticker-item"><span class="ti-quote">"I'd rather generate my own high quality leads than pay HomeAdvisor."</span><div class="ti-dot"></div><span class="ti-attr">Andrew Bachman · Trout Brook Arborists</span></div>
+  </div>
+</section>
+
+<!-- ══════════ OLD WAY / SPOTSEND WAY ══════════ -->
+<section id="split">
+  <!-- LEFT: The Old Way -->
+  <div class="split-old">
+    <div class="split-scene">
+      <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.4;" viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice" fill="none">
+        <rect width="600" height="700" fill="#0c0e10"/>
+        <!-- Road vanishing point -->
+        <polygon points="280,200 320,200 600,700 0,700" fill="#141618"/>
+        <!-- Road lines -->
+        <line x1="300" y1="200" x2="300" y2="700" stroke="rgba(255,255,255,.04)" stroke-width="2" stroke-dasharray="30 20"/>
+        <line x1="260" y1="200" x2="100" y2="700" stroke="rgba(255,255,255,.025)" stroke-width="1"/>
+        <line x1="340" y1="200" x2="500" y2="700" stroke="rgba(255,255,255,.025)" stroke-width="1"/>
+        <!-- Houses passing by - blurred suggestion -->
+        <rect x="20" y="250" width="180" height="200" fill="#161819" rx="2"/>
+        <rect x="400" y="280" width="160" height="180" fill="#161819" rx="2"/>
+        <polygon points="20,252 110,200 200,252" fill="#111314"/>
+        <polygon points="400,282 480,240 560,282" fill="#111314"/>
+        <!-- Sky -->
+        <rect width="600" height="220" fill="#0d0f12"/>
       </svg>
-      Start Spotting Free
-    </a>
-    <a href="#how" class="cta-secondary">See how it works →</a>
-  </div>
-  <div class="proof-strip">
-    <div class="proof-stat"><div class="proof-number">30<span>s</span></div><div class="proof-label">Spot to sent</div></div>
-    <div class="proof-stat"><div class="proof-number">$<span>35</span></div><div class="proof-label">To win a $2k job</div></div>
-    <div class="proof-stat"><div class="proof-number">13<span>x</span></div><div class="proof-label">Average ROI</div></div>
-    <div class="proof-stat"><div class="proof-number">$<span>99</span></div><div class="proof-label">Per month</div></div>
-  </div>
-</section>
-
-<section class="section" id="how">
-  <div class="section-label">How It Works</div>
-  <h2 class="section-title">Three Steps.<br/>One Job Won.</h2>
-  <p class="section-sub">SpotSend turns your daily drive into a revenue engine. No desk. No cold calls. No lead lists.</p>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">STEP 01</div>
-      <span class="step-icon">📍</span>
-      <div class="step-title">Spot It</div>
-      <p class="step-desc">Drive your route. See a cracked driveway, sunken slab, or damaged concrete. Tap the address on our <strong>live satellite map</strong> or type it in. Snap a photo for AI analysis — optional but powerful.</p>
+      <div class="split-old-overlay"></div>
+      <!-- DRIVING PAST text overlay -->
+      <div style="position:absolute;bottom:32px;right:28px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.08);">DRIVING PAST</div>
     </div>
-    <div class="step">
-      <div class="step-num">STEP 02</div>
-      <span class="step-icon">✨</span>
-      <div class="step-title">Send It</div>
-      <p class="step-desc">AI analyzes the damage, writes a <strong>personalized message to that specific homeowner</strong>, and reaches them automatically. You stay on the road.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">STEP 03</div>
-      <span class="step-icon">🏆</span>
-      <div class="step-title">Win It</div>
-      <p class="step-desc">The homeowner hears from you <strong>before anyone else</strong>. Your name. Their damage. Your price. Personalized and professional. They call. You win the job.</p>
-    </div>
-  </div>
-</section>
-
-<div class="diff-section">
-  <div class="diff-inner">
-    <div class="section-label">Why SpotSend</div>
-    <h2 class="section-title">Built for the<br/><span style="color:var(--orange)">Field, Not the Office.</span></h2>
-    <div class="diff-grid">
-      <div class="diff-card">
-        <div class="diff-card-icon">🎯</div>
-        <div class="diff-card-title">You Pick Every Lead</div>
-        <p>No shared lead pools. No competing with 5 other contractors on the same job. You spot the damage, you own the contact. Every outreach is exclusive to you.</p>
-      </div>
-      <div class="diff-card">
-        <div class="diff-card-icon">🤖</div>
-        <div class="diff-card-title">AI Does the Writing</div>
-        <p>SpotSend analyzes your photo, identifies the damage type, and writes a personalized note that sounds like it came from you — because the details come from what you actually saw.</p>
-      </div>
-      <div class="diff-card">
-        <div class="diff-card-icon">⚡</div>
-        <div class="diff-card-title">30 Seconds Per Lead</div>
-        <p>Tap the address. Take a photo. Hit send. No typing, no CRM entry, no templates to fill out. SpotSend handles everything from your phone between jobs.</p>
-      </div>
-      <div class="diff-card">
-        <div class="diff-card-icon">📈</div>
-        <div class="diff-card-title">Built to Scale</div>
-        <p>Queue 50 leads at once. Bulk send at end of day. Track every prospect from spot to win. SpotSend grows with your operation — from solo to multi-crew.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<section class="roi-section">
-  <div class="roi-inner">
-    <div>
-      <div class="section-label">The Math</div>
-      <h2 class="section-title">$35 to Win a<br/><span style="color:var(--orange)">$2,000 Job.</span></h2>
-      <p style="font-size:16px;color:var(--stone);line-height:1.8;margin-top:20px;max-width:420px;">
-        Send 20 prospects at $1.75 each. One converts. You pocket $2,000. Your prospecting cost was <strong style="color:var(--cream)">1.75% of revenue.</strong><br/><br/>
-        No leads platform, no Google Ad, no referral network comes close to that math.
-      </p>
-    </div>
-    <div class="roi-math">
-      <div class="roi-row"><span class="roi-row-label">Spot bids sent</span><span class="roi-row-val">20</span></div>
-      <div class="roi-row"><span class="roi-row-label">Cost per outreach</span><span class="roi-row-val">$1.75</span></div>
-      <div class="roi-row"><span class="roi-row-label">Total prospecting cost</span><span class="roi-row-val">$35.00</span></div>
-      <div class="roi-row"><span class="roi-row-label">Typical conversion rate</span><span class="roi-row-val">5%</span></div>
-      <div class="roi-row"><span class="roi-row-label">Jobs won</span><span class="roi-row-val">1</span></div>
-      <div class="roi-row"><span class="roi-row-label">Average job value</span><span class="roi-row-val">$2,000</span></div>
-      <div class="roi-row highlight"><span class="roi-row-label">Return on investment</span><span class="roi-row-val">57x</span></div>
-    </div>
-  </div>
-</section>
-
-<div class="pricing-section" id="pricing">
-  <div class="pricing-inner">
-    <div class="section-label" style="justify-content:center;">Pricing</div>
-    <h2 class="section-title">Simple.<br/>No Surprises.</h2>
-    <p class="section-sub" style="margin:12px auto 0;max-width:420px;">One plan. Everything included. Pay per outreach only when you send.</p>
-    <div class="pricing-card">
-      <div class="pricing-label">SpotSend Pro</div>
-      <div class="pricing-amount"><sup>$</sup>99</div>
-      <div class="pricing-period">per month + usage</div>
-      <ul class="pricing-features">
-        <li>EDDM Scout — live satellite map with GPS house flagging</li>
-        <li>AI Spot Bid — photo analysis + personalized outreach in 30 seconds</li>
-        <li>Neighborhood campaigns — area-wide prospecting at scale</li>
-        <li>AI Phone Agent — answers inbound calls, qualifies leads, transfers</li>
-        <li>Pipeline CRM — track every lead from spot to close</li>
-        <li>Bulk queue + batch send — prospect all day, send at once</li>
-        <li>Job board + revenue tracking dashboard</li>
+    <div class="split-old-content reveal">
+      <div class="split-tag bad">The Old Way</div>
+      <h2 class="split-h bad">You See It.<br>You Drive Past.</h2>
+      <ul class="split-items bad">
+        <li>You drive past the job. You keep going.</li>
+        <li>EDDM blasts every address in a zip code</li>
+        <li>5,000 cards to strangers — 3 callbacks (0.06%)</li>
+        <li>"Current Resident" on every card — tossed</li>
+        <li>$3,500 spent. No idea what worked.</li>
+        <li>Leads bought from Angi — shared with 4 others</li>
       </ul>
-      <div class="pricing-usage">
-        <div class="pricing-usage-title">Usage — Pay Only When You Send</div>
-        <div class="pricing-usage-row"><span>Spot Bid outreach (personalized postcard, printed + mailed)</span><span class="pricing-usage-price">$1.75</span></div>
-        <div class="pricing-usage-row"><span>Neighborhood campaign (per home)</span><span class="pricing-usage-price">$0.82</span></div>
-        <div class="pricing-usage-row"><span>AI phone calls</span><span class="pricing-usage-price">Included</span></div>
-      </div>
-      <a href="https://app.spotsend.io" class="cta-primary" style="width:100%;justify-content:center;font-size:20px;letter-spacing:2px;">Start Free Trial →</a>
-      <p class="pricing-note">No credit card required. Cancel anytime.</p>
     </div>
   </div>
-</div>
 
-<section class="final-cta">
-  <div class="final-glow"></div>
-  <h2 class="final-title">Stop Driving Past<br/><span>Your Next Job.</span></h2>
-  <p class="final-sub">Every piece of damage you pass without reaching out is <strong>money left on the road.</strong> SpotSend turns your drive into a prospecting machine.</p>
-  <a href="https://app.spotsend.io" class="cta-primary" style="font-size:22px;letter-spacing:3px;padding:18px 52px;position:relative;z-index:1;">SPOT IT. SEND IT. WIN IT. →</a>
+  <!-- RIGHT: SpotSend -->
+  <div class="split-new">
+    <div class="split-property">
+      <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice" fill="none">
+        <!-- Sky -->
+        <rect width="600" height="700" fill="#0d1420"/>
+        <rect width="600" height="340" fill="#111c2e" opacity=".8"/>
+        <!-- Ground -->
+        <rect x="0" y="430" width="600" height="270" fill="#0f1008"/>
+        <!-- House -->
+        <rect x="100" y="220" width="400" height="230" fill="#141612"/>
+        <polygon points="80,224 300,130 520,224" fill="#0d0e0b"/>
+        <!-- Door -->
+        <rect x="256" y="360" width="88" height="90" rx="1" fill="#0a0b08"/>
+        <!-- Windows -->
+        <rect x="120" y="250" width="110" height="80" rx="1" fill="#131e30"/>
+        <line x1="175" y1="250" x2="175" y2="330" stroke="#0a0b08" stroke-width="1.5"/>
+        <line x1="120" y1="290" x2="230" y2="290" stroke="#0a0b08" stroke-width="1.5"/>
+        <rect x="370" y="250" width="110" height="80" rx="1" fill="#131e30"/>
+        <line x1="425" y1="250" x2="425" y2="330" stroke="#0a0b08" stroke-width="1.5"/>
+        <line x1="370" y1="290" x2="480" y2="290" stroke="#0a0b08" stroke-width="1.5"/>
+        <!-- Driveway -->
+        <polygon points="200,450 400,450 430,700 170,700" fill="#171914"/>
+        <!-- Exterior wear — general, any trade -->
+        <!-- Siding gap on south wall -->
+        <rect x="420" y="260" width="3" height="40" fill="rgba(208,104,48,.25)" rx="1"/>
+        <rect x="440" y="275" width="2" height="30" fill="rgba(208,104,48,.15)" rx="1"/>
+        <!-- Overgrown lawn edge -->
+        <ellipse cx="200" cy="452" rx="30" ry="8" fill="#141a0a" opacity=".6"/>
+        <ellipse cx="380" cy="452" rx="25" ry="7" fill="#141a0a" opacity=".5"/>
+        <!-- Window issue highlight -->
+        <rect x="120" y="250" width="110" height="80" rx="1" fill="#131e30" opacity=".8"/>
+        <line x1="120" y1="250" x2="230" y2="330" stroke="rgba(208,104,48,.12)" stroke-width="1"/>
+        <!-- Trees -->
+        <rect x="40" y="310" width="10" height="150" fill="#0d0e0b"/>
+        <ellipse cx="45" cy="295" rx="42" ry="55" fill="#0d0e0b"/>
+        <rect x="540" y="330" width="10" height="130" fill="#0d0e0b"/>
+        <ellipse cx="545" cy="315" rx="38" ry="48" fill="#0d0e0b"/>
+        <!-- Bushes -->
+        <ellipse cx="148" cy="450" rx="55" ry="24" fill="#0d0e0b"/>
+        <ellipse cx="452" cy="450" rx="55" ry="24" fill="#0d0e0b"/>
+      </svg>
+      <div class="split-new-overlay"></div>
+      <!-- Targeting crosshair on driveway -->
+      <div class="ch-wrap" style="top:43%;left:50%;">
+        <div class="ch">
+          <div class="ch-r1"><div class="ch-r2"></div><div class="ch-dot"></div><div class="ch-lh"></div><div class="ch-lv"></div></div>
+          <div class="ch-c tl"></div><div class="ch-c tr"></div><div class="ch-c bl"></div><div class="ch-c br"></div>
+        </div>
+        <div class="ch-scan"></div>
+      </div>
+      <!-- UI badges -->
+      <div style="position:absolute;top:28px;left:28px;background:rgba(15,17,20,.9);border:.5px solid rgba(208,104,48,.3);border-radius:3px;padding:5px 13px;display:flex;align-items:center;gap:7px;">
+        <div style="width:5px;height:5px;border-radius:50%;background:var(--cu);animation:glow 1.5s ease-in-out infinite;"></div>
+        <span style="font-family:'DM Mono',monospace;font-size:8.5px;color:var(--cu);letter-spacing:2px;text-transform:uppercase;">AI Targeting</span>
+      </div>
+      <div style="position:absolute;top:28px;right:28px;background:var(--cu);border-radius:2px;padding:4px 12px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;color:#0f1114;text-transform:uppercase;">Spotted</div>
+      <div style="position:absolute;bottom:22px;left:28px;font-family:'DM Mono',monospace;font-size:8px;color:rgba(232,213,192,.25);letter-spacing:.5px;">2204 Riverside Blvd · Tulsa, OK 74114</div>
+    </div>
+    <div class="split-new-content reveal">
+      <div class="split-tag good">◎ The SpotSend Way</div>
+      <h2 class="split-h good">You See It.<br><span style="color:var(--cu);">You Send It.</span></h2>
+      <ul class="split-items good">
+        <li>Spot any exterior job opportunity from your truck</li>
+        <li>AI writes what you actually observed</li>
+        <li>50 targeted sends — 6–9 callbacks (12–18%)</li>
+        <li>Homeowner's name on every card — gets read</li>
+        <li>Every send tracked. Know what's working.</li>
+        <li>You spotted it. No one else gets this lead.</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
+<!-- ══════════ TIMELINE — REPLACES 3-STEP ══════════ -->
+<section id="how" style="position:relative;background:var(--bg2);padding:120px 48px;overflow:hidden;">
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(208,104,48,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(208,104,48,.015) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;"></div>
+
+  <div style="max-width:900px;margin:0 auto;position:relative;z-index:1;">
+
+    <!-- Section label -->
+    <div class="sec-tag reveal">What Actually Happens</div>
+    <h2 class="sec-h reveal reveal-d1" style="margin-bottom:72px;">Tuesday Morning.<br><span class="cu">Friday, Their Mailbox.</span></h2>
+
+    <!-- Timeline -->
+    <div style="position:relative;">
+
+      <!-- Vertical line -->
+      <div style="position:absolute;left:110px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,rgba(208,104,48,.4),rgba(208,104,48,.15) 60%,transparent);"></div>
+
+      <!-- EVENT 1 -->
+      <div class="reveal" style="display:grid;grid-template-columns:110px 1fr;gap:0;margin-bottom:56px;align-items:start;">
+        <div style="text-align:right;padding-right:28px;padding-top:4px;">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--cu);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;">Tuesday</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--hi);font-weight:500;">9:14 am</div>
+        </div>
+        <div style="position:relative;padding-left:32px;">
+          <!-- Dot on line -->
+          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(208,104,48,.15);"></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--hi);margin-bottom:8px;">You Drive Past a Property</div>
+          <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">You're between jobs. You see a fence that's falling apart, a roof with missing shingles, a yard that hasn't been touched in months. You pull over for 10 seconds. Open SpotSend. Snap the photo.</p>
+          <div style="margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;">
+            <div style="width:4px;height:4px;border-radius:50%;background:var(--cu);opacity:.6;"></div>
+            10 seconds · still in your truck
+          </div>
+        </div>
+      </div>
+
+      <!-- EVENT 2 -->
+      <div class="reveal reveal-d1" style="display:grid;grid-template-columns:110px 1fr;gap:0;margin-bottom:56px;align-items:start;">
+        <div style="text-align:right;padding-right:28px;padding-top:4px;">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--cu);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;">Tuesday</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--hi);font-weight:500;">9:14 am<br><span style="color:var(--dim);font-size:9px;">+ 30 sec</span></div>
+        </div>
+        <div style="position:relative;padding-left:32px;">
+          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(208,104,48,.15);"></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--hi);margin-bottom:8px;">AI Writes a Postcard — To That Person</div>
+          <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">SpotSend looks up who owns that property. Writes a note using your exact observation — not a template, not "Dear Homeowner." <em style="color:var(--hi);">Michael Ruiz at 1847 Elmwood Drive gets a card that says we drove past and noticed his specific situation.</em> Your logo. Your phone number. An estimate range for his property.</p>
+          <div style="margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;">
+            <div style="width:4px;height:4px;border-radius:50%;background:var(--cu);opacity:.6;"></div>
+            AI analysis · homeowner name · your estimate
+          </div>
+        </div>
+      </div>
+
+      <!-- EVENT 3 -->
+      <div class="reveal reveal-d2" style="display:grid;grid-template-columns:110px 1fr;gap:0;margin-bottom:56px;align-items:start;">
+        <div style="text-align:right;padding-right:28px;padding-top:4px;">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--cu);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;">Tuesday</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--hi);font-weight:500;">9:15 am</div>
+        </div>
+        <div style="position:relative;padding-left:32px;">
+          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(208,104,48,.15);"></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--hi);margin-bottom:8px;">You're Already Back on the Job</div>
+          <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">SpotSend sends the card to print. Full-color 6×9, on real cardstock. We address it to Michael by name, stamp it, and drop it in the USPS stream. You're already at your next job. You didn't knock on a door. You didn't make a cold call.</p>
+          <div style="margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;">
+            <div style="width:4px;height:4px;border-radius:50%;background:var(--cu);opacity:.6;"></div>
+            $1.75 · print + postage included
+          </div>
+        </div>
+      </div>
+
+      <!-- EVENT 4 -->
+      <div class="reveal reveal-d3" style="display:grid;grid-template-columns:110px 1fr;gap:0;margin-bottom:56px;align-items:start;">
+        <div style="text-align:right;padding-right:28px;padding-top:4px;">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--cu);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;">Thursday</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--hi);font-weight:500;">Afternoon</div>
+        </div>
+        <div style="position:relative;padding-left:32px;">
+          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(208,104,48,.15);"></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--hi);margin-bottom:8px;">Michael Gets the Card</div>
+          <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">He pulls it from his mailbox. He sees a photo of his own property — the thing he's been meaning to deal with. A contractor already noticed. Already wrote up an estimate. Already made it easy to say yes. <em style="color:var(--hi);">He scans the QR code and calls you.</em></p>
+          <div style="margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;">
+            <div style="width:4px;height:4px;border-radius:50%;background:var(--cu);opacity:.6;"></div>
+            4–7 business day USPS delivery · 12–18% callback rate
+          </div>
+        </div>
+      </div>
+
+      <!-- FINAL EVENT — the close -->
+      <div class="reveal reveal-d4" style="display:grid;grid-template-columns:110px 1fr;gap:0;align-items:start;">
+        <div style="text-align:right;padding-right:28px;padding-top:4px;">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--cu);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;">Friday</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--hi);font-weight:500;">Morning</div>
+        </div>
+        <div style="position:relative;padding-left:32px;">
+          <!-- Final dot — bigger, brighter -->
+          <div style="position:absolute;left:-7px;top:5px;width:14px;height:14px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 5px rgba(208,104,48,.2),0 0 20px rgba(208,104,48,.3);"></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;text-transform:uppercase;letter-spacing:-0.5px;color:var(--cu);margin-bottom:8px;">You Close the Job.</div>
+          <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">Tuesday morning you drove past a property. Friday morning you're closing a job. The entire pipeline — spot, send, call, close — ran while you were busy doing other work. That's SpotSend.</p>
+          <div style="margin-top:16px;">
+            <a href="#access-form" class="btn-cu" style="font-size:12px;padding:11px 24px;">Request Early Access</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ECONOMICS ══════════ -->
+<section id="econ">
+  <div class="econ-top"></div>
+
+  <!-- Giant 48× -->
+  <div class="econ-hero">
+    <div class="econ-grid"></div>
+    <div class="econ-glow"></div>
+    <div style="position:relative;z-index:1;max-width:1160px;margin:0 auto;">
+      <div class="econ-label reveal">Spot Bid Economics</div>
+      <div class="econ-num-wrap reveal reveal-d1">
+        <div class="econ-ring" style="width:360px;height:360px;"></div>
+        <div class="econ-ring" style="width:260px;height:260px;"></div>
+        <div class="econ-ring" style="width:160px;height:160px;"></div>
+        <div class="econ-48" id="econ-counter">0<span class="econ-x">×</span></div>
+      </div>
+      <div class="econ-hl reveal reveal-d2">return on investment</div>
+      <div class="econ-note reveal reveal-d3">$186.50 in &nbsp;·&nbsp; $9,000 out &nbsp;·&nbsp; conservative 25% close rate</div>
+    </div>
+  </div>
+
+  <!-- Input / Output cards -->
+  <div class="econ-io">
+    <div class="io-card reveal">
+      <div class="io-head in">
+        <div class="io-tag in">Your Investment</div>
+        <div class="io-total in">$186.50 <span style="font-size:18px;font-weight:400;color:var(--dim);letter-spacing:0;">/month</span></div>
+      </div>
+      <div class="io-row"><span>Platform fee</span><span class="io-row-v hi">$99.00</span></div>
+      <div class="io-row"><span>50 spot bids × $1.75</span><span class="io-row-v hi">$87.50</span></div>
+      <div class="io-row"><span>Print + postage</span><span class="io-row-v cu">Included</span></div>
+    </div>
+    <div class="io-eq reveal reveal-d1"><div class="io-eq-sign">=</div></div>
+    <div class="io-card reveal reveal-d2">
+      <div class="io-head out">
+        <div class="io-tag out">Your Revenue</div>
+        <div class="io-total out">$9,000</div>
+      </div>
+      <div class="io-row"><span>12–18% callback rate</span><span class="io-row-v hi">6–9 calls</span></div>
+      <div class="io-row"><span>Jobs closed (25% rate)</span><span class="io-row-v hi">2 jobs</span></div>
+      <div class="io-row"><span>Average job value</span><span class="io-row-v cu">$4,500</span></div>
+    </div>
+  </div>
+
+  <!-- Response rate comparison bars -->
+  <div class="econ-bars reveal">
+    <div class="bar-wrap">
+      <div class="bar-hd">Response Rate Comparison</div>
+      <div class="bar-row">
+        <div class="bar-meta">
+          <span class="bar-name dim">EDDM / Mass Mail</span>
+          <span class="bar-pct dim">0.06%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill dim" style="--w:.4%;"></div></div>
+        <div class="bar-sub">3 callbacks from 5,000 mailers · $3,500 spent · "Current Resident" on every card</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-meta">
+          <span class="bar-name cu">◎ SpotSend Spot Bid</span>
+          <span class="bar-pct cu">12–18%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill cu" style="--w:85%;"></div></div>
+        <div class="bar-sub">6–9 callbacks from 50 targeted sends · $186.50 spent · Homeowner name on every card</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="econ-qs">
+    <div class="eq reveal">
+      <div class="eq-bg">"</div>
+      <div class="eq-txt">"It takes less than a minute to send a postcard any time we see a hazard tree. I'm getting 18% callback rate. Crazy good for direct mail."</div>
+      <div class="eq-attr"><div class="eq-line"></div><div class="eq-name">Cody Willard · Tree Love LLC</div></div>
+    </div>
+    <div class="eq reveal reveal-d1">
+      <div class="eq-bg">"</div>
+      <div class="eq-txt">"I landed one $11K job off a single card. The picture and authenticity of the postcard is what sells it. The homeowner knew we'd been there."</div>
+      <div class="eq-attr"><div class="eq-line"></div><div class="eq-name">John Tomlinson · Southern Charm</div></div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="econ-stats reveal">
+    <div class="es"><div class="es-n">18%</div><div class="es-l">Callback Rate</div></div>
+    <div class="es"><div class="es-n">4-7 days</div><div class="es-l">Mailbox Delivery</div></div>
+    <div class="es"><div class="es-n">13×</div><div class="es-l">Better Than EDDM</div></div>
+    <div class="es"><div class="es-n">$35</div><div class="es-l">Cost Per Close</div></div>
+  </div>
+</section>
+
+<!-- ══════════ PLATFORM ══════════ -->
+<section id="platform">
+  <div class="plat-inner">
+    <div class="sec-tag reveal">Platform</div>
+    <h2 class="sec-h reveal reveal-d1">Everything You<br><span class="cu">Actually Need.</span></h2>
+    <div class="plat-grid reveal reveal-d2">
+      <div class="pg feat">
+        <div class="pg-tag" style="color:var(--cu);">◎ Hero Product</div>
+        <div class="pg-ico"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2L18 8V18H2V8Z" stroke="#d06830" stroke-width="1.3" stroke-linejoin="round"/><circle cx="10" cy="8" r="3.5" stroke="#d06830" stroke-width="1" stroke-dasharray="2 2.5"/><circle cx="10" cy="8" r="1.4" fill="#d06830"/></svg></div>
+        <div class="pg-h">Spot Bid</div>
+        <p class="pg-b">See it. Snap it. Send it in 30 seconds. AI-personalized postcard — property photo, personal note, your estimate — mailed to that homeowner by Friday.</p>
+      </div>
+      <div class="pg">
+        <div class="pg-tag">Neighborhood</div>
+        <div class="pg-ico"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="16" height="16" rx="2" stroke="rgba(232,213,192,.3)" stroke-width="1.1"/><line x1="10" y1="2" x2="10" y2="18" stroke="rgba(232,213,192,.3)" stroke-width=".8" stroke-dasharray="2 3"/><line x1="2" y1="10" x2="18" y2="10" stroke="rgba(232,213,192,.3)" stroke-width=".8" stroke-dasharray="2 3"/><circle cx="10" cy="10" r="2" stroke="rgba(232,213,192,.3)" stroke-width="1"/></svg></div>
+        <div class="pg-h">Area Mailer</div>
+        <p class="pg-b">Just finished a job? Blanket the surrounding streets. Let the neighborhood know you're already working nearby. $0.82/home via USPS.</p>
+      </div>
+      <div class="pg">
+        <div class="pg-tag">Pipeline</div>
+        <div class="pg-ico"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><line x1="2" y1="15" x2="6" y2="8" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><line x1="6" y1="8" x2="10" y2="12" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><line x1="10" y1="12" x2="14" y2="6" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><line x1="14" y1="6" x2="18" y2="4" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><circle cx="14" cy="6" r="1.5" fill="#d06830"/></svg></div>
+        <div class="pg-h">Deal Tracker</div>
+        <p class="pg-b">Every spot bid flows into your pipeline. Spotted → Sent → Called → Won. Know your cost per closed job to the penny.</p>
+      </div>
+      <div class="pg">
+        <div class="pg-tag">AI Phone</div>
+        <div class="pg-ico"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M3 3C3 3 4 2.5 5.5 2.5C6.5 2.5 7 3.5 7.5 4.5L7.8 5.2C8.1 6 7.8 6.8 7.2 7.2L6.5 7.5C7 8.5 7.8 9.2 9 9.8L9.5 9.1C10 8.5 11 8.2 11.8 8.7L12.5 9.1C13.3 9.6 13.6 10.5 13 11.3C12.5 12 11 13 10 12.5C7.5 11.2 5 8.5 3.5 6C2 3.8 3 3 3 3Z" stroke="rgba(232,213,192,.3)" stroke-width="1.1"/></svg></div>
+        <div class="pg-h">AI Phone Agent</div>
+        <p class="pg-b">Callbacks handled automatically while you're on-site. Qualifies leads, answers questions, routes the best prospects to you. Never miss an opportunity.</p>
+      </div>
+      <div class="pg">
+        <div class="pg-tag">Reports</div>
+        <div class="pg-ico"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="1.5" stroke="rgba(232,213,192,.3)" stroke-width="1.1"/><line x1="2" y1="8" x2="18" y2="8" stroke="rgba(232,213,192,.3)" stroke-width=".8"/><line x1="7" y1="4" x2="7" y2="16" stroke="rgba(232,213,192,.3)" stroke-width=".8"/></svg></div>
+        <div class="pg-h">Send History</div>
+        <p class="pg-b">Every card, its USPS delivery status, and the revenue it generated. Route-level ROI at a glance — no spreadsheet required.</p>
+      </div>
+      <div class="pg">
+        <div class="pg-tag">Branding</div>
+        <div class="pg-ico"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="4" stroke="rgba(232,213,192,.3)" stroke-width="1.1"/><path d="M4 18C4 14.7 6.7 12 10 12C13.3 12 16 14.7 16 18" stroke="rgba(232,213,192,.3)" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+        <div class="pg-h">Your Brand</div>
+        <p class="pg-b">Your logo, your number, your name on every card. Every send builds your local reputation — even the ones who don't call this month.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PRICING ══════════ -->
+<section id="pricing">
+  <div class="pricing-inner">
+    <div class="sec-tag reveal">Pricing</div>
+    <h2 class="sec-h reveal reveal-d1">Flat. Honest.<br><span class="cu">No Waste.</span></h2>
+    <p style="font-size:14px;color:var(--body);font-weight:300;line-height:1.8;max-width:440px;margin-top:0;" class="reveal reveal-d2">$99/month flat. Pay per send. One closed job returns 48× your monthly cost. First 10 sends on us — no credit card required.</p>
+    <div class="price-cards reveal reveal-d3">
+      <div class="pc feat">
+        <div class="pc-tag cu">Platform · Monthly</div>
+        <div class="pc-big cu">$99</div>
+        <div class="pc-per">per month · all features included</div>
+        <div class="pc-items">
+          <div class="pc-i">Spot Bid tool <span class="pc-iv cu">✓</span></div>
+          <div class="pc-i">Pipeline deal tracker <span class="pc-iv cu">✓</span></div>
+          <div class="pc-i">AI phone agent <span class="pc-iv cu">✓</span></div>
+          <div class="pc-i">EDDM neighborhood scout <span class="pc-iv cu">✓</span></div>
+          <div class="pc-i">Send history &amp; reporting <span class="pc-iv cu">✓</span></div>
+          <div class="pc-i">Your logo on every card <span class="pc-iv cu">✓</span></div>
+          <div class="pc-i">First 10 sends on us <span class="pc-iv cu">✓</span></div>
+        </div>
+      </div>
+      <div class="pc">
+        <div class="pc-tag cr">Pay Per Send</div>
+        <div class="pc-big cr">$1.75</div>
+        <div class="pc-per">per spot bid · postage included</div>
+        <div class="pc-items">
+          <div class="pc-i">Neighborhood mailer <span class="pc-iv cr">$0.82</span></div>
+          <div class="pc-i">Print + postage included <span class="pc-iv cr">✓</span></div>
+          <div class="pc-i">Real 6×9 full-color card <span class="pc-iv cr">✓</span></div>
+          <div class="pc-i">USPS delivery 4–7 business days <span class="pc-iv cr">✓</span></div>
+          <div class="pc-i">No minimums <span class="pc-iv cr">✓</span></div>
+          <div class="pc-i">Cancel anytime <span class="pc-iv cr">✓</span></div>
+          <div class="pc-i">Homeowner name on every send <span class="pc-iv cr">✓</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="price-cta reveal reveal-d4">
+      <a href="#access-form" class="btn-cu">Request Early Access</a>
+      <span class="price-note">No credit card required · cancel anytime · no setup fees</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FINAL CTA ══════════ -->
+<section id="cta">
+  <div class="cta-glow"></div>
+  <div class="cta-grid"></div>
+  <div class="cta-top"></div>
+  <svg class="cta-mark" width="80" height="80" viewBox="0 0 40 40" fill="none">
+    <path d="M20 4L36 16V38H4V16Z" fill="rgba(208,104,48,.06)" stroke="rgba(208,104,48,.4)" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M12 38V26H28V38" stroke="rgba(208,104,48,.4)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="20" cy="17" r="6.5" stroke="rgba(208,104,48,.5)" stroke-width="1.2" stroke-dasharray="3 2.5"/>
+    <circle cx="20" cy="17" r="2.5" fill="#d06830"/>
+    <line x1="20" y1="1" x2="20" y2="9" stroke="rgba(232,213,192,.4)" stroke-width="1.4" stroke-linecap="round"/>
+    <line x1="1" y1="20" x2="9" y2="20" stroke="rgba(232,213,192,.4)" stroke-width="1.4" stroke-linecap="round"/>
+    <line x1="31" y1="20" x2="39" y2="20" stroke="rgba(232,213,192,.4)" stroke-width="1.4" stroke-linecap="round"/>
+  </svg>
+  <h2 class="cta-h reveal">The Job Is<br>Already Out There.<br><span class="cu">Go Get It.</span></h2>
+  <p class="cta-p reveal reveal-d1">Every route you drive, every property you pass — SpotSend turns that into a postcard, a phone call, and a signed job. Start with 10 free sends.</p>
+  <div class="cta-btns reveal reveal-d2">
+    <a href="#access-form" class="btn-cu">Request Early Access</a>
+    <a href="#how" class="btn-ghost">See How It Works →</a>
+  </div>
+  <p class="cta-note reveal reveal-d3">No credit card required · Cancel anytime · Postage always included</p>
+</section>
+
+<!-- ══════════ ACCESS REQUEST FORM ══════════ -->
+<section id="access-form" style="background:#0d0e10;padding:96px 24px 120px;border-top:1px solid rgba(208,104,48,0.12);position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(800px 400px at 50% 0%,rgba(208,104,48,0.08) 0%,transparent 70%);pointer-events:none;"></div>
+  <div style="max-width:560px;margin:0 auto;position:relative;">
+    <div style="text-align:center;margin-bottom:36px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:3px;color:#d06830;text-transform:uppercase;margin-bottom:14px;">Early Access</div>
+      <h2 style="font-size:36px;line-height:1.1;color:#f5f0e6;font-weight:700;letter-spacing:-0.5px;margin:0 0 14px;">Tell us about your business</h2>
+      <p style="font-size:15px;color:rgba(232,213,192,0.65);line-height:1.6;margin:0;">We're onboarding contractors one at a time so we can get every account right.<br>Fill this out and we'll reach back within 24 hours.</p>
+    </div>
+    <form id="access-request-form" style="display:flex;flex-direction:column;gap:14px;">
+      <!-- honeypot — hidden from real users, bots fill it -->
+      <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true"/>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <label style="display:flex;flex-direction:column;gap:6px;">
+          <span style="font-size:11px;font-weight:600;color:rgba(232,213,192,0.6);letter-spacing:0.5px;">Full name *</span>
+          <input type="text" name="full_name" required maxlength="200" placeholder="Your name" style="background:#1a1c1e;border:1px solid rgba(232,213,192,0.12);border-radius:8px;padding:12px 14px;color:#f5f0e6;font-size:14px;font-family:inherit;outline:none;transition:border 0.15s;"/>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:6px;">
+          <span style="font-size:11px;font-weight:600;color:rgba(232,213,192,0.6);letter-spacing:0.5px;">Email *</span>
+          <input type="email" name="email" required maxlength="200" placeholder="you@company.com" style="background:#1a1c1e;border:1px solid rgba(232,213,192,0.12);border-radius:8px;padding:12px 14px;color:#f5f0e6;font-size:14px;font-family:inherit;outline:none;transition:border 0.15s;"/>
+        </label>
+      </div>
+
+      <label style="display:flex;flex-direction:column;gap:6px;">
+        <span style="font-size:11px;font-weight:600;color:rgba(232,213,192,0.6);letter-spacing:0.5px;">Company name *</span>
+        <input type="text" name="company_name" required maxlength="200" placeholder="Your company" style="background:#1a1c1e;border:1px solid rgba(232,213,192,0.12);border-radius:8px;padding:12px 14px;color:#f5f0e6;font-size:14px;font-family:inherit;outline:none;transition:border 0.15s;"/>
+      </label>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <label style="display:flex;flex-direction:column;gap:6px;">
+          <span style="font-size:11px;font-weight:600;color:rgba(232,213,192,0.6);letter-spacing:0.5px;">Phone</span>
+          <input type="tel" name="phone" maxlength="40" placeholder="555-123-4567" style="background:#1a1c1e;border:1px solid rgba(232,213,192,0.12);border-radius:8px;padding:12px 14px;color:#f5f0e6;font-size:14px;font-family:inherit;outline:none;transition:border 0.15s;"/>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:6px;">
+          <span style="font-size:11px;font-weight:600;color:rgba(232,213,192,0.6);letter-spacing:0.5px;">Trade</span>
+          <select name="trade" style="background:#1a1c1e;border:1px solid rgba(232,213,192,0.12);border-radius:8px;padding:12px 14px;color:#f5f0e6;font-size:14px;font-family:inherit;outline:none;cursor:pointer;">
+            <option value="">Select a trade</option>
+            <option value="roofing">Roofing</option>
+            <option value="concrete">Concrete</option>
+            <option value="fencing">Fencing</option>
+            <option value="lawn_care">Lawn Care</option>
+            <option value="landscape">Landscaping</option>
+            <option value="tree">Tree Service</option>
+            <option value="windows_siding">Windows / Siding</option>
+            <option value="painting">Painting</option>
+            <option value="pressure">Pressure Washing</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+      </div>
+
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:14px;">
+        <label style="display:flex;flex-direction:column;gap:6px;">
+          <span style="font-size:11px;font-weight:600;color:rgba(232,213,192,0.6);letter-spacing:0.5px;">City</span>
+          <input type="text" name="city" maxlength="100" placeholder="Your city" style="background:#1a1c1e;border:1px solid rgba(232,213,192,0.12);border-radius:8px;padding:12px 14px;color:#f5f0e6;font-size:14px;font-family:inherit;outline:none;transition:border 0.15s;"/>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:6px;">
+          <span style="font-size:11px;font-weight:600;color:rgba(232,213,192,0.6);letter-spacing:0.5px;">State</span>
+          <input type="text" name="state" maxlength="2" placeholder="ST" style="background:#1a1c1e;border:1px solid rgba(232,213,192,0.12);border-radius:8px;padding:12px 14px;color:#f5f0e6;font-size:14px;font-family:inherit;outline:none;transition:border 0.15s;text-transform:uppercase;"/>
+        </label>
+      </div>
+
+      <label style="display:flex;flex-direction:column;gap:6px;">
+        <span style="font-size:11px;font-weight:600;color:rgba(232,213,192,0.6);letter-spacing:0.5px;">What made you reach out? <span style="font-weight:400;color:rgba(232,213,192,0.35);">(optional)</span></span>
+        <textarea name="why" maxlength="1000" rows="4" placeholder="Anything you want us to know — biggest pain point, what you're hoping SpotSend helps with, etc." style="background:#1a1c1e;border:1px solid rgba(232,213,192,0.12);border-radius:8px;padding:12px 14px;color:#f5f0e6;font-size:14px;font-family:inherit;outline:none;transition:border 0.15s;resize:vertical;line-height:1.5;"></textarea>
+      </label>
+
+      <div id="access-form-error" style="display:none;background:rgba(184,50,50,0.12);border:1px solid rgba(184,50,50,0.35);color:#f87171;padding:11px 14px;border-radius:8px;font-size:13px;line-height:1.5;"></div>
+
+      <button type="submit" id="access-submit-btn" style="background:linear-gradient(135deg,#d06830,#e8560a);color:#fff;border:none;padding:16px 24px;border-radius:9px;font-size:15px;font-weight:700;letter-spacing:0.3px;cursor:pointer;transition:transform 0.15s,opacity 0.15s;font-family:inherit;margin-top:6px;box-shadow:0 4px 16px rgba(208,104,48,0.25);">Request Early Access →</button>
+
+      <p style="text-align:center;font-size:11px;color:rgba(232,213,192,0.4);margin:6px 0 0;line-height:1.5;">No credit card required · We respond within 24 hours · Limited POC spots available</p>
+    </form>
+
+    <!-- success state, hidden by default -->
+    <div id="access-form-success" style="display:none;text-align:center;padding:48px 32px;background:linear-gradient(145deg,rgba(46,204,113,0.06),rgba(0,0,0,0.2));border:1px solid rgba(46,204,113,0.25);border-radius:14px;">
+      <div style="font-size:54px;margin-bottom:14px;line-height:1;">✓</div>
+      <h3 style="font-size:24px;color:#f5f0e6;font-weight:700;margin:0 0 10px;">Got it.</h3>
+      <p style="font-size:15px;color:rgba(232,213,192,0.7);line-height:1.6;margin:0;">We'll reach back within 24 hours to walk you through next steps.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var form = document.getElementById("access-request-form");
+  var errEl = document.getElementById("access-form-error");
+  var successEl = document.getElementById("access-form-success");
+  var submitBtn = document.getElementById("access-submit-btn");
+  if (!form) return;
+
+  // Pretty input focus styling
+  document.querySelectorAll("#access-request-form input, #access-request-form textarea, #access-request-form select").forEach(function(el){
+    el.addEventListener("focus", function(){ this.style.borderColor = "rgba(208,104,48,0.5)"; });
+    el.addEventListener("blur", function(){ this.style.borderColor = "rgba(232,213,192,0.12)"; });
+  });
+
+  function showErr(msg){
+    errEl.textContent = msg;
+    errEl.style.display = "block";
+  }
+  function hideErr(){
+    errEl.style.display = "none";
+  }
+
+  form.addEventListener("submit", async function(e){
+    e.preventDefault();
+    hideErr();
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = "0.6";
+    submitBtn.textContent = "Submitting…";
+
+    var fd = new FormData(form);
+    var payload = {
+      full_name:    fd.get("full_name") || "",
+      email:        fd.get("email") || "",
+      phone:        fd.get("phone") || "",
+      company_name: fd.get("company_name") || "",
+      trade:        fd.get("trade") || "",
+      city:         fd.get("city") || "",
+      state:        (fd.get("state") || "").toString().toUpperCase(),
+      why:          fd.get("why") || "",
+      website:      fd.get("website") || "", // honeypot
+      source:       "landing"
+    };
+
+    try {
+      var res = await fetch("https://joelmwood--caf3509a369b11f190f942b51c65c3df.web.val.run/?target=request-access", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      var data = await res.json().catch(function(){ return {}; });
+      if (!res.ok) {
+        showErr(data.error || "Something went wrong — try again or email us directly.");
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = "1";
+        submitBtn.textContent = "Request Early Access →";
+        return;
+      }
+      // Success — swap form for thank-you state
+      form.style.display = "none";
+      successEl.style.display = "block";
+      // Scroll the success message into view
+      successEl.scrollIntoView({ behavior: "smooth", block: "center" });
+    } catch (err) {
+      showErr("Network error — check your connection and try again.");
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = "1";
+      submitBtn.textContent = "Request Early Access →";
+    }
+  });
+})();
+</script>
+
+<!-- ══════════ FOOTER ══════════ -->
 <footer>
-  <div class="footer-logo">spot<span>send</span></div>
-  <div class="footer-slogan">AI-Powered Prospecting for Contractors</div>
-  <div class="footer-copy">© 2026 SpotSend · spotsend.io</div>
+  <div style="display:flex;align-items:center;gap:9px;">
+    <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
+      <path d="M20 4L36 16V38H4V16Z" fill="none" stroke="rgba(208,104,48,.4)" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M12 38V26H28V38" stroke="rgba(208,104,48,.35)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="20" cy="17" r="6" stroke="rgba(208,104,48,.4)" stroke-width="1" stroke-dasharray="2.5 2"/>
+      <circle cx="20" cy="17" r="2" fill="rgba(208,104,48,.6)"/>
+    </svg>
+    <div class="ft-brand"><em>SPOT</em>SEND</div>
+  </div>
+  <div class="ft-tag">Spot It · Send It · Win It</div>
+  <div class="ft-copy">© 2026 SpotSend · AI-Powered Prospecting · Any Exterior Trade · spotsend.io</div>
 </footer>
+
+<!-- ══════════ SCRIPTS ══════════ -->
+<script>
+// Scroll reveal
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ obs.observe(el); });
+})();
+
+// Counter animation + bars
+(function(){
+  var done = false;
+  function run(){
+    if(done) return; done = true;
+    // 48x counter
+    var el = document.getElementById('econ-counter');
+    if(el){
+      var s = performance.now();
+      var dur = 1800;
+      (function tick(now){
+        var p = Math.min((now-s)/dur,1);
+        var ease = 1-Math.pow(1-p,3);
+        el.innerHTML = Math.round(ease*48) + '<span class="econ-x">\xd7</span>';
+        if(p<1) requestAnimationFrame(tick);
+      })(s);
+    }
+    // Bars
+    document.querySelectorAll('.bar-fill').forEach(function(b){
+      setTimeout(function(){ b.style.width = b.style.getPropertyValue('--w') || b.getAttribute('style').match(/--w:([^;]+)/)?.[1] || '0'; }, 200);
+    });
+  }
+  var sec = document.getElementById('econ');
+  if(sec && window.IntersectionObserver){
+    new IntersectionObserver(function(e){ if(e[0].isIntersecting) run(); },{threshold:.15}).observe(sec);
+  }
+})();
+</script>
 
 </body>
 </html>
