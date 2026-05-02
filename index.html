@@ -12,18 +12,18 @@
    TOKENS
 ════════════════════════════════════ */
 :root {
-  --bg:    #0f1114;
+  --bg:    #1c1916;
   --bg2:   #161920;
   --bg3:   #1d2128;
   --edge:  rgba(255,255,255,.06);
   --edge2: rgba(255,255,255,.03);
-  --cu:    #d06830;
-  --cu2:   rgba(208,104,48,.12);
-  --cu3:   rgba(208,104,48,.06);
-  --hi:    #e8d5c0;     /* warm off-white headline */
+  --cu:    #dc5a1f;
+  --cu2:   rgba(220,90,31,.12);
+  --cu3:   rgba(220,90,31,.06);
+  --hi:    #f5f0e6;     /* warm cream — matches app's text-on-primary */
   --body:  #8a9099;
   --dim:   #4a5260;
-  --line:  rgba(208,104,48,.15);
+  --line:  rgba(220,90,31,.15);
 }
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
@@ -84,7 +84,7 @@ nav {
 .nav-r { display:flex; gap:10px; align-items:center; }
 .nav-in { font-family:'DM Mono',monospace; font-size:9.5px; color:var(--dim); letter-spacing:1.5px; text-transform:uppercase; text-decoration:none; padding:7px 16px; border:.5px solid rgba(255,255,255,.08); border-radius:3px; transition:all .2s; }
 .nav-in:hover { color:var(--hi); border-color:var(--dim); }
-.nav-cta { background:var(--cu); color:#0f1114; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:12px; letter-spacing:2px; text-transform:uppercase; text-decoration:none; padding:8px 20px; border-radius:3px; transition:all .15s; }
+.nav-cta { background:var(--cu); color:#1c1916; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:12px; letter-spacing:2px; text-transform:uppercase; text-decoration:none; padding:8px 20px; border-radius:3px; transition:all .15s; }
 .nav-cta:hover { background:#e07840; transform:translateY(-1px); }
 
 /* ════════════════════════════════════
@@ -104,8 +104,8 @@ nav {
 .h-grid {
   position: absolute; inset:0; pointer-events:none;
   background-image:
-    linear-gradient(rgba(208,104,48,.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(208,104,48,.018) 1px, transparent 1px);
+    linear-gradient(rgba(220,90,31,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(220,90,31,.018) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
@@ -120,7 +120,7 @@ nav {
   line-height: 1;
   letter-spacing: -16px;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(208,104,48,.06);
+  -webkit-text-stroke: 1px rgba(220,90,31,.06);
   user-select: none;
   pointer-events: none;
   white-space: nowrap;
@@ -129,7 +129,7 @@ nav {
 /* Radial atmosphere */
 .h-atm {
   position: absolute; inset:0; pointer-events:none;
-  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(208,104,48,.05) 0%, transparent 70%);
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(220,90,31,.05) 0%, transparent 70%);
 }
 
 /* Hero content */
@@ -140,8 +140,8 @@ nav {
 
 .h-pill {
   display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(208,104,48,.08);
-  border: .5px solid rgba(208,104,48,.25);
+  background: rgba(220,90,31,.08);
+  border: .5px solid rgba(220,90,31,.25);
   border-radius: 100px;
   padding: 5px 16px;
   margin-bottom: 36px;
@@ -181,7 +181,7 @@ nav {
 .h-ctas { display:flex; gap:14px; align-items:center; margin-bottom: 64px; }
 .btn-cu {
   display: inline-flex; align-items:center; gap:8px;
-  background: var(--cu); color: #0f1114;
+  background: var(--cu); color: #1c1916;
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform:uppercase;
   padding: 14px 32px; border:none; border-radius:3px;
@@ -190,7 +190,7 @@ nav {
   transition: transform .15s, box-shadow .15s;
 }
 .btn-cu::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,.15),transparent 55%); }
-.btn-cu:hover { transform:translateY(-2px); box-shadow:0 16px 48px rgba(208,104,48,.3); }
+.btn-cu:hover { transform:translateY(-2px); box-shadow:0 16px 48px rgba(220,90,31,.3); }
 .btn-ghost {
   display: inline-flex; align-items:center; gap:8px;
   background:none; color:var(--body);
@@ -204,7 +204,7 @@ nav {
 /* Proof strip */
 .h-proof {
   display: flex; gap:0;
-  border-top: .5px solid rgba(208,104,48,.1);
+  border-top: .5px solid rgba(220,90,31,.1);
   padding-top: 28px;
 }
 .hp-item {
@@ -220,33 +220,165 @@ nav {
 }
 .hp-l { font-family:'DM Mono',monospace; font-size:8.5px; color:var(--dim); letter-spacing:1.5px; text-transform:uppercase; }
 
+/* The Math — visceral one-liner right after proof strip.
+   Sits below proof; slightly muted but authoritative type. */
+.h-math {
+  margin-top: 22px;
+  padding: 14px 18px;
+  background: var(--cu3);
+  border-left: 2px solid var(--cu);
+  border-radius: 4px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+}
+.hm-lead {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--cu);
+}
+.hm-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 17px; line-height: 1.4; color: var(--hi);
+}
+.hm-body strong { font-weight: 700; color: var(--cu); font-style: normal; }
+@media (max-width: 540px) {
+  .h-math { padding: 12px 14px; }
+  .hm-body { font-size: 15px; }
+}
+
+/* ════════════════════════════════════
+   THE LOOP — three-frame spotting workflow
+   ════════════════════════════════════ */
+#loop {
+  position: relative;
+  background: var(--bg);
+  padding: 96px 24px 80px;
+  border-top: .5px solid var(--edge);
+}
+.loop-wrap { max-width: 1200px; margin: 0 auto; text-align: center; }
+.loop-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; font-weight: 500; letter-spacing: 3.5px;
+  color: var(--cu); text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.loop-h {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(28px, 4.5vw, 48px); font-weight: 800;
+  letter-spacing: -.5px; line-height: 1.1; color: var(--hi);
+  margin: 0 0 12px;
+}
+.loop-sub {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 18px; color: var(--body); margin: 0 auto 56px;
+}
+.loop-grid {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: nowrap;
+}
+@media (max-width: 900px) {
+  .loop-grid { flex-direction: column; align-items: center; gap: 12px; }
+  .loop-arrow { transform: rotate(90deg); margin: 4px 0; }
+}
+.loop-frame {
+  flex: 1; max-width: 320px; min-width: 240px;
+  background: var(--bg2);
+  border: 1px solid var(--edge);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex; flex-direction: column;
+  text-align: left;
+  position: relative;
+}
+.loop-num {
+  position: absolute; top: 14px; right: 16px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; letter-spacing: 2px;
+  color: var(--cu); opacity: .7;
+}
+.loop-frame-art {
+  width: 100%;
+  background: #0d0c0b;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.loop-frame-art svg { display: block; width: 100%; height: auto; }
+.loop-frame-cap { flex: 1; }
+.loop-frame-h {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 22px; letter-spacing: -.3px;
+  color: var(--hi); margin-bottom: 6px;
+}
+.loop-frame-t {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; line-height: 1.5; color: var(--body);
+}
+.loop-arrow {
+  display: flex; align-items: center;
+  width: 40px; flex-shrink: 0;
+  opacity: .7;
+}
+.loop-arrow svg { display: block; width: 100%; height: auto; }
+
 /* ════════════════════════════════════
    TICKER STRIP
 ════════════════════════════════════ */
-#ticker {
+#voices {
   position:relative;
   border-top: .5px solid var(--edge);
   border-bottom: .5px solid var(--edge);
   background: var(--bg2);
-  overflow: hidden;
-  padding: 0;
+  padding: 80px 24px;
 }
-.ticker-track {
-  display: flex;
-  width: max-content;
-  animation: ticker 40s linear infinite;
+.voices-wrap { max-width: 1100px; margin: 0 auto; }
+.voices-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; font-weight: 500; letter-spacing: 3.5px;
+  color: var(--cu); text-transform: uppercase;
+  margin-bottom: 14px;
 }
-.ticker-track:hover { animation-play-state:paused; }
-.ticker-item {
-  display: flex; align-items:center; gap:14px;
-  padding: 18px 48px;
-  border-right: .5px solid var(--edge2);
-  white-space: nowrap;
-  flex-shrink: 0;
+.voices-h {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(28px, 4vw, 42px); font-weight: 800;
+  letter-spacing: -.5px; line-height: 1.1; color: var(--hi);
+  margin: 0 0 48px; max-width: 720px;
 }
-.ti-quote { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:var(--body); }
-.ti-attr { font-family:'DM Mono',monospace; font-size:9px; color:var(--dim); letter-spacing:1.5px; text-transform:uppercase; }
-.ti-dot { width:3px; height:3px; border-radius:50%; background:var(--cu); opacity:.5; }
+.voices-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+}
+@media (max-width: 720px) { .voices-grid { grid-template-columns: 1fr; gap: 20px; } }
+.voice-card {
+  background: var(--bg3);
+  border: 1px solid var(--edge);
+  border-left: 2px solid var(--cu);
+  border-radius: 10px;
+  padding: 32px 30px 26px;
+  position: relative;
+}
+.voice-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 17px; line-height: 1.55;
+  color: var(--hi);
+}
+.voice-quote-cont { margin-top: 12px; }
+.voice-attr { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--edge); }
+.voice-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 500; color: var(--hi);
+}
+.voice-co {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 1.8px;
+  color: var(--cu); text-transform: uppercase; margin-top: 4px;
+}
 
 /* ════════════════════════════════════
    OLD WAY / SPOTSEND WAY
@@ -322,18 +454,18 @@ nav {
 .ch {
   width:110px; height:110px; position:relative;
 }
-.ch-r1 { position:absolute; inset:0; border:1.5px solid rgba(208,104,48,.5); border-radius:50%; animation:glow 2s ease-in-out infinite; }
-.ch-r2 { position:absolute; inset:18px; border:1px solid rgba(208,104,48,.25); border-radius:50%; }
+.ch-r1 { position:absolute; inset:0; border:1.5px solid rgba(220,90,31,.5); border-radius:50%; animation:glow 2s ease-in-out infinite; }
+.ch-r2 { position:absolute; inset:18px; border:1px solid rgba(220,90,31,.25); border-radius:50%; }
 .ch-dot { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:5px; height:5px; border-radius:50%; background:var(--cu); animation:glow 1.5s ease-in-out infinite; }
-.ch-lh { position:absolute; top:50%; left:-14px; right:-14px; height:1px; background:linear-gradient(90deg,transparent,rgba(208,104,48,.6),transparent); transform:translateY(-50%); }
-.ch-lv { position:absolute; left:50%; top:-14px; bottom:-14px; width:1px; background:linear-gradient(180deg,transparent,rgba(208,104,48,.6),transparent); transform:translateX(-50%); }
+.ch-lh { position:absolute; top:50%; left:-14px; right:-14px; height:1px; background:linear-gradient(90deg,transparent,rgba(220,90,31,.6),transparent); transform:translateY(-50%); }
+.ch-lv { position:absolute; left:50%; top:-14px; bottom:-14px; width:1px; background:linear-gradient(180deg,transparent,rgba(220,90,31,.6),transparent); transform:translateX(-50%); }
 .ch-c { position:absolute; width:14px; height:14px; border-color:var(--cu); border-style:solid; border-width:0; }
 .ch-c.tl { top:6px; left:6px; border-top-width:2px; border-left-width:2px; }
 .ch-c.tr { top:6px; right:6px; border-top-width:2px; border-right-width:2px; }
 .ch-c.bl { bottom:6px; left:6px; border-bottom-width:2px; border-left-width:2px; }
 .ch-c.br { bottom:6px; right:6px; border-bottom-width:2px; border-right-width:2px; }
 /* Scan line */
-.ch-scan { position:absolute; left:0; right:0; height:1.5px; background:linear-gradient(90deg,transparent,rgba(208,104,48,.4),transparent); animation:scanDown 2.8s ease-in-out infinite; top:0; }
+.ch-scan { position:absolute; left:0; right:0; height:1.5px; background:linear-gradient(90deg,transparent,rgba(220,90,31,.4),transparent); animation:scanDown 2.8s ease-in-out infinite; top:0; }
 
 /* ════════════════════════════════════
    HOW IT WORKS — 3 BIG CARDS
@@ -353,22 +485,22 @@ nav {
   color:var(--hi); margin-bottom:60px;
 }
 .sec-h .cu { color:var(--cu); }
-.how-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(208,104,48,.04); border-radius:8px; overflow:hidden; }
+.how-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(220,90,31,.04); border-radius:8px; overflow:hidden; }
 .hc {
   background:var(--bg2); padding:44px 36px;
   position:relative; overflow:hidden;
   transition:background .25s;
 }
 .hc:hover { background:var(--bg3); }
-.hc::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--cu),rgba(208,104,48,.3)); opacity:0; transition:opacity .25s; }
+.hc::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--cu),rgba(220,90,31,.3)); opacity:0; transition:opacity .25s; }
 .hc:hover::before { opacity:1; }
 .hc-n { font-family:'DM Mono',monospace; font-size:9px; color:var(--cu); letter-spacing:3px; margin-bottom:24px; display:flex; align-items:center; gap:10px; }
-.hc-n::after { content:''; flex:1; height:1px; background:rgba(208,104,48,.1); }
-.hc-ico { width:44px; height:44px; background:rgba(208,104,48,.07); border:.5px solid rgba(208,104,48,.2); border-radius:7px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; }
+.hc-n::after { content:''; flex:1; height:1px; background:rgba(220,90,31,.1); }
+.hc-ico { width:44px; height:44px; background:rgba(220,90,31,.07); border:.5px solid rgba(220,90,31,.2); border-radius:7px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; }
 .hc-h { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:22px; letter-spacing:.5px; text-transform:uppercase; color:var(--hi); margin-bottom:12px; }
 .hc-b { font-size:13px; font-weight:300; color:var(--body); line-height:1.75; }
 .hc-b strong { color:rgba(232,213,192,.75); font-weight:400; }
-.hc-t { font-family:'DM Mono',monospace; font-size:8.5px; color:var(--cu); letter-spacing:2px; text-transform:uppercase; margin-top:20px; padding-top:16px; border-top:.5px solid rgba(208,104,48,.07); }
+.hc-t { font-family:'DM Mono',monospace; font-size:8.5px; color:var(--cu); letter-spacing:2px; text-transform:uppercase; margin-top:20px; padding-top:16px; border-top:.5px solid rgba(220,90,31,.07); }
 
 /* ════════════════════════════════════
    ECONOMICS — THE SHOWSTOPPER
@@ -378,7 +510,7 @@ nav {
   background: var(--bg);
   overflow:hidden;
 }
-.econ-top { height:1px; background:linear-gradient(90deg,transparent,rgba(208,104,48,.4),rgba(208,104,48,.6),rgba(208,104,48,.4),transparent); }
+.econ-top { height:1px; background:linear-gradient(90deg,transparent,rgba(220,90,31,.4),rgba(220,90,31,.6),rgba(220,90,31,.4),transparent); }
 
 /* GIANT NUMBER PANEL */
 .econ-hero {
@@ -387,8 +519,8 @@ nav {
   text-align:center;
   overflow:hidden;
 }
-.econ-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(208,104,48,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(208,104,48,.015) 1px,transparent 1px); background-size:52px 52px; pointer-events:none; }
-.econ-glow { position:absolute; inset:0; background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(208,104,48,.07) 0%,transparent 70%); pointer-events:none; }
+.econ-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(220,90,31,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(220,90,31,.015) 1px,transparent 1px); background-size:52px 52px; pointer-events:none; }
+.econ-glow { position:absolute; inset:0; background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(220,90,31,.07) 0%,transparent 70%); pointer-events:none; }
 .econ-label { font-family:'DM Mono',monospace; font-size:10px; color:var(--cu); letter-spacing:4px; text-transform:uppercase; margin-bottom:28px; display:flex; align-items:center; justify-content:center; gap:16px; }
 .econ-label::before, .econ-label::after { content:''; display:block; width:48px; height:1px; background:var(--cu); }
 .econ-num-wrap { position:relative; display:inline-block; }
@@ -400,9 +532,9 @@ nav {
   color:var(--cu);
   position:relative; z-index:1;
 }
-.econ-x { font-size:.5em; color:rgba(208,104,48,.55); letter-spacing:-2px; }
+.econ-x { font-size:.5em; color:rgba(220,90,31,.55); letter-spacing:-2px; }
 /* Rings behind number */
-.econ-ring { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:50%; border:1px solid rgba(208,104,48,.08); pointer-events:none; }
+.econ-ring { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:50%; border:1px solid rgba(220,90,31,.08); pointer-events:none; }
 .econ-hl { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(20px,2.5vw,30px); color:var(--hi); letter-spacing:-1px; margin-bottom:10px; }
 .econ-note { font-family:'DM Mono',monospace; font-size:10px; color:var(--dim); letter-spacing:1.5px; }
 
@@ -414,8 +546,8 @@ nav {
 }
 .io-card { background:var(--bg2); border:.5px solid var(--edge); border-radius:6px; overflow:hidden; }
 .io-head { padding:20px 28px; border-bottom:.5px solid var(--edge); }
-.io-head.in { background:rgba(208,104,48,.04); }
-.io-head.out { background:rgba(208,104,48,.08); }
+.io-head.in { background:rgba(220,90,31,.04); }
+.io-head.out { background:rgba(220,90,31,.08); }
 .io-tag { font-family:'DM Mono',monospace; font-size:8.5px; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:5px; }
 .io-tag.in { color:var(--dim); }
 .io-tag.out { color:var(--cu); }
@@ -428,7 +560,7 @@ nav {
 .io-row-v.cu { color:var(--cu); }
 .io-row-v.hi { color:var(--hi); }
 .io-eq { display:flex; align-items:center; justify-content:center; padding-top:48px; }
-.io-eq-sign { font-family:'Barlow Condensed',sans-serif; font-size:48px; font-weight:900; color:rgba(208,104,48,.2); }
+.io-eq-sign { font-family:'Barlow Condensed',sans-serif; font-size:48px; font-weight:900; color:rgba(220,90,31,.2); }
 
 /* BAR CHART */
 .econ-bars {
@@ -450,7 +582,7 @@ nav {
 .bar-track { height:8px; background:rgba(255,255,255,.04); border-radius:4px; overflow:hidden; }
 .bar-fill { height:100%; border-radius:4px; transition:width 2s cubic-bezier(.16,1,.3,1); width:0; }
 .bar-fill.dim { background:var(--bg3); }
-.bar-fill.cu { background:linear-gradient(90deg,#b05820,#d06830,#e88040); }
+.bar-fill.cu { background:linear-gradient(90deg,#a04415,#dc5a1f,#e8722f); }
 .bar-sub { font-family:'DM Mono',monospace; font-size:8.5px; color:rgba(74,82,96,.8); letter-spacing:1px; margin-top:7px; }
 
 /* QUOTES */
@@ -465,15 +597,15 @@ nav {
   border-radius:6px; padding:36px 40px 32px;
   overflow:hidden;
 }
-.eq-bg { position:absolute; top:12px; left:20px; font-family:'Barlow Condensed',sans-serif; font-size:120px; font-weight:900; color:rgba(208,104,48,.06); line-height:.7; pointer-events:none; }
+.eq-bg { position:absolute; top:12px; left:20px; font-family:'Barlow Condensed',sans-serif; font-size:120px; font-weight:900; color:rgba(220,90,31,.06); line-height:.7; pointer-events:none; }
 .eq-txt { position:relative; z-index:1; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:var(--hi); line-height:1.6; margin-bottom:16px; }
 .eq-attr { position:relative; z-index:1; display:flex; align-items:center; gap:10px; }
-.eq-line { width:24px; height:1px; background:rgba(208,104,48,.4); }
+.eq-line { width:24px; height:1px; background:rgba(220,90,31,.4); }
 .eq-name { font-family:'DM Mono',monospace; font-size:8.5px; color:var(--dim); letter-spacing:1.5px; text-transform:uppercase; }
 
 /* STAT TICKER */
 .econ-stats {
-  border-top:.5px solid rgba(208,104,48,.08);
+  border-top:.5px solid rgba(220,90,31,.08);
   background:var(--bg2);
   display:grid; grid-template-columns:repeat(4,1fr);
 }
@@ -492,12 +624,12 @@ nav {
   overflow:hidden;
 }
 .plat-inner { max-width:1200px; margin:0 auto; }
-.plat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(208,104,48,.04); border-radius:8px; overflow:hidden; margin-top:56px; }
+.plat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(220,90,31,.04); border-radius:8px; overflow:hidden; margin-top:56px; }
 .pg { background:var(--bg2); padding:36px 30px; transition:background .2s; }
 .pg:hover { background:var(--bg3); }
 .pg-tag { font-family:'DM Mono',monospace; font-size:8px; color:var(--dim); letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; }
 .pg-ico { width:36px; height:36px; margin-bottom:14px; background:rgba(232,213,192,.04); border:.5px solid rgba(232,213,192,.08); border-radius:6px; display:flex; align-items:center; justify-content:center; }
-.pg.feat .pg-ico { background:rgba(208,104,48,.07); border-color:rgba(208,104,48,.2); }
+.pg.feat .pg-ico { background:rgba(220,90,31,.07); border-color:rgba(220,90,31,.2); }
 .pg-h { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:700; letter-spacing:.3px; text-transform:uppercase; color:var(--hi); margin-bottom:8px; }
 .pg-b { font-size:13px; font-weight:300; color:var(--body); line-height:1.7; }
 
@@ -511,9 +643,9 @@ nav {
   overflow:hidden;
 }
 .pricing-inner { max-width:1200px; margin:0 auto; }
-.price-cards { display:grid; grid-template-columns:1fr 1fr; gap:2px; max-width:800px; background:rgba(208,104,48,.06); border-radius:8px; overflow:hidden; border:.5px solid rgba(208,104,48,.12); margin-top:52px; }
+.price-cards { display:grid; grid-template-columns:1fr 1fr; gap:2px; max-width:800px; background:rgba(220,90,31,.06); border-radius:8px; overflow:hidden; border:.5px solid rgba(220,90,31,.12); margin-top:52px; }
 .pc { background:var(--bg2); padding:44px 40px; }
-.pc.feat { background:rgba(208,104,48,.05); }
+.pc.feat { background:rgba(220,90,31,.05); }
 .pc-tag { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; margin-bottom:20px; display:flex; align-items:center; gap:10px; }
 .pc-tag::before { content:''; width:14px; height:1px; background:currentColor; flex-shrink:0; }
 .pc-tag.cu { color:var(--cu); }
@@ -541,9 +673,9 @@ nav {
   text-align:center;
   overflow:hidden;
 }
-.cta-glow { position:absolute; inset:0; background:radial-gradient(ellipse 55% 50% at 50% 50%,rgba(208,104,48,.07) 0%,transparent 100%); pointer-events:none; }
-.cta-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(208,104,48,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(208,104,48,.015) 1px,transparent 1px); background-size:52px 52px; pointer-events:none; }
-.cta-top { position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(208,104,48,.4),rgba(208,104,48,.6),rgba(208,104,48,.4),transparent); }
+.cta-glow { position:absolute; inset:0; background:radial-gradient(ellipse 55% 50% at 50% 50%,rgba(220,90,31,.07) 0%,transparent 100%); pointer-events:none; }
+.cta-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(220,90,31,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(220,90,31,.015) 1px,transparent 1px); background-size:52px 52px; pointer-events:none; }
+.cta-top { position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(220,90,31,.4),rgba(220,90,31,.6),rgba(220,90,31,.4),transparent); }
 .cta-mark { margin:0 auto 40px; display:block; }
 .cta-h { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(56px,8vw,110px); letter-spacing:-3px; line-height:.88; text-transform:uppercase; color:var(--hi); margin-bottom:24px; position:relative; z-index:1; }
 .cta-h .cu { color:var(--cu); }
@@ -596,10 +728,10 @@ footer {
 <nav>
   <a href="/" class="nav-logo">
     <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-      <path d="M20 4L36 16V38H4V16Z" fill="rgba(208,104,48,.1)" stroke="#d06830" stroke-width="1.8" stroke-linejoin="round"/>
-      <path d="M12 38V26H28V38" stroke="#d06830" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="20" cy="17" r="6.5" stroke="#d06830" stroke-width="1.2" stroke-dasharray="3 2.5"/>
-      <circle cx="20" cy="17" r="2.5" fill="#d06830"/>
+      <path d="M20 4L36 16V38H4V16Z" fill="rgba(220,90,31,.1)" stroke="#dc5a1f" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M12 38V26H28V38" stroke="#dc5a1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="20" cy="17" r="6.5" stroke="#dc5a1f" stroke-width="1.2" stroke-dasharray="3 2.5"/>
+      <circle cx="20" cy="17" r="2.5" fill="#dc5a1f"/>
       <line x1="20" y1="1" x2="20" y2="9" stroke="rgba(232,213,192,.5)" stroke-width="1.4" stroke-linecap="round"/>
       <line x1="1" y1="20" x2="9" y2="20" stroke="rgba(232,213,192,.5)" stroke-width="1.4" stroke-linecap="round"/>
       <line x1="31" y1="20" x2="39" y2="20" stroke="rgba(232,213,192,.5)" stroke-width="1.4" stroke-linecap="round"/>
@@ -607,9 +739,9 @@ footer {
     <div class="nav-mark"><em>SPOT</em>SEND</div>
   </a>
   <div class="nav-links">
-    <a href="#split" class="on">◎ Why SpotSend</a>
+    <a href="#loop" class="on">◎ The Loop</a>
+    <a href="#split">Why SpotSend</a>
     <a href="#how">How It Works</a>
-    <a href="#econ">Economics</a>
     <a href="#pricing">Pricing</a>
   </div>
   <div class="nav-r">
@@ -644,35 +776,196 @@ footer {
 
     <div class="h-ctas" style="animation:fadeUp .7s .3s ease both;">
       <a href="#access-form" class="btn-cu">Request Early Access</a>
-      <a href="#how" class="btn-ghost">See How It Works →</a>
+      <a href="#loop" class="btn-ghost">See it in 30 seconds →</a>
     </div>
 
     <div class="h-proof" style="animation:fadeUp .7s .4s ease both;">
       <div class="hp-item"><div class="hp-n">30s</div><div class="hp-l">Spot to Send</div></div>
       <div class="hp-item"><div class="hp-n">4-7 days</div><div class="hp-l">In Mailbox</div></div>
-      <div class="hp-item"><div class="hp-n">18%</div><div class="hp-l">Callback Rate</div></div>
+      <div class="hp-item"><div class="hp-n">$1.75</div><div class="hp-l">Per Card, All-In</div></div>
       <div class="hp-item"><div class="hp-n">$99</div><div class="hp-l">Per Month</div></div>
+    </div>
+
+    <div class="h-math" style="animation:fadeUp .7s .5s ease both;">
+      <span class="hm-lead">The math:</span>
+      <span class="hm-body">A postcard costs <strong>$1.75</strong>. One driveway job pays for <strong>1,200 of them.</strong></span>
     </div>
   </div>
 </section>
 
-<!-- ══════════ TICKER ══════════ -->
-<section id="ticker">
-  <div class="ticker-track">
-    <!-- First set -->
-    <div class="ticker-item"><span class="ti-quote">"18% callback rate. Crazy good for direct mail."</span><div class="ti-dot"></div><span class="ti-attr">Cody Willard · Tree Love LLC</span></div>
-    <div class="ticker-item"><span class="ti-quote">"One $11K job off a single card."</span><div class="ti-dot"></div><span class="ti-attr">John Tomlinson · Southern Charm</span></div>
-    <div class="ticker-item"><span class="ti-quote">"Less than a minute to send a postcard when we see a hazard tree."</span><div class="ti-dot"></div><span class="ti-attr">Nick Araya · TreeCare LA</span></div>
-    <div class="ticker-item"><span class="ti-quote">"The picture and authenticity of the postcard is what sells it."</span><div class="ti-dot"></div><span class="ti-attr">Dallas Stephens · Arb Tech</span></div>
-    <div class="ticker-item"><span class="ti-quote">"Now my whole team can pursue leads in the field."</span><div class="ti-dot"></div><span class="ti-attr">Jeremy Wagener · Urban Timber</span></div>
-    <div class="ticker-item"><span class="ti-quote">"I'd rather generate my own high quality leads than pay HomeAdvisor."</span><div class="ti-dot"></div><span class="ti-attr">Andrew Bachman · Trout Brook Arborists</span></div>
-    <!-- Duplicate for seamless loop -->
-    <div class="ticker-item"><span class="ti-quote">"18% callback rate. Crazy good for direct mail."</span><div class="ti-dot"></div><span class="ti-attr">Cody Willard · Tree Love LLC</span></div>
-    <div class="ticker-item"><span class="ti-quote">"One $11K job off a single card."</span><div class="ti-dot"></div><span class="ti-attr">John Tomlinson · Southern Charm</span></div>
-    <div class="ticker-item"><span class="ti-quote">"Less than a minute to send a postcard when we see a hazard tree."</span><div class="ti-dot"></div><span class="ti-attr">Nick Araya · TreeCare LA</span></div>
-    <div class="ticker-item"><span class="ti-quote">"The picture and authenticity of the postcard is what sells it."</span><div class="ti-dot"></div><span class="ti-attr">Dallas Stephens · Arb Tech</span></div>
-    <div class="ticker-item"><span class="ti-quote">"Now my whole team can pursue leads in the field."</span><div class="ti-dot"></div><span class="ti-attr">Jeremy Wagener · Urban Timber</span></div>
-    <div class="ticker-item"><span class="ti-quote">"I'd rather generate my own high quality leads than pay HomeAdvisor."</span><div class="ti-dot"></div><span class="ti-attr">Andrew Bachman · Trout Brook Arborists</span></div>
+<!-- ══════════ SPOTTING WORKFLOW VISUAL ══════════ -->
+<!-- Three-frame static sequence showing the actual product loop:               -->
+<!-- (1) contractor sees a property from truck → (2) snaps a photo →            -->
+<!-- (3) postcard lands at that house. Static SVG, mobile-friendly,             -->
+<!-- no external assets. This is the "what is this product" demo.               -->
+<section id="loop">
+  <div class="loop-wrap">
+    <div class="loop-eyebrow">The whole loop</div>
+    <h2 class="loop-h">Drive past it. Send a card. Win the job.</h2>
+    <p class="loop-sub">Three steps. About thirty seconds. From your truck.</p>
+
+    <div class="loop-grid">
+      <!-- Frame 1: Spot from truck -->
+      <div class="loop-frame">
+        <div class="loop-num">01</div>
+        <div class="loop-frame-art" aria-hidden="true">
+          <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+            <!-- sky -->
+            <rect width="200" height="80" fill="#2a2522"/>
+            <!-- horizon glow -->
+            <rect y="65" width="200" height="20" fill="#3d2a1f" opacity=".5"/>
+            <!-- ground -->
+            <rect y="80" width="200" height="60" fill="#1c1916"/>
+            <!-- road -->
+            <polygon points="80,80 120,80 200,140 0,140" fill="#0d0c0b"/>
+            <!-- road dashes -->
+            <line x1="100" y1="85" x2="100" y2="100" stroke="#dc5a1f" stroke-width="2" opacity=".5"/>
+            <line x1="100" y1="110" x2="100" y2="130" stroke="#dc5a1f" stroke-width="2" opacity=".3"/>
+            <!-- house with damaged driveway -->
+            <rect x="125" y="55" width="55" height="30" fill="#3a2f29"/>
+            <polygon points="125,55 152,38 180,55" fill="#2a221d"/>
+            <rect x="135" y="65" width="8" height="12" fill="#5a4a3d"/>
+            <rect x="155" y="65" width="8" height="8" fill="#5a4a3d"/>
+            <!-- driveway with cracks -->
+            <polygon points="125,85 180,85 175,100 130,100" fill="#5a5651"/>
+            <line x1="140" y1="87" x2="148" y2="98" stroke="#1c1916" stroke-width="1.2"/>
+            <line x1="158" y1="86" x2="165" y2="99" stroke="#1c1916" stroke-width="1"/>
+            <!-- spot indicator -->
+            <circle cx="152" cy="92" r="13" fill="none" stroke="#dc5a1f" stroke-width="1.5" stroke-dasharray="3 2"/>
+            <circle cx="152" cy="92" r="3" fill="#dc5a1f"/>
+            <!-- truck windshield framing (foreground) -->
+            <path d="M 0 0 L 30 0 L 18 50 L 0 50 Z" fill="#1c1916" opacity=".4"/>
+            <path d="M 200 0 L 170 0 L 182 50 L 200 50 Z" fill="#1c1916" opacity=".4"/>
+          </svg>
+        </div>
+        <div class="loop-frame-cap">
+          <div class="loop-frame-h">You spot it.</div>
+          <div class="loop-frame-t">Driving by, you see the cracked driveway, the worn roof, the work that needs doing.</div>
+        </div>
+      </div>
+
+      <!-- Connector arrow -->
+      <div class="loop-arrow" aria-hidden="true">
+        <svg viewBox="0 0 40 12" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="6" x2="34" y2="6" stroke="#dc5a1f" stroke-width="1.5" stroke-dasharray="2 2"/>
+          <polygon points="40,6 32,2 32,10" fill="#dc5a1f"/>
+        </svg>
+      </div>
+
+      <!-- Frame 2: Snap & send -->
+      <div class="loop-frame">
+        <div class="loop-num">02</div>
+        <div class="loop-frame-art" aria-hidden="true">
+          <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+            <!-- phone outline -->
+            <rect x="60" y="10" width="80" height="120" rx="10" fill="#0a0908" stroke="#3d3631" stroke-width="1.5"/>
+            <!-- phone screen -->
+            <rect x="65" y="20" width="70" height="100" rx="3" fill="#1c1916"/>
+            <!-- camera viewfinder header -->
+            <rect x="65" y="20" width="70" height="14" fill="#dc5a1f" opacity=".15"/>
+            <text x="100" y="30" text-anchor="middle" font-family="monospace" font-size="6" fill="#dc5a1f" letter-spacing="1.5">SPOT IT</text>
+            <!-- preview photo of the house -->
+            <rect x="70" y="38" width="60" height="40" fill="#3a2f29"/>
+            <polygon points="70,38 100,28 130,38" fill="#2a221d"/>
+            <rect x="80" y="50" width="6" height="9" fill="#5a4a3d"/>
+            <polygon points="70,68 130,68 127,78 73,78" fill="#5a5651"/>
+            <!-- crosshair on photo -->
+            <circle cx="100" cy="73" r="6" fill="none" stroke="#dc5a1f" stroke-width="1"/>
+            <line x1="94" y1="73" x2="98" y2="73" stroke="#dc5a1f" stroke-width="1"/>
+            <line x1="102" y1="73" x2="106" y2="73" stroke="#dc5a1f" stroke-width="1"/>
+            <line x1="100" y1="67" x2="100" y2="71" stroke="#dc5a1f" stroke-width="1"/>
+            <line x1="100" y1="75" x2="100" y2="79" stroke="#dc5a1f" stroke-width="1"/>
+            <!-- AI copy preview -->
+            <rect x="70" y="84" width="60" height="3" fill="#f5f0e6" opacity=".5"/>
+            <rect x="70" y="89" width="48" height="3" fill="#f5f0e6" opacity=".3"/>
+            <rect x="70" y="94" width="55" height="3" fill="#f5f0e6" opacity=".3"/>
+            <!-- send button -->
+            <rect x="70" y="103" width="60" height="11" rx="2" fill="#dc5a1f"/>
+            <text x="100" y="111" text-anchor="middle" font-family="sans-serif" font-size="6" font-weight="700" fill="#fff" letter-spacing="1">SEND IT</text>
+            <!-- finger -->
+            <circle cx="115" cy="108" r="6" fill="#f5f0e6" opacity=".25"/>
+          </svg>
+        </div>
+        <div class="loop-frame-cap">
+          <div class="loop-frame-h">You send it.</div>
+          <div class="loop-frame-t">Snap a photo, AI writes the copy, postcard goes to print. Thirty seconds, no laptop.</div>
+        </div>
+      </div>
+
+      <!-- Connector arrow -->
+      <div class="loop-arrow" aria-hidden="true">
+        <svg viewBox="0 0 40 12" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="6" x2="34" y2="6" stroke="#dc5a1f" stroke-width="1.5" stroke-dasharray="2 2"/>
+          <polygon points="40,6 32,2 32,10" fill="#dc5a1f"/>
+        </svg>
+      </div>
+
+      <!-- Frame 3: Card lands -->
+      <div class="loop-frame">
+        <div class="loop-num">03</div>
+        <div class="loop-frame-art" aria-hidden="true">
+          <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+            <!-- door + porch ground -->
+            <rect width="200" height="140" fill="#3a2f29"/>
+            <rect y="100" width="200" height="40" fill="#5a4a3d"/>
+            <!-- door -->
+            <rect x="60" y="20" width="80" height="100" fill="#7a5e3d"/>
+            <rect x="62" y="22" width="76" height="96" fill="none" stroke="#5a4530" stroke-width="1.5"/>
+            <circle cx="128" cy="70" r="2" fill="#d4c8a8"/>
+            <!-- mail slot -->
+            <rect x="80" y="62" width="40" height="4" fill="#3d2f1f"/>
+            <rect x="80" y="62" width="40" height="2" fill="#1c1410"/>
+            <!-- postcard sticking out, partway through slot -->
+            <g>
+              <!-- shadow -->
+              <rect x="78" y="60" width="44" height="22" fill="#000" opacity=".3" rx="1"/>
+              <!-- card body -->
+              <rect x="78" y="58" width="44" height="22" fill="#f5f0e6" rx="1"/>
+              <!-- card band -->
+              <rect x="78" y="58" width="44" height="6" fill="#1c1916" rx="1"/>
+              <!-- accent bar -->
+              <rect x="78" y="74" width="20" height="6" fill="#dc5a1f"/>
+              <!-- text lines -->
+              <rect x="80" y="66" width="20" height="1" fill="#1c1916"/>
+              <rect x="80" y="69" width="16" height="1" fill="#1c1916" opacity=".6"/>
+              <rect x="80" y="71" width="22" height="1" fill="#1c1916" opacity=".6"/>
+            </g>
+          </svg>
+        </div>
+        <div class="loop-frame-cap">
+          <div class="loop-frame-h">They open it.</div>
+          <div class="loop-frame-t">A real photo of <em>their</em> property. Personalized note. Lands in 4–7 days. You get the call.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Two real testimonials from active POC contractors. Quotes are pulled       -->
+<!-- verbatim with permission. Names use first-name + last-initial format       -->
+<!-- standard for SaaS testimonials. Replaces the previous animated ticker      -->
+<!-- which contained fabricated quotes.                                         -->
+<section id="voices">
+  <div class="voices-wrap">
+    <div class="voices-eyebrow">From the field</div>
+    <h2 class="voices-h">Built for contractors who don't have time for marketing.</h2>
+    <div class="voices-grid">
+      <article class="voice-card">
+        <div class="voice-quote">"As a current user, I've saved hundreds of dollars in both labor and marketing costs. Instead of getting out at every house, I can drive a neighborhood, identify properties that need work, and send targeted spot bids right from my truck.</div>
+        <div class="voice-quote voice-quote-cont">When we're working a job, I can instantly target 50–100 surrounding homeowners and launch a campaign without putting out a single yard sign or pulling my crew off the job. The postcards are polished, professional, and actually grab attention."</div>
+        <div class="voice-attr">
+          <div class="voice-name">Joel W.</div>
+          <div class="voice-co">Liberty Concrete &amp; Construction · Tulsa, OK</div>
+        </div>
+      </article>
+      <article class="voice-card">
+        <div class="voice-quote">"As a roofing contractor, SpotSend makes storm campaigns incredibly easy to manage. I can sit in my truck, identify homes that clearly need roofs, and send targeted mailers on the spot. No delay, no wasted time.</div>
+        <div class="voice-quote voice-quote-cont">It's also a game changer around active jobs — we can automatically target surrounding homes and get mail out immediately without paying for expensive, large-scale direct mail campaigns. SpotSend gives us precision and speed we've never had before."</div>
+        <div class="voice-attr">
+          <div class="voice-name">Chad B.</div>
+          <div class="voice-co">Claddagh Roofing · Spring, TX</div>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -740,14 +1033,14 @@ footer {
         <polygon points="200,450 400,450 430,700 170,700" fill="#171914"/>
         <!-- Exterior wear — general, any trade -->
         <!-- Siding gap on south wall -->
-        <rect x="420" y="260" width="3" height="40" fill="rgba(208,104,48,.25)" rx="1"/>
-        <rect x="440" y="275" width="2" height="30" fill="rgba(208,104,48,.15)" rx="1"/>
+        <rect x="420" y="260" width="3" height="40" fill="rgba(220,90,31,.25)" rx="1"/>
+        <rect x="440" y="275" width="2" height="30" fill="rgba(220,90,31,.15)" rx="1"/>
         <!-- Overgrown lawn edge -->
         <ellipse cx="200" cy="452" rx="30" ry="8" fill="#141a0a" opacity=".6"/>
         <ellipse cx="380" cy="452" rx="25" ry="7" fill="#141a0a" opacity=".5"/>
         <!-- Window issue highlight -->
         <rect x="120" y="250" width="110" height="80" rx="1" fill="#131e30" opacity=".8"/>
-        <line x1="120" y1="250" x2="230" y2="330" stroke="rgba(208,104,48,.12)" stroke-width="1"/>
+        <line x1="120" y1="250" x2="230" y2="330" stroke="rgba(220,90,31,.12)" stroke-width="1"/>
         <!-- Trees -->
         <rect x="40" y="310" width="10" height="150" fill="#0d0e0b"/>
         <ellipse cx="45" cy="295" rx="42" ry="55" fill="#0d0e0b"/>
@@ -767,11 +1060,11 @@ footer {
         <div class="ch-scan"></div>
       </div>
       <!-- UI badges -->
-      <div style="position:absolute;top:28px;left:28px;background:rgba(15,17,20,.9);border:.5px solid rgba(208,104,48,.3);border-radius:3px;padding:5px 13px;display:flex;align-items:center;gap:7px;">
+      <div style="position:absolute;top:28px;left:28px;background:rgba(15,17,20,.9);border:.5px solid rgba(220,90,31,.3);border-radius:3px;padding:5px 13px;display:flex;align-items:center;gap:7px;">
         <div style="width:5px;height:5px;border-radius:50%;background:var(--cu);animation:glow 1.5s ease-in-out infinite;"></div>
         <span style="font-family:'DM Mono',monospace;font-size:8.5px;color:var(--cu);letter-spacing:2px;text-transform:uppercase;">AI Targeting</span>
       </div>
-      <div style="position:absolute;top:28px;right:28px;background:var(--cu);border-radius:2px;padding:4px 12px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;color:#0f1114;text-transform:uppercase;">Spotted</div>
+      <div style="position:absolute;top:28px;right:28px;background:var(--cu);border-radius:2px;padding:4px 12px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;color:#1c1916;text-transform:uppercase;">Spotted</div>
       <div style="position:absolute;bottom:22px;left:28px;font-family:'DM Mono',monospace;font-size:8px;color:rgba(232,213,192,.25);letter-spacing:.5px;">2204 Riverside Blvd · Tulsa, OK 74114</div>
     </div>
     <div class="split-new-content reveal">
@@ -791,7 +1084,7 @@ footer {
 
 <!-- ══════════ TIMELINE — REPLACES 3-STEP ══════════ -->
 <section id="how" style="position:relative;background:var(--bg2);padding:120px 48px;overflow:hidden;">
-  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(208,104,48,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(208,104,48,.015) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(220,90,31,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(220,90,31,.015) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;"></div>
 
   <div style="max-width:900px;margin:0 auto;position:relative;z-index:1;">
 
@@ -803,7 +1096,7 @@ footer {
     <div style="position:relative;">
 
       <!-- Vertical line -->
-      <div style="position:absolute;left:110px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,rgba(208,104,48,.4),rgba(208,104,48,.15) 60%,transparent);"></div>
+      <div style="position:absolute;left:110px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,rgba(220,90,31,.4),rgba(220,90,31,.15) 60%,transparent);"></div>
 
       <!-- EVENT 1 -->
       <div class="reveal" style="display:grid;grid-template-columns:110px 1fr;gap:0;margin-bottom:56px;align-items:start;">
@@ -813,7 +1106,7 @@ footer {
         </div>
         <div style="position:relative;padding-left:32px;">
           <!-- Dot on line -->
-          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(208,104,48,.15);"></div>
+          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(220,90,31,.15);"></div>
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--hi);margin-bottom:8px;">You Drive Past a Property</div>
           <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">You're between jobs. You see a fence that's falling apart, a roof with missing shingles, a yard that hasn't been touched in months. You pull over for 10 seconds. Open SpotSend. Snap the photo.</p>
           <div style="margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;">
@@ -830,7 +1123,7 @@ footer {
           <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--hi);font-weight:500;">9:14 am<br><span style="color:var(--dim);font-size:9px;">+ 30 sec</span></div>
         </div>
         <div style="position:relative;padding-left:32px;">
-          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(208,104,48,.15);"></div>
+          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(220,90,31,.15);"></div>
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--hi);margin-bottom:8px;">AI Writes a Postcard — To That Person</div>
           <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">SpotSend looks up who owns that property. Writes a note using your exact observation — not a template, not "Dear Homeowner." <em style="color:var(--hi);">Michael Ruiz at 1847 Elmwood Drive gets a card that says we drove past and noticed his specific situation.</em> Your logo. Your phone number. An estimate range for his property.</p>
           <div style="margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;">
@@ -847,7 +1140,7 @@ footer {
           <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--hi);font-weight:500;">9:15 am</div>
         </div>
         <div style="position:relative;padding-left:32px;">
-          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(208,104,48,.15);"></div>
+          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(220,90,31,.15);"></div>
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--hi);margin-bottom:8px;">You're Already Back on the Job</div>
           <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">SpotSend sends the card to print. Full-color 6×9, on real cardstock. We address it to Michael by name, stamp it, and drop it in the USPS stream. You're already at your next job. You didn't knock on a door. You didn't make a cold call.</p>
           <div style="margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;">
@@ -864,7 +1157,7 @@ footer {
           <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--hi);font-weight:500;">Afternoon</div>
         </div>
         <div style="position:relative;padding-left:32px;">
-          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(208,104,48,.15);"></div>
+          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(220,90,31,.15);"></div>
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--hi);margin-bottom:8px;">Michael Gets the Card</div>
           <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">He pulls it from his mailbox. He sees a photo of his own property — the thing he's been meaning to deal with. A contractor already noticed. Already wrote up an estimate. Already made it easy to say yes. <em style="color:var(--hi);">He scans the QR code and calls you.</em></p>
           <div style="margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;">
@@ -882,7 +1175,7 @@ footer {
         </div>
         <div style="position:relative;padding-left:32px;">
           <!-- Final dot — bigger, brighter -->
-          <div style="position:absolute;left:-7px;top:5px;width:14px;height:14px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 5px rgba(208,104,48,.2),0 0 20px rgba(208,104,48,.3);"></div>
+          <div style="position:absolute;left:-7px;top:5px;width:14px;height:14px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 5px rgba(220,90,31,.2),0 0 20px rgba(220,90,31,.3);"></div>
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;text-transform:uppercase;letter-spacing:-0.5px;color:var(--cu);margin-bottom:8px;">You Close the Job.</div>
           <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">Tuesday morning you drove past a property. Friday morning you're closing a job. The entire pipeline — spot, send, call, close — ran while you were busy doing other work. That's SpotSend.</p>
           <div style="margin-top:16px;">
@@ -993,7 +1286,7 @@ footer {
     <div class="plat-grid reveal reveal-d2">
       <div class="pg feat">
         <div class="pg-tag" style="color:var(--cu);">◎ Hero Product</div>
-        <div class="pg-ico"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2L18 8V18H2V8Z" stroke="#d06830" stroke-width="1.3" stroke-linejoin="round"/><circle cx="10" cy="8" r="3.5" stroke="#d06830" stroke-width="1" stroke-dasharray="2 2.5"/><circle cx="10" cy="8" r="1.4" fill="#d06830"/></svg></div>
+        <div class="pg-ico"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2L18 8V18H2V8Z" stroke="#dc5a1f" stroke-width="1.3" stroke-linejoin="round"/><circle cx="10" cy="8" r="3.5" stroke="#dc5a1f" stroke-width="1" stroke-dasharray="2 2.5"/><circle cx="10" cy="8" r="1.4" fill="#dc5a1f"/></svg></div>
         <div class="pg-h">Spot Bid</div>
         <p class="pg-b">See it. Snap it. Send it in 30 seconds. AI-personalized postcard — property photo, personal note, your estimate — mailed to that homeowner by Friday.</p>
       </div>
@@ -1005,7 +1298,7 @@ footer {
       </div>
       <div class="pg">
         <div class="pg-tag">Pipeline</div>
-        <div class="pg-ico"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><line x1="2" y1="15" x2="6" y2="8" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><line x1="6" y1="8" x2="10" y2="12" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><line x1="10" y1="12" x2="14" y2="6" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><line x1="14" y1="6" x2="18" y2="4" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><circle cx="14" cy="6" r="1.5" fill="#d06830"/></svg></div>
+        <div class="pg-ico"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><line x1="2" y1="15" x2="6" y2="8" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><line x1="6" y1="8" x2="10" y2="12" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><line x1="10" y1="12" x2="14" y2="6" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><line x1="14" y1="6" x2="18" y2="4" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><circle cx="14" cy="6" r="1.5" fill="#dc5a1f"/></svg></div>
         <div class="pg-h">Deal Tracker</div>
         <p class="pg-b">Every spot bid flows into your pipeline. Spotted → Sent → Called → Won. Know your cost per closed job to the penny.</p>
       </div>
@@ -1080,10 +1373,10 @@ footer {
   <div class="cta-grid"></div>
   <div class="cta-top"></div>
   <svg class="cta-mark" width="80" height="80" viewBox="0 0 40 40" fill="none">
-    <path d="M20 4L36 16V38H4V16Z" fill="rgba(208,104,48,.06)" stroke="rgba(208,104,48,.4)" stroke-width="1.6" stroke-linejoin="round"/>
-    <path d="M12 38V26H28V38" stroke="rgba(208,104,48,.4)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="20" cy="17" r="6.5" stroke="rgba(208,104,48,.5)" stroke-width="1.2" stroke-dasharray="3 2.5"/>
-    <circle cx="20" cy="17" r="2.5" fill="#d06830"/>
+    <path d="M20 4L36 16V38H4V16Z" fill="rgba(220,90,31,.06)" stroke="rgba(220,90,31,.4)" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M12 38V26H28V38" stroke="rgba(220,90,31,.4)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="20" cy="17" r="6.5" stroke="rgba(220,90,31,.5)" stroke-width="1.2" stroke-dasharray="3 2.5"/>
+    <circle cx="20" cy="17" r="2.5" fill="#dc5a1f"/>
     <line x1="20" y1="1" x2="20" y2="9" stroke="rgba(232,213,192,.4)" stroke-width="1.4" stroke-linecap="round"/>
     <line x1="1" y1="20" x2="9" y2="20" stroke="rgba(232,213,192,.4)" stroke-width="1.4" stroke-linecap="round"/>
     <line x1="31" y1="20" x2="39" y2="20" stroke="rgba(232,213,192,.4)" stroke-width="1.4" stroke-linecap="round"/>
@@ -1098,11 +1391,11 @@ footer {
 </section>
 
 <!-- ══════════ ACCESS REQUEST FORM ══════════ -->
-<section id="access-form" style="background:#0d0e10;padding:96px 24px 120px;border-top:1px solid rgba(208,104,48,0.12);position:relative;overflow:hidden;">
-  <div style="position:absolute;inset:0;background:radial-gradient(800px 400px at 50% 0%,rgba(208,104,48,0.08) 0%,transparent 70%);pointer-events:none;"></div>
+<section id="access-form" style="background:#0d0e10;padding:96px 24px 120px;border-top:1px solid rgba(220,90,31,0.12);position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(800px 400px at 50% 0%,rgba(220,90,31,0.08) 0%,transparent 70%);pointer-events:none;"></div>
   <div style="max-width:560px;margin:0 auto;position:relative;">
     <div style="text-align:center;margin-bottom:36px;">
-      <div style="font-size:11px;font-weight:700;letter-spacing:3px;color:#d06830;text-transform:uppercase;margin-bottom:14px;">Early Access</div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:3px;color:#dc5a1f;text-transform:uppercase;margin-bottom:14px;">Early Access</div>
       <h2 style="font-size:36px;line-height:1.1;color:#f5f0e6;font-weight:700;letter-spacing:-0.5px;margin:0 0 14px;">Tell us about your business</h2>
       <p style="font-size:15px;color:rgba(232,213,192,0.65);line-height:1.6;margin:0;">We're onboarding contractors one at a time so we can get every account right.<br>Fill this out and we'll reach back within 24 hours.</p>
     </div>
@@ -1167,7 +1460,7 @@ footer {
 
       <div id="access-form-error" style="display:none;background:rgba(184,50,50,0.12);border:1px solid rgba(184,50,50,0.35);color:#f87171;padding:11px 14px;border-radius:8px;font-size:13px;line-height:1.5;"></div>
 
-      <button type="submit" id="access-submit-btn" style="background:linear-gradient(135deg,#d06830,#e8560a);color:#fff;border:none;padding:16px 24px;border-radius:9px;font-size:15px;font-weight:700;letter-spacing:0.3px;cursor:pointer;transition:transform 0.15s,opacity 0.15s;font-family:inherit;margin-top:6px;box-shadow:0 4px 16px rgba(208,104,48,0.25);">Request Early Access →</button>
+      <button type="submit" id="access-submit-btn" style="background:linear-gradient(135deg,#dc5a1f,#dc5a1f);color:#fff;border:none;padding:16px 24px;border-radius:9px;font-size:15px;font-weight:700;letter-spacing:0.3px;cursor:pointer;transition:transform 0.15s,opacity 0.15s;font-family:inherit;margin-top:6px;box-shadow:0 4px 16px rgba(220,90,31,0.25);">Request Early Access →</button>
 
       <p style="text-align:center;font-size:11px;color:rgba(232,213,192,0.4);margin:6px 0 0;line-height:1.5;">No credit card required · We respond within 24 hours · Limited POC spots available</p>
     </form>
@@ -1191,7 +1484,7 @@ footer {
 
   // Pretty input focus styling
   document.querySelectorAll("#access-request-form input, #access-request-form textarea, #access-request-form select").forEach(function(el){
-    el.addEventListener("focus", function(){ this.style.borderColor = "rgba(208,104,48,0.5)"; });
+    el.addEventListener("focus", function(){ this.style.borderColor = "rgba(220,90,31,0.5)"; });
     el.addEventListener("blur", function(){ this.style.borderColor = "rgba(232,213,192,0.12)"; });
   });
 
@@ -1257,10 +1550,10 @@ footer {
 <footer>
   <div style="display:flex;align-items:center;gap:9px;">
     <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
-      <path d="M20 4L36 16V38H4V16Z" fill="none" stroke="rgba(208,104,48,.4)" stroke-width="1.8" stroke-linejoin="round"/>
-      <path d="M12 38V26H28V38" stroke="rgba(208,104,48,.35)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="20" cy="17" r="6" stroke="rgba(208,104,48,.4)" stroke-width="1" stroke-dasharray="2.5 2"/>
-      <circle cx="20" cy="17" r="2" fill="rgba(208,104,48,.6)"/>
+      <path d="M20 4L36 16V38H4V16Z" fill="none" stroke="rgba(220,90,31,.4)" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M12 38V26H28V38" stroke="rgba(220,90,31,.35)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="20" cy="17" r="6" stroke="rgba(220,90,31,.4)" stroke-width="1" stroke-dasharray="2.5 2"/>
+      <circle cx="20" cy="17" r="2" fill="rgba(220,90,31,.6)"/>
     </svg>
     <div class="ft-brand"><em>SPOT</em>SEND</div>
   </div>
