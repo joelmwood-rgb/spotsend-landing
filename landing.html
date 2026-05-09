@@ -76,7 +76,8 @@ nav {
   backdrop-filter: blur(20px);
   border-bottom: .5px solid var(--edge);
 }
-.nav-logo { display:flex; align-items:center; gap:9px; text-decoration:none; }
+.nav-logo { display:flex; align-items:center; text-decoration:none; min-width:0; }
+.nav-lockup { width:142px; height:36px; object-fit:contain; object-position:left center; display:block; }
 .nav-mark { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:18px; letter-spacing:3px; text-transform:uppercase; color:var(--hi); }
 .nav-mark em { color:var(--cu); font-style:normal; }
 .nav-links { display:flex; gap:32px; }
@@ -693,6 +694,7 @@ footer {
   padding:24px 48px;
   display:flex; align-items:center; justify-content:space-between;
 }
+.ft-lockup { width:112px; height:28px; object-fit:contain; object-position:left center; display:block; opacity:.82; }
 .ft-brand { font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:900; letter-spacing:2.5px; text-transform:uppercase; color:var(--dim); }
 .ft-brand em { color:var(--cu); font-style:normal; }
 .ft-tag { font-family:'DM Mono',monospace; font-size:8.5px; color:var(--dim); letter-spacing:3px; text-transform:uppercase; }
@@ -728,8 +730,7 @@ footer {
 <!-- NAV -->
 <nav>
   <a href="/" class="nav-logo">
-    <img src="/spotsend-logo-80.png" width="36" height="36" alt="SpotSend" style="display:block;border-radius:6px;"/>
-    <div class="nav-mark"><em>SPOT</em>SEND</div>
+    <img class="nav-lockup" src="/spotsend-lockup.png" width="142" height="36" alt="SpotSend"/>
   </a>
   <div class="nav-links">
     <a href="#loop" class="on">◎ The Loop</a>
@@ -1533,9 +1534,8 @@ footer {
 
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
-  <div style="display:flex;align-items:center;gap:9px;">
-    <img src="/spotsend-logo-80.png" width="22" height="22" alt="SpotSend" style="display:block;border-radius:3px;opacity:0.8;"/>
-    <div class="ft-brand"><em>SPOT</em>SEND</div>
+  <div style="display:flex;align-items:center;">
+    <img class="ft-lockup" src="/spotsend-lockup.png" width="112" height="28" alt="SpotSend"/>
   </div>
   <div class="ft-tag">Spot It · Send It · Win It</div>
   <div class="ft-copy">© 2026 SpotSend · AI-Powered Prospecting · Any Exterior Trade · spotsend.io</div>
