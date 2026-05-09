@@ -5,26 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="icon" type="image/png" href="/spotsend-logo.png">
 <title>SpotSend — Turn What You Drive Past Into Jobs</title>
-<meta name="description" content="Snap a photo. We mail that homeowner by Friday. AI-powered prospecting for contractors. $1.75 per send, postage included."/>
+<meta name="description" content="Snap a photo. SpotSend turns it into a targeted postcard that lands in about a week. AI-powered prospecting for contractors. $1.75 per send, postage included."/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600;1,700&family=Barlow+Condensed:wght@700;800;900&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=DM+Mono:wght@400;500;700&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 /* ════════════════════════════════════
    TOKENS
 ════════════════════════════════════ */
 :root {
-  --bg:    #1c1916;
-  --bg2:   #161920;
-  --bg3:   #1d2128;
+  --bg:    #171411;
+  --bg2:   #101216;
+  --bg3:   #191c22;
   --edge:  rgba(255,255,255,.06);
   --edge2: rgba(255,255,255,.03);
-  --cu:    #dc5a1f;
-  --cu2:   rgba(220,90,31,.12);
-  --cu3:   rgba(220,90,31,.06);
+  --cu:    #ff5a13;
+  --cu2:   rgba(255,90,19,.14);
+  --cu3:   rgba(255,90,19,.07);
   --hi:    #f5f0e6;     /* warm cream — matches app's text-on-primary */
-  --body:  #8a9099;
-  --dim:   #4a5260;
-  --line:  rgba(220,90,31,.15);
+  --body:  #b8b0a4;
+  --dim:   #6f756f;
+  --line:  rgba(255,90,19,.18);
 }
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
@@ -72,12 +72,17 @@ nav {
   height: 56px;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 48px;
-  background: rgba(15,17,20,.95);
+  background: rgba(13,13,12,.94);
   backdrop-filter: blur(20px);
   border-bottom: .5px solid var(--edge);
 }
 .nav-logo { display:flex; align-items:center; text-decoration:none; min-width:0; }
-.nav-lockup { width:142px; height:36px; object-fit:contain; object-position:left center; display:block; }
+.nav-lockup { width:176px; height:44px; object-fit:contain; object-position:left center; display:block; image-rendering:auto; filter:drop-shadow(0 0 10px rgba(255,90,19,.12)); }
+.brand-lockup { display:flex; align-items:center; gap:9px; min-width:0; }
+.brand-mark { width:32px; height:32px; object-fit:contain; border-radius:4px; box-shadow:0 0 0 1px rgba(255,90,19,.18), 0 0 18px rgba(255,90,19,.12); }
+.brand-word { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:23px; line-height:.9; letter-spacing:1.1px; color:var(--hi); text-transform:uppercase; }
+.brand-word span { color:var(--cu); }
+.brand-tag { margin-top:4px; font-family:'DM Mono',monospace; font-size:5px; font-weight:700; letter-spacing:1px; color:rgba(245,240,230,.74); text-transform:uppercase; white-space:nowrap; }
 .nav-mark { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:18px; letter-spacing:3px; text-transform:uppercase; color:var(--hi); }
 .nav-mark em { color:var(--cu); font-style:normal; }
 .nav-links { display:flex; gap:32px; }
@@ -106,12 +111,12 @@ nav {
 .h-grid {
   position: absolute; inset:0; pointer-events:none;
   background-image:
-    linear-gradient(rgba(220,90,31,.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(220,90,31,.018) 1px, transparent 1px);
+    linear-gradient(rgba(255,90,19,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,90,19,.018) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
-/* Giant 48× watermark behind everything */
+/* Giant 6x9 watermark behind everything */
 .h-wm {
   position: absolute;
   top: 50%; left: 50%;
@@ -122,7 +127,7 @@ nav {
   line-height: 1;
   letter-spacing: -16px;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(220,90,31,.06);
+  -webkit-text-stroke: 1px rgba(255,90,19,.06);
   user-select: none;
   pointer-events: none;
   white-space: nowrap;
@@ -131,7 +136,7 @@ nav {
 /* Radial atmosphere */
 .h-atm {
   position: absolute; inset:0; pointer-events:none;
-  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(220,90,31,.05) 0%, transparent 70%);
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255,90,19,.05) 0%, transparent 70%);
 }
 
 /* Hero content */
@@ -139,11 +144,32 @@ nav {
   position: relative; z-index: 2;
   max-width: 900px;
 }
+.h-product {
+  position:absolute;
+  right:48px;
+  top:50%;
+  width:min(40vw, 520px);
+  aspect-ratio:9/6;
+  transform:translateY(-42%) rotate(2.5deg);
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 36px 110px rgba(0,0,0,.62), 0 0 0 1px rgba(255,90,19,.24);
+  z-index:1;
+  opacity:.95;
+}
+.h-product img { width:100%; height:100%; object-fit:cover; display:block; }
+.h-product::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(90deg, rgba(255,255,255,.1), transparent 20%, rgba(0,0,0,.18));
+}
 
 .h-pill {
   display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(220,90,31,.08);
-  border: .5px solid rgba(220,90,31,.25);
+  background: rgba(255,90,19,.08);
+  border: .5px solid rgba(255,90,19,.25);
   border-radius: 100px;
   padding: 5px 16px;
   margin-bottom: 36px;
@@ -157,7 +183,7 @@ nav {
   font-weight: 900;
   font-size: clamp(72px, 10.5vw, 150px);
   line-height: .88;
-  letter-spacing: -3px;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--hi);
   margin-bottom: 40px;
@@ -172,7 +198,7 @@ nav {
 .h-sub {
   font-size: 16px;
   font-weight: 300;
-  color: var(--body);
+  color: rgba(245,240,230,.72);
   line-height: 1.8;
   max-width: 480px;
   margin-bottom: 40px;
@@ -192,7 +218,7 @@ nav {
   transition: transform .15s, box-shadow .15s;
 }
 .btn-cu::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,.15),transparent 55%); }
-.btn-cu:hover { transform:translateY(-2px); box-shadow:0 16px 48px rgba(220,90,31,.3); }
+.btn-cu:hover { transform:translateY(-2px); box-shadow:0 16px 48px rgba(255,90,19,.3); }
 .btn-ghost {
   display: inline-flex; align-items:center; gap:8px;
   background:none; color:var(--body);
@@ -206,29 +232,30 @@ nav {
 /* Proof strip */
 .h-proof {
   display: flex; gap:0;
-  border-top: .5px solid rgba(220,90,31,.1);
+  border-top: .5px solid rgba(255,90,19,.18);
   padding-top: 28px;
 }
 .hp-item {
   padding-right: 32px;
-  border-right: .5px solid rgba(255,255,255,.05);
+  border-right: .5px solid rgba(255,255,255,.08);
   margin-right: 32px;
 }
 .hp-item:last-child { border-right:none; padding-right:0; margin-right:0; }
 .hp-n {
   font-family:'Barlow Condensed',sans-serif;
   font-weight:900; font-size:34px; line-height:1;
-  letter-spacing:-1px; color:var(--cu); margin-bottom:4px;
+  letter-spacing:0; color:var(--cu); margin-bottom:4px; text-shadow:0 0 20px rgba(255,90,19,.18);
 }
-.hp-l { font-family:'DM Mono',monospace; font-size:8.5px; color:var(--dim); letter-spacing:1.5px; text-transform:uppercase; }
+.hp-l { font-family:'DM Mono',monospace; font-size:8.5px; color:rgba(245,240,230,.58); letter-spacing:1.5px; text-transform:uppercase; }
 
 /* The Math — visceral one-liner right after proof strip.
    Sits below proof; slightly muted but authoritative type. */
 .h-math {
   margin-top: 22px;
   padding: 14px 18px;
-  background: var(--cu3);
-  border-left: 2px solid var(--cu);
+  background: linear-gradient(135deg, rgba(255,90,19,.12), rgba(245,240,230,.035));
+  border: 1px solid rgba(255,90,19,.24);
+  border-left: 3px solid var(--cu);
   border-radius: 4px;
   display: inline-flex;
   flex-wrap: wrap;
@@ -241,14 +268,164 @@ nav {
   text-transform: uppercase; color: var(--cu);
 }
 .hm-body {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 17px; line-height: 1.4; color: var(--hi);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 17px; line-height: 1.4; color: rgba(245,240,230,.88);
 }
 .hm-body strong { font-weight: 700; color: var(--cu); font-style: normal; }
 @media (max-width: 540px) {
   .h-math { padding: 12px 14px; }
   .hm-body { font-size: 15px; }
+}
+@media (max-width: 1100px) {
+  .h-product { display:none; }
+}
+
+/* ════════════════════════════════════
+   PRODUCT SHOWCASE — phone to mailbox
+   ════════════════════════════════════ */
+#showcase {
+  position: relative;
+  padding: 80px 48px 96px;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255,90,19,.14), transparent 28%),
+    linear-gradient(180deg, #171411 0%, #101216 100%);
+  overflow: hidden;
+}
+.showcase-inner { max-width:1180px; margin:0 auto; }
+.showcase-head { display:flex; align-items:flex-end; justify-content:space-between; gap:32px; margin-bottom:34px; }
+.showcase-kicker { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:3.5px; color:var(--cu); text-transform:uppercase; margin-bottom:12px; }
+.showcase-title { font-family:'Barlow Condensed',sans-serif; font-size:clamp(46px,6vw,86px); line-height:.86; font-weight:900; letter-spacing:0; text-transform:uppercase; color:var(--hi); max-width:620px; }
+.showcase-title span { color:var(--cu); }
+.showcase-copy { max-width:360px; color:var(--body); font-size:15px; line-height:1.7; font-weight:500; }
+.showcase-flow { display:grid; grid-template-columns:.82fr 1.35fr .82fr; gap:18px; align-items:stretch; }
+.show-card {
+  min-height:430px;
+  border:1px solid rgba(245,240,230,.12);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.018)),
+    radial-gradient(circle at 50% 0%, rgba(255,90,19,.08), transparent 48%);
+  border-radius:8px;
+  padding:20px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 28px 80px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.show-card::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg, rgba(255,90,19,.055), transparent 42%); pointer-events:none; }
+.show-label { position:relative; z-index:1; font-family:'DM Mono',monospace; font-size:9px; color:var(--cu); letter-spacing:2.5px; text-transform:uppercase; margin-bottom:18px; }
+.phone-shell { position:relative; z-index:1; width:190px; height:360px; margin:0 auto; border:8px solid #060606; border-radius:30px; background:#101216; box-shadow:0 0 0 1px rgba(255,255,255,.09), 0 24px 55px rgba(0,0,0,.58), inset 0 0 0 1px rgba(255,255,255,.04); overflow:hidden; }
+.phone-shell::before { content:''; position:absolute; top:9px; left:50%; width:54px; height:5px; border-radius:99px; background:#050505; transform:translateX(-50%); z-index:4; }
+.phone-top { height:36px; display:flex; align-items:center; justify-content:center; color:#f5f0e6; font-family:'DM Mono',monospace; font-size:8px; letter-spacing:1.5px; }
+.phone-photo { height:145px; position:relative; overflow:hidden; background:
+  radial-gradient(circle at 20% 22%, rgba(255,255,255,.8), transparent 8%),
+  linear-gradient(180deg, #b8c6d2 0 32%, #776c5d 33% 47%, #342f2a 48% 100%);
+}
+.phone-photo::before { content:''; position:absolute; left:-8%; right:-8%; top:37%; height:33%; background:repeating-linear-gradient(0deg, rgba(255,255,255,.08) 0 2px, transparent 2px 13px), linear-gradient(120deg,#2d2b28,#746858); transform:skewY(-7deg); box-shadow:0 -8px 16px rgba(0,0,0,.24) inset; }
+.phone-photo::after { content:''; position:absolute; left:76px; top:52px; width:44px; height:44px; border:2px solid var(--cu); border-radius:50%; box-shadow:0 0 0 999px rgba(0,0,0,.14), 0 0 18px rgba(255,90,19,.28); }
+.phone-house { position:absolute; left:23px; right:18px; bottom:16px; height:55px; background:linear-gradient(160deg,#a2907d,#61564c); clip-path:polygon(0 50%,50% 5%,100% 50%,100% 100%,0 100%); box-shadow:0 0 0 2px rgba(255,255,255,.18) inset, 0 12px 20px rgba(0,0,0,.24); }
+.phone-house::after { content:''; position:absolute; left:46%; bottom:0; width:14%; height:39%; background:#252321; box-shadow:22px -12px 0 -7px rgba(255,255,255,.25), -25px -12px 0 -7px rgba(255,255,255,.22); }
+.phone-ui { padding:14px; }
+.phone-field { height:10px; border-radius:5px; background:rgba(245,240,230,.12); margin-bottom:8px; }
+.phone-field.short { width:62%; }
+.phone-btn { margin-top:14px; height:38px; border-radius:6px; background:linear-gradient(135deg, #ff6a1a, #dc4d13); color:#111; display:flex; align-items:center; justify-content:center; font-family:'Barlow Condensed',sans-serif; font-weight:900; letter-spacing:2px; font-size:13px; text-transform:uppercase; }
+.phone-live-shot { position:absolute; inset:36px 0 0; width:100%; height:calc(100% - 36px); object-fit:cover; object-position:center top; opacity:.86; filter:saturate(1.08) contrast(1.04); }
+.phone-shell.has-shot .phone-photo,
+.phone-shell.has-shot .phone-ui { display:none; }
+.phone-shell.has-shot::after { content:''; position:absolute; inset:36px 0 0; background:linear-gradient(180deg, transparent 0 58%, rgba(0,0,0,.44)); pointer-events:none; }
+.postcard-stage { position:relative; z-index:1; min-height:0; padding:34px 0 28px; display:flex; align-items:center; justify-content:center; perspective:1200px; }
+.postcard-stage::before { content:''; position:absolute; inset:18px 4% 8px; border-radius:999px; background:radial-gradient(ellipse, rgba(255,90,19,.18), transparent 60%); filter:blur(18px); opacity:.9; }
+.postcard-shadow { position:absolute; left:8%; right:8%; bottom:0; height:30px; background:radial-gradient(ellipse, rgba(0,0,0,.66), transparent 70%); filter:blur(9px); }
+.postcard-back {
+  position:absolute;
+  width:min(96%, 560px);
+  aspect-ratio:9/6;
+  border-radius:8px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.34), transparent 28%),
+    #f3eadf;
+  transform:translate(26px, 18px) rotate(3.2deg);
+  box-shadow:0 22px 60px rgba(0,0,0,.4);
+  overflow:hidden;
+  opacity:.92;
+}
+.postcard-back::before { content:''; position:absolute; left:0; top:0; bottom:0; width:46%; background:linear-gradient(180deg,#171411,#101216); border-right:1px dashed rgba(23,20,17,.34); }
+.postcard-back::after { content:'POSTCARD'; position:absolute; top:24px; right:28px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:3px; color:rgba(23,20,17,.46); }
+.back-lines { position:absolute; right:42px; top:76px; width:210px; display:grid; gap:12px; }
+.back-lines span { height:2px; background:rgba(23,20,17,.28); display:block; }
+.back-stamp { position:absolute; right:32px; top:28px; width:42px; height:34px; border:2px solid rgba(23,20,17,.28); border-radius:3px; transform:rotate(2deg); }
+.postcard-render { width:min(100%, 620px); aspect-ratio:9/6; border-radius:6px; overflow:hidden; display:grid; grid-template-columns:52% 48%; transform:rotate(-1.2deg); box-shadow:0 34px 95px rgba(0,0,0,.68), 0 0 0 1px rgba(255,90,19,.26), inset 0 0 0 1px rgba(255,255,255,.12); background:#111; position:relative; }
+.postcard-render.as-image { display:block; }
+.postcard-img { width:100%; height:100%; object-fit:cover; display:block; }
+.postcard-back .postcard-img { opacity:.96; }
+.postcard-render::before { content:''; position:absolute; inset:0; z-index:5; pointer-events:none; background-image:radial-gradient(rgba(255,255,255,.09) .55px, transparent .7px); background-size:3px 3px; opacity:.18; mix-blend-mode:screen; }
+.postcard-render::after { content:''; position:absolute; inset:0; z-index:6; pointer-events:none; background:linear-gradient(90deg,rgba(255,255,255,.10),transparent 12%,transparent 84%,rgba(0,0,0,.22)), linear-gradient(115deg, transparent 0 44%, rgba(255,255,255,.12) 45%, transparent 54%); mix-blend-mode:screen; opacity:.42; }
+.pc-left { background:radial-gradient(circle at 12% 0%, rgba(255,90,19,.18), transparent 22%), linear-gradient(150deg, #171411, #080807); padding:26px; position:relative; }
+.pc-left::after { content:''; position:absolute; inset:0; background-image:linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px), linear-gradient(rgba(255,255,255,.016) 1px, transparent 1px); background-size:5px 5px; opacity:.32; pointer-events:none; }
+.pc-logo { display:flex; align-items:center; gap:10px; margin-bottom:18px; min-height:40px; }
+.pc-mark { width:34px; height:34px; flex:0 0 34px; color:var(--cu); filter:drop-shadow(0 0 8px rgba(255,90,19,.2)); }
+.pc-brand { font-family:'Barlow Condensed',sans-serif; color:var(--hi); font-size:26px; font-weight:900; letter-spacing:1px; line-height:.9; text-transform:uppercase; }
+.pc-brand span { display:block; color:var(--cu); font-size:11px; letter-spacing:1.8px; margin-top:5px; }
+.pc-logo-lockup { width:152px; height:auto; display:block; object-fit:contain; filter:drop-shadow(0 0 12px rgba(255,90,19,.18)); }
+.pc-ss-mark { position:absolute; top:18px; right:18px; width:36px; height:36px; object-fit:contain; z-index:4; filter:drop-shadow(0 0 12px rgba(255,90,19,.22)); opacity:.88; }
+.pc-notice { font-family:'DM Mono',monospace; color:var(--cu); font-size:8px; letter-spacing:2px; text-transform:uppercase; margin:6px 0 14px; }
+.pc-headline { font-family:'Barlow Condensed',sans-serif; font-size:38px; line-height:.95; color:var(--hi); font-weight:900; text-transform:uppercase; letter-spacing:0; }
+.pc-headline em { color:var(--cu); font-style:normal; }
+.pc-body { color:rgba(245,240,230,.78); font-size:12px; line-height:1.45; margin-top:12px; max-width:250px; }
+.pc-icons { display:flex; gap:10px; margin-top:18px; color:rgba(245,240,230,.68); font-family:'DM Mono',monospace; font-size:7px; text-transform:uppercase; }
+.pc-icon { flex:1; border-top:1px solid rgba(255,90,19,.35); padding-top:6px; }
+.pc-footer { position:absolute; left:0; right:0; bottom:0; height:54px; background:linear-gradient(90deg, #dc4d13, #ff6a1a); display:flex; align-items:center; justify-content:space-between; padding:0 24px; color:#111; }
+.pc-phone { font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:900; letter-spacing:1px; }
+.pc-qr { width:34px; height:34px; background:linear-gradient(90deg,#111 4px,transparent 4px 8px,#111 8px 12px,transparent 12px),linear-gradient(#111 4px,transparent 4px 8px,#111 8px 12px,transparent 12px),#fff; background-size:12px 12px; border:4px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,.2); }
+.pc-photo { position:relative; overflow:hidden; background:
+  radial-gradient(circle at 20% 18%, rgba(255,255,255,.68), transparent 9%),
+  radial-gradient(circle at 38% 20%, rgba(255,255,255,.46), transparent 12%),
+  linear-gradient(180deg, #b9c7d1 0 30%, #766c5f 31% 47%, #2b2926 48% 100%);
+}
+.pc-photo::before { content:''; position:absolute; inset:34% -10% -4%; background:repeating-linear-gradient(0deg, rgba(255,255,255,.08) 0 2px, transparent 2px 14px), linear-gradient(116deg, #2c2b29, #665e53 58%, #312e2a); transform:skewY(-7deg); box-shadow:0 -14px 28px rgba(0,0,0,.34) inset, 0 0 0 3px rgba(255,255,255,.09) inset; }
+.pc-photo::after { content:''; position:absolute; inset:0; background:linear-gradient(115deg, transparent 0 42%, rgba(255,255,255,.16) 43%, transparent 54%), linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.32)); opacity:.86; pointer-events:none; }
+.photo-sky { position:absolute; inset:0 0 48%; opacity:0; }
+.photo-roofline { position:absolute; left:-12%; right:-8%; top:31%; height:18%; background:linear-gradient(130deg,#171717,#3f3831 55%,#8c7b67); transform:skewY(-7deg); border-top:4px solid rgba(245,240,230,.16); border-bottom:8px solid rgba(0,0,0,.36); box-shadow:0 12px 24px rgba(0,0,0,.18); }
+.photo-drive { position:absolute; left:-12%; right:0; bottom:-4%; height:30%; background:linear-gradient(145deg,#81776a,#383632); clip-path:polygon(22% 0,100% 0,78% 100%,0 100%); opacity:.96; }
+.photo-house { position:absolute; left:15%; right:8%; bottom:18%; height:35%; background:linear-gradient(160deg,#978976,#62584d 58%,#3e3a35); clip-path:polygon(0 49%, 50% 0, 100% 49%, 100% 100%, 0 100%); box-shadow:0 0 0 3px rgba(255,255,255,.15) inset, 0 14px 28px rgba(0,0,0,.28); }
+.photo-house span { position:absolute; left:43%; bottom:0; width:15%; height:42%; background:#242321; border:2px solid rgba(255,255,255,.18); box-shadow:24px -18px 0 -7px rgba(255,255,255,.18), -31px -16px 0 -7px rgba(255,255,255,.16); }
+.photo-badge { position:absolute; left:18px; bottom:18px; padding:6px 9px; background:rgba(15,17,20,.78); border:1px solid rgba(255,255,255,.16); border-radius:5px; font-family:'DM Mono',monospace; font-size:7px; color:#f5f0e6; letter-spacing:1px; text-transform:uppercase; }
+.pc-pin { position:absolute; top:20px; right:22px; background:rgba(255,90,19,.92); color:#111; padding:9px 12px; border-radius:6px; font-family:'DM Mono',monospace; font-size:7px; font-weight:700; letter-spacing:1px; text-transform:uppercase; box-shadow:0 12px 28px rgba(0,0,0,.26); }
+.mailbox-scene { position:relative; z-index:1; height:350px; display:flex; align-items:center; justify-content:center; perspective:900px; }
+.mailbox-scene::before { content:''; position:absolute; left:16%; right:16%; bottom:56px; height:26px; background:radial-gradient(ellipse, rgba(0,0,0,.58), transparent 68%); filter:blur(9px); }
+.mailbox { width:210px; height:140px; border-radius:72px 72px 12px 12px; background:linear-gradient(160deg, #40444b, #121419 72%); border:1px solid rgba(245,240,230,.14); position:relative; box-shadow:0 30px 70px rgba(0,0,0,.48), inset 0 1px 0 rgba(255,255,255,.16); transform:rotateY(-8deg) rotateX(2deg); }
+.mailbox::before { content:''; position:absolute; left:26px; right:18px; top:42px; height:78px; background:linear-gradient(180deg,#fffaf2,#e4d7c8); transform:rotate(-7deg); box-shadow:0 9px 20px rgba(0,0,0,.3), inset 0 0 0 1px rgba(0,0,0,.08); border-left:12px solid var(--cu); }
+.mailbox::after { content:'MAIL DELIVERED'; position:absolute; right:16px; top:-18px; background:var(--cu); color:#111; padding:6px 10px; border-radius:4px; font-family:'DM Mono',monospace; font-size:8px; font-weight:700; letter-spacing:1.2px; box-shadow:0 12px 20px rgba(0,0,0,.24); }
+.tracking-shot { position:absolute; inset:28px 22px auto; height:112px; border-radius:7px; overflow:hidden; opacity:.9; transform:rotate(-2deg); box-shadow:0 18px 42px rgba(0,0,0,.34), 0 0 0 1px rgba(255,255,255,.1); }
+.tracking-shot img { width:100%; height:100%; object-fit:cover; object-position:50% 12%; display:block; }
+.mailbox-photo {
+  position:relative;
+  z-index:1;
+  width:min(100%, 360px);
+  aspect-ratio:3/2;
+  border-radius:8px;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+  box-shadow:0 28px 72px rgba(0,0,0,.48), 0 0 0 1px rgba(255,255,255,.12);
+}
+.show-caption { position:relative; z-index:1; margin-top:18px; color:var(--hi); font-family:'Barlow Condensed',sans-serif; font-size:24px; font-weight:900; text-transform:uppercase; letter-spacing:0; }
+.show-caption span { display:block; margin-top:5px; color:var(--body); font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; line-height:1.45; text-transform:none; }
+
+@media(max-width:900px){
+  #showcase { padding:72px 24px 84px; }
+  .showcase-head { display:block; }
+  .showcase-copy { margin-top:18px; }
+  .showcase-flow { grid-template-columns:1fr; }
+  .show-card { min-height:auto; }
+  .postcard-stage { height:auto; min-height:0; padding:18px 0 14px; }
+  .postcard-back { display:none; }
+  .postcard-render { transform:rotate(0deg); width:100%; max-width:520px; }
+  .pc-left { padding:18px; }
+  .pc-headline { font-size:30px; }
+  .pc-body { font-size:10.5px; }
+  .pc-icons { display:none; }
+  .pc-footer { height:44px; padding:0 16px; }
+  .pc-phone { font-size:18px; }
 }
 
 /* ════════════════════════════════════
@@ -274,7 +451,8 @@ nav {
   margin: 0 0 12px;
 }
 .loop-sub {
-  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
   font-size: 18px; color: var(--body); margin: 0 auto 56px;
 }
 .loop-grid {
@@ -290,13 +468,15 @@ nav {
 }
 .loop-frame {
   flex: 1; max-width: 320px; min-width: 240px;
-  background: var(--bg2);
-  border: 1px solid var(--edge);
-  border-radius: 12px;
+  background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)), var(--bg2);
+  border: 1px solid rgba(245,240,230,.1);
+  border-radius: 8px;
   padding: 20px;
   display: flex; flex-direction: column;
   text-align: left;
   position: relative;
+  box-shadow:0 24px 60px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.045);
+  overflow:hidden;
 }
 .loop-num {
   position: absolute; top: 14px; right: 16px;
@@ -306,12 +486,66 @@ nav {
 }
 .loop-frame-art {
   width: 100%;
+  min-height: 210px;
   background: #0d0c0b;
   border-radius: 6px;
   overflow: hidden;
   margin-bottom: 16px;
+  position:relative;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);
 }
 .loop-frame-art svg { display: block; width: 100%; height: auto; }
+.ui-shot {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+  filter:saturate(1.08) contrast(1.04);
+}
+.ui-shot.spotbid { object-position:center top; }
+.ui-shot.pipeline { object-position:center top; }
+.ui-shot.detail { object-position:50% 0; }
+.ui-shot.mailbox-shot { object-position:center; filter:saturate(1.05) contrast(1.03); }
+.loop-frame-art::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(180deg, rgba(255,255,255,.06), transparent 32%, rgba(0,0,0,.18));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);
+}
+.scene-photo {
+  position:absolute; inset:0;
+  background:
+    radial-gradient(circle at 17% 20%, rgba(255,255,255,.62), transparent 9%),
+    linear-gradient(180deg,#b6c2ca 0 34%,#7a705f 35% 48%,#242321 49% 100%);
+}
+.scene-photo::before { content:''; position:absolute; inset:36% -8% -2%; background:repeating-linear-gradient(0deg, rgba(255,255,255,.08) 0 2px, transparent 2px 15px), linear-gradient(120deg,#2c2a28,#716758); transform:skewY(-8deg); box-shadow:0 -14px 28px rgba(0,0,0,.35) inset; }
+.scene-photo::after { content:''; position:absolute; left:18%; right:11%; bottom:18%; height:36%; background:linear-gradient(160deg,#9b8d7a,#5f554a); clip-path:polygon(0 48%,50% 0,100% 48%,100% 100%,0 100%); box-shadow:0 0 0 3px rgba(255,255,255,.14) inset, 0 16px 26px rgba(0,0,0,.28); }
+.scene-windshield { position:absolute; inset:0; background:linear-gradient(90deg, rgba(5,5,5,.7) 0 11%, transparent 22% 78%, rgba(5,5,5,.7) 89% 100%), linear-gradient(180deg, rgba(0,0,0,.16), transparent 42%); }
+.scene-target { position:absolute; right:31%; bottom:30%; width:50px; height:50px; border:2px solid var(--cu); border-radius:50%; box-shadow:0 0 0 999px rgba(0,0,0,.08), 0 0 22px rgba(255,90,19,.24); }
+.scene-target::before,.scene-target::after { content:''; position:absolute; background:var(--cu); opacity:.85; }
+.scene-target::before { left:50%; top:-9px; bottom:-9px; width:2px; transform:translateX(-50%); }
+.scene-target::after { top:50%; left:-9px; right:-9px; height:2px; transform:translateY(-50%); }
+.scene-phone { position:absolute; left:50%; top:18px; width:104px; height:178px; transform:translateX(-50%); border:8px solid #060606; border-radius:22px; background:#111318; box-shadow:0 20px 38px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.05); overflow:hidden; }
+.scene-phone::before { content:''; position:absolute; top:8px; left:50%; width:34px; height:4px; border-radius:99px; background:#040404; transform:translateX(-50%); z-index:2; }
+.scene-phone-photo { position:absolute; left:8px; right:8px; top:24px; height:68px; border-radius:4px; overflow:hidden; background:linear-gradient(180deg,#b6c2ca 0 34%,#756b5d 35% 48%,#2d2b28 49% 100%); }
+.scene-phone-photo::before { content:''; position:absolute; inset:35% -8% -2%; background:linear-gradient(120deg,#2a2927,#6d6356); transform:skewY(-8deg); }
+.scene-phone-photo::after { content:''; position:absolute; left:18%; right:13%; bottom:16%; height:35%; background:#7d705f; clip-path:polygon(0 48%,50% 0,100% 48%,100% 100%,0 100%); box-shadow:0 0 0 2px rgba(255,255,255,.13) inset; }
+.scene-ui-line { position:absolute; left:14px; right:14px; height:5px; border-radius:99px; background:rgba(245,240,230,.18); }
+.scene-ui-line.one { top:106px; }
+.scene-ui-line.two { top:117px; right:34px; }
+.scene-ui-line.three { top:128px; }
+.scene-send { position:absolute; left:14px; right:14px; bottom:16px; height:28px; border-radius:5px; background:linear-gradient(135deg,#ff6a1a,#dc4d13); color:#111; display:flex; align-items:center; justify-content:center; font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:900; letter-spacing:1.8px; text-transform:uppercase; }
+.scene-mail { position:absolute; inset:0; background:linear-gradient(180deg,#302924,#151311); }
+.scene-mail::before { content:''; position:absolute; left:0; right:0; bottom:0; height:44%; background:linear-gradient(180deg,#6e5e4b,#3f342b); }
+.scene-door { position:absolute; left:50%; top:22px; width:96px; height:150px; transform:translateX(-50%); background:linear-gradient(160deg,#76563d,#4a3425); box-shadow:0 0 0 2px rgba(0,0,0,.26) inset, 0 20px 40px rgba(0,0,0,.32); }
+.scene-slot { position:absolute; left:50%; top:86px; width:56px; height:7px; transform:translateX(-50%); background:#211611; box-shadow:0 2px 0 rgba(255,255,255,.08) inset; }
+.scene-card { position:absolute; left:50%; top:80px; width:70px; height:42px; transform:translateX(-50%) rotate(-4deg); background:#f6efe4; box-shadow:0 12px 24px rgba(0,0,0,.34); border-left:9px solid var(--cu); }
+.scene-card::before { content:''; position:absolute; left:10px; right:9px; top:9px; height:3px; background:rgba(23,20,17,.55); box-shadow:0 8px 0 rgba(23,20,17,.32), 0 16px 0 rgba(23,20,17,.24); }
+.scene-card::after { content:''; position:absolute; right:8px; bottom:7px; width:14px; height:14px; background:repeating-linear-gradient(90deg,#111 0 3px,#fff 3px 6px),repeating-linear-gradient(#111 0 3px,#fff 3px 6px); background-blend-mode:multiply; opacity:.82; }
 .loop-frame-cap { flex: 1; }
 .loop-frame-h {
   font-family: 'Barlow Condensed', sans-serif;
@@ -365,8 +599,8 @@ nav {
   position: relative;
 }
 .voice-quote {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
   font-size: 17px; line-height: 1.55;
   color: var(--hi);
 }
@@ -422,7 +656,7 @@ nav {
 .split-tag.good { color:var(--cu); }
 .split-tag.good::before { content:''; display:block; width:24px; height:1px; background:var(--cu); }
 .split-h {
-  font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:700;
+  font-family:'Barlow Condensed',sans-serif; font-style:normal; font-weight:900; text-transform:uppercase;
   font-size:clamp(32px,3.5vw,52px); line-height:.9; letter-spacing:-1px;
   margin-bottom:24px;
 }
@@ -456,18 +690,18 @@ nav {
 .ch {
   width:110px; height:110px; position:relative;
 }
-.ch-r1 { position:absolute; inset:0; border:1.5px solid rgba(220,90,31,.5); border-radius:50%; animation:glow 2s ease-in-out infinite; }
-.ch-r2 { position:absolute; inset:18px; border:1px solid rgba(220,90,31,.25); border-radius:50%; }
+.ch-r1 { position:absolute; inset:0; border:1.5px solid rgba(255,90,19,.5); border-radius:50%; animation:glow 2s ease-in-out infinite; }
+.ch-r2 { position:absolute; inset:18px; border:1px solid rgba(255,90,19,.25); border-radius:50%; }
 .ch-dot { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:5px; height:5px; border-radius:50%; background:var(--cu); animation:glow 1.5s ease-in-out infinite; }
-.ch-lh { position:absolute; top:50%; left:-14px; right:-14px; height:1px; background:linear-gradient(90deg,transparent,rgba(220,90,31,.6),transparent); transform:translateY(-50%); }
-.ch-lv { position:absolute; left:50%; top:-14px; bottom:-14px; width:1px; background:linear-gradient(180deg,transparent,rgba(220,90,31,.6),transparent); transform:translateX(-50%); }
+.ch-lh { position:absolute; top:50%; left:-14px; right:-14px; height:1px; background:linear-gradient(90deg,transparent,rgba(255,90,19,.6),transparent); transform:translateY(-50%); }
+.ch-lv { position:absolute; left:50%; top:-14px; bottom:-14px; width:1px; background:linear-gradient(180deg,transparent,rgba(255,90,19,.6),transparent); transform:translateX(-50%); }
 .ch-c { position:absolute; width:14px; height:14px; border-color:var(--cu); border-style:solid; border-width:0; }
 .ch-c.tl { top:6px; left:6px; border-top-width:2px; border-left-width:2px; }
 .ch-c.tr { top:6px; right:6px; border-top-width:2px; border-right-width:2px; }
 .ch-c.bl { bottom:6px; left:6px; border-bottom-width:2px; border-left-width:2px; }
 .ch-c.br { bottom:6px; right:6px; border-bottom-width:2px; border-right-width:2px; }
 /* Scan line */
-.ch-scan { position:absolute; left:0; right:0; height:1.5px; background:linear-gradient(90deg,transparent,rgba(220,90,31,.4),transparent); animation:scanDown 2.8s ease-in-out infinite; top:0; }
+.ch-scan { position:absolute; left:0; right:0; height:1.5px; background:linear-gradient(90deg,transparent,rgba(255,90,19,.4),transparent); animation:scanDown 2.8s ease-in-out infinite; top:0; }
 
 /* ════════════════════════════════════
    HOW IT WORKS — 3 BIG CARDS
@@ -482,27 +716,27 @@ nav {
 .sec-tag { font-family:'DM Mono',monospace; font-size:9.5px; color:var(--cu); letter-spacing:3.5px; text-transform:uppercase; margin-bottom:20px; display:flex; align-items:center; gap:12px; }
 .sec-tag::before { content:''; display:block; width:28px; height:1px; background:var(--cu); flex-shrink:0; }
 .sec-h {
-  font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:700;
-  font-size:clamp(42px,5.5vw,72px); line-height:.88; letter-spacing:-2px;
+  font-family:'Barlow Condensed',sans-serif; font-style:normal; font-weight:900; text-transform:uppercase;
+  font-size:clamp(48px,6vw,86px); line-height:.86; letter-spacing:0;
   color:var(--hi); margin-bottom:60px;
 }
 .sec-h .cu { color:var(--cu); }
-.how-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(220,90,31,.04); border-radius:8px; overflow:hidden; }
+.how-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(255,90,19,.04); border-radius:8px; overflow:hidden; }
 .hc {
   background:var(--bg2); padding:44px 36px;
   position:relative; overflow:hidden;
   transition:background .25s;
 }
 .hc:hover { background:var(--bg3); }
-.hc::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--cu),rgba(220,90,31,.3)); opacity:0; transition:opacity .25s; }
+.hc::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--cu),rgba(255,90,19,.3)); opacity:0; transition:opacity .25s; }
 .hc:hover::before { opacity:1; }
 .hc-n { font-family:'DM Mono',monospace; font-size:9px; color:var(--cu); letter-spacing:3px; margin-bottom:24px; display:flex; align-items:center; gap:10px; }
-.hc-n::after { content:''; flex:1; height:1px; background:rgba(220,90,31,.1); }
-.hc-ico { width:44px; height:44px; background:rgba(220,90,31,.07); border:.5px solid rgba(220,90,31,.2); border-radius:7px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; }
+.hc-n::after { content:''; flex:1; height:1px; background:rgba(255,90,19,.1); }
+.hc-ico { width:44px; height:44px; background:rgba(255,90,19,.07); border:.5px solid rgba(255,90,19,.2); border-radius:7px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; }
 .hc-h { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:22px; letter-spacing:.5px; text-transform:uppercase; color:var(--hi); margin-bottom:12px; }
 .hc-b { font-size:13px; font-weight:300; color:var(--body); line-height:1.75; }
 .hc-b strong { color:rgba(232,213,192,.75); font-weight:400; }
-.hc-t { font-family:'DM Mono',monospace; font-size:8.5px; color:var(--cu); letter-spacing:2px; text-transform:uppercase; margin-top:20px; padding-top:16px; border-top:.5px solid rgba(220,90,31,.07); }
+.hc-t { font-family:'DM Mono',monospace; font-size:8.5px; color:var(--cu); letter-spacing:2px; text-transform:uppercase; margin-top:20px; padding-top:16px; border-top:.5px solid rgba(255,90,19,.07); }
 
 /* ════════════════════════════════════
    ECONOMICS — THE SHOWSTOPPER
@@ -512,7 +746,7 @@ nav {
   background: var(--bg);
   overflow:hidden;
 }
-.econ-top { height:1px; background:linear-gradient(90deg,transparent,rgba(220,90,31,.4),rgba(220,90,31,.6),rgba(220,90,31,.4),transparent); }
+.econ-top { height:1px; background:linear-gradient(90deg,transparent,rgba(255,90,19,.4),rgba(255,90,19,.6),rgba(255,90,19,.4),transparent); }
 
 /* GIANT NUMBER PANEL */
 .econ-hero {
@@ -521,12 +755,12 @@ nav {
   text-align:center;
   overflow:hidden;
 }
-.econ-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(220,90,31,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(220,90,31,.015) 1px,transparent 1px); background-size:52px 52px; pointer-events:none; }
-.econ-glow { position:absolute; inset:0; background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(220,90,31,.07) 0%,transparent 70%); pointer-events:none; }
+.econ-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(255,90,19,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,90,19,.015) 1px,transparent 1px); background-size:52px 52px; pointer-events:none; }
+.econ-glow { position:absolute; inset:0; background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(255,90,19,.07) 0%,transparent 70%); pointer-events:none; }
 .econ-label { font-family:'DM Mono',monospace; font-size:10px; color:var(--cu); letter-spacing:4px; text-transform:uppercase; margin-bottom:28px; display:flex; align-items:center; justify-content:center; gap:16px; }
 .econ-label::before, .econ-label::after { content:''; display:block; width:48px; height:1px; background:var(--cu); }
 .econ-num-wrap { position:relative; display:inline-block; }
-.econ-48 {
+.econ-roi{
   font-family:'Barlow Condensed',sans-serif;
   font-weight:900;
   font-size:clamp(130px,20vw,240px);
@@ -534,10 +768,10 @@ nav {
   color:var(--cu);
   position:relative; z-index:1;
 }
-.econ-x { font-size:.5em; color:rgba(220,90,31,.55); letter-spacing:-2px; }
+.econ-x { font-size:.5em; color:rgba(255,90,19,.55); letter-spacing:-2px; }
 /* Rings behind number */
-.econ-ring { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:50%; border:1px solid rgba(220,90,31,.08); pointer-events:none; }
-.econ-hl { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(20px,2.5vw,30px); color:var(--hi); letter-spacing:-1px; margin-bottom:10px; }
+.econ-ring { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:50%; border:1px solid rgba(255,90,19,.08); pointer-events:none; }
+.econ-hl { font-family:'DM Sans',sans-serif; font-style:normal; font-weight:700; font-size:clamp(20px,2.5vw,30px); color:var(--hi); letter-spacing:-1px; margin-bottom:10px; }
 .econ-note { font-family:'DM Mono',monospace; font-size:10px; color:var(--dim); letter-spacing:1.5px; }
 
 /* IO SPLIT */
@@ -548,8 +782,8 @@ nav {
 }
 .io-card { background:var(--bg2); border:.5px solid var(--edge); border-radius:6px; overflow:hidden; }
 .io-head { padding:20px 28px; border-bottom:.5px solid var(--edge); }
-.io-head.in { background:rgba(220,90,31,.04); }
-.io-head.out { background:rgba(220,90,31,.08); }
+.io-head.in { background:rgba(255,90,19,.04); }
+.io-head.out { background:rgba(255,90,19,.08); }
 .io-tag { font-family:'DM Mono',monospace; font-size:8.5px; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:5px; }
 .io-tag.in { color:var(--dim); }
 .io-tag.out { color:var(--cu); }
@@ -562,7 +796,7 @@ nav {
 .io-row-v.cu { color:var(--cu); }
 .io-row-v.hi { color:var(--hi); }
 .io-eq { display:flex; align-items:center; justify-content:center; padding-top:48px; }
-.io-eq-sign { font-family:'Barlow Condensed',sans-serif; font-size:48px; font-weight:900; color:rgba(220,90,31,.2); }
+.io-eq-sign { font-family:'Barlow Condensed',sans-serif; font-size:48px; font-weight:900; color:rgba(255,90,19,.2); }
 
 /* BAR CHART */
 .econ-bars {
@@ -584,7 +818,7 @@ nav {
 .bar-track { height:8px; background:rgba(255,255,255,.04); border-radius:4px; overflow:hidden; }
 .bar-fill { height:100%; border-radius:4px; transition:width 2s cubic-bezier(.16,1,.3,1); width:0; }
 .bar-fill.dim { background:var(--bg3); }
-.bar-fill.cu { background:linear-gradient(90deg,#a04415,#dc5a1f,#e8722f); }
+.bar-fill.cu { background:linear-gradient(90deg,#a04415,#ff5a13,#e8722f); }
 .bar-sub { font-family:'DM Mono',monospace; font-size:8.5px; color:rgba(74,82,96,.8); letter-spacing:1px; margin-top:7px; }
 
 /* QUOTES */
@@ -599,15 +833,15 @@ nav {
   border-radius:6px; padding:36px 40px 32px;
   overflow:hidden;
 }
-.eq-bg { position:absolute; top:12px; left:20px; font-family:'Barlow Condensed',sans-serif; font-size:120px; font-weight:900; color:rgba(220,90,31,.06); line-height:.7; pointer-events:none; }
-.eq-txt { position:relative; z-index:1; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:var(--hi); line-height:1.6; margin-bottom:16px; }
+.eq-bg { position:absolute; top:12px; left:20px; font-family:'Barlow Condensed',sans-serif; font-size:120px; font-weight:900; color:rgba(255,90,19,.06); line-height:.7; pointer-events:none; }
+.eq-txt { position:relative; z-index:1; font-family:'DM Sans',sans-serif; font-style:normal; font-weight:700; font-size:18px; color:var(--hi); line-height:1.6; margin-bottom:16px; }
 .eq-attr { position:relative; z-index:1; display:flex; align-items:center; gap:10px; }
-.eq-line { width:24px; height:1px; background:rgba(220,90,31,.4); }
+.eq-line { width:24px; height:1px; background:rgba(255,90,19,.4); }
 .eq-name { font-family:'DM Mono',monospace; font-size:8.5px; color:var(--dim); letter-spacing:1.5px; text-transform:uppercase; }
 
 /* STAT TICKER */
 .econ-stats {
-  border-top:.5px solid rgba(220,90,31,.08);
+  border-top:.5px solid rgba(255,90,19,.08);
   background:var(--bg2);
   display:grid; grid-template-columns:repeat(4,1fr);
 }
@@ -626,12 +860,12 @@ nav {
   overflow:hidden;
 }
 .plat-inner { max-width:1200px; margin:0 auto; }
-.plat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(220,90,31,.04); border-radius:8px; overflow:hidden; margin-top:56px; }
+.plat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(255,90,19,.04); border-radius:8px; overflow:hidden; margin-top:56px; }
 .pg { background:var(--bg2); padding:36px 30px; transition:background .2s; }
 .pg:hover { background:var(--bg3); }
 .pg-tag { font-family:'DM Mono',monospace; font-size:8px; color:var(--dim); letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; }
 .pg-ico { width:36px; height:36px; margin-bottom:14px; background:rgba(232,213,192,.04); border:.5px solid rgba(232,213,192,.08); border-radius:6px; display:flex; align-items:center; justify-content:center; }
-.pg.feat .pg-ico { background:rgba(220,90,31,.07); border-color:rgba(220,90,31,.2); }
+.pg.feat .pg-ico { background:rgba(255,90,19,.07); border-color:rgba(255,90,19,.2); }
 .pg-h { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:700; letter-spacing:.3px; text-transform:uppercase; color:var(--hi); margin-bottom:8px; }
 .pg-b { font-size:13px; font-weight:300; color:var(--body); line-height:1.7; }
 
@@ -645,14 +879,14 @@ nav {
   overflow:hidden;
 }
 .pricing-inner { max-width:1200px; margin:0 auto; }
-.price-cards { display:grid; grid-template-columns:1fr 1fr; gap:2px; max-width:800px; background:rgba(220,90,31,.06); border-radius:8px; overflow:hidden; border:.5px solid rgba(220,90,31,.12); margin-top:52px; }
+.price-cards { display:grid; grid-template-columns:1fr 1fr; gap:2px; max-width:800px; background:rgba(255,90,19,.06); border-radius:8px; overflow:hidden; border:.5px solid rgba(255,90,19,.12); margin-top:52px; }
 .pc { background:var(--bg2); padding:44px 40px; }
-.pc.feat { background:rgba(220,90,31,.05); }
+.pc.feat { background:rgba(255,90,19,.05); }
 .pc-tag { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; margin-bottom:20px; display:flex; align-items:center; gap:10px; }
 .pc-tag::before { content:''; width:14px; height:1px; background:currentColor; flex-shrink:0; }
 .pc-tag.cu { color:var(--cu); }
 .pc-tag.cr { color:rgba(221,227,234,.6); }
-.pc-big { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:72px; line-height:1; letter-spacing:-3px; margin-bottom:4px; }
+.pc-big { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:76px; line-height:1; letter-spacing:0; margin-bottom:4px; }
 .pc-big.cu { color:var(--cu); }
 .pc-big.cr { color:rgba(221,227,234,.7); }
 .pc-per { font-family:'DM Mono',monospace; font-size:9.5px; color:var(--dim); letter-spacing:1px; margin-bottom:28px; }
@@ -675,11 +909,11 @@ nav {
   text-align:center;
   overflow:hidden;
 }
-.cta-glow { position:absolute; inset:0; background:radial-gradient(ellipse 55% 50% at 50% 50%,rgba(220,90,31,.07) 0%,transparent 100%); pointer-events:none; }
-.cta-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(220,90,31,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(220,90,31,.015) 1px,transparent 1px); background-size:52px 52px; pointer-events:none; }
-.cta-top { position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(220,90,31,.4),rgba(220,90,31,.6),rgba(220,90,31,.4),transparent); }
-.cta-mark { margin:0 auto 40px; display:block; }
-.cta-h { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(56px,8vw,110px); letter-spacing:-3px; line-height:.88; text-transform:uppercase; color:var(--hi); margin-bottom:24px; position:relative; z-index:1; }
+.cta-glow { position:absolute; inset:0; background:radial-gradient(ellipse 55% 50% at 50% 50%,rgba(255,90,19,.07) 0%,transparent 100%); pointer-events:none; }
+.cta-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(255,90,19,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,90,19,.015) 1px,transparent 1px); background-size:52px 52px; pointer-events:none; }
+.cta-top { position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(255,90,19,.4),rgba(255,90,19,.6),rgba(255,90,19,.4),transparent); }
+.cta-mark { width:92px; height:92px; margin:0 auto 34px; display:block; object-fit:contain; opacity:.95; filter:drop-shadow(0 0 22px rgba(255,90,19,.28)); }
+.cta-h { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(52px,8vw,104px); letter-spacing:0; line-height:.82; text-transform:uppercase; color:var(--hi); margin-bottom:28px; position:relative; z-index:1; text-wrap:balance; }
 .cta-h .cu { color:var(--cu); }
 .cta-p { font-size:16px; font-weight:300; color:var(--body); max-width:480px; margin:0 auto 48px; line-height:1.8; position:relative; z-index:1; }
 .cta-btns { display:flex; align-items:center; justify-content:center; gap:16px; position:relative; z-index:1; }
@@ -695,6 +929,11 @@ footer {
   display:flex; align-items:center; justify-content:space-between;
 }
 .ft-lockup { width:112px; height:28px; object-fit:contain; object-position:left center; display:block; opacity:.82; }
+.ft-brand-lockup { display:flex; align-items:center; gap:8px; opacity:.9; }
+.ft-lockup { width:146px; height:auto; display:block; object-fit:contain; filter:drop-shadow(0 0 10px rgba(255,90,19,.08)); }
+.ft-brand-lockup .brand-mark { width:24px; height:24px; }
+.ft-brand-lockup .brand-word { font-size:18px; }
+.ft-brand-lockup .brand-tag { display:none; }
 .ft-brand { font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:900; letter-spacing:2.5px; text-transform:uppercase; color:var(--dim); }
 .ft-brand em { color:var(--cu); font-style:normal; }
 .ft-tag { font-family:'DM Mono',monospace; font-size:8.5px; color:var(--dim); letter-spacing:3px; text-transform:uppercase; }
@@ -730,7 +969,7 @@ footer {
 <!-- NAV -->
 <nav>
   <a href="/" class="nav-logo">
-    <img class="nav-lockup" src="/spotsend-lockup.png" width="142" height="36" alt="SpotSend"/>
+    <img class="nav-lockup" src="/spotsend-lockup-transparent.png" width="176" height="44" alt="SpotSend"/>
   </a>
   <div class="nav-links">
     <a href="#loop" class="on">◎ The Loop</a>
@@ -740,7 +979,7 @@ footer {
   </div>
   <div class="nav-r">
     <a href="https://app.spotsend.io" class="nav-in">Sign In</a>
-    <a href="#access-form" class="nav-cta">Request Access</a>
+    <a href="#access-form" class="nav-cta">Start Free</a>
   </div>
 </nav>
 
@@ -748,7 +987,8 @@ footer {
 <section id="hero">
   <div class="h-grid"></div>
   <div class="h-atm"></div>
-  <div class="h-wm" aria-hidden="true">48×</div>
+  <div class="h-wm" aria-hidden="true">6x9</div>
+  <div class="h-product" aria-hidden="true"><img src="/postcard-front-sanitized.png" alt=""/></div>
 
   <div class="h-inner">
     <div class="h-pill" style="animation:fadeIn .5s ease both;">
@@ -765,17 +1005,17 @@ footer {
     <p class="h-sub" style="animation:fadeUp .7s .2s ease both;">
       You see the worn siding, the overgrown yard, the property that needs work.
       <strong>You keep driving. That stops now.</strong>
-      Snap a photo — we mail that homeowner a personalized postcard by Friday.
+      Snap a photo — we mail that homeowner a personalized postcard that lands in about a week.
     </p>
 
     <div class="h-ctas" style="animation:fadeUp .7s .3s ease both;">
-      <a href="#access-form" class="btn-cu">Request Early Access</a>
+      <a href="#access-form" class="btn-cu">Start With 10 Free Sends</a>
       <a href="#loop" class="btn-ghost">See it in 30 seconds →</a>
     </div>
 
     <div class="h-proof" style="animation:fadeUp .7s .4s ease both;">
       <div class="hp-item"><div class="hp-n">30s</div><div class="hp-l">Spot to Send</div></div>
-      <div class="hp-item"><div class="hp-n">4-7 days</div><div class="hp-l">In Mailbox</div></div>
+      <div class="hp-item"><div class="hp-n">~1 week</div><div class="hp-l">In Mailbox</div></div>
       <div class="hp-item"><div class="hp-n">$1.75</div><div class="hp-l">Per Card, All-In</div></div>
       <div class="hp-item"><div class="hp-n">$99</div><div class="hp-l">Per Month</div></div>
     </div>
@@ -788,6 +1028,59 @@ footer {
 </section>
 
 <!-- ══════════ SPOTTING WORKFLOW VISUAL ══════════ -->
+<!-- PRODUCT SHOWCASE -->
+<section id="showcase">
+  <div class="showcase-inner">
+    <div class="showcase-head">
+      <div>
+        <div class="showcase-kicker">From phone to mailbox</div>
+        <h2 class="showcase-title">A real 6x9 postcard built from <span>the job you spotted.</span></h2>
+      </div>
+      <p class="showcase-copy">SpotSend turns a property photo into a branded 6x9 postcard with an estimate range, call-to-action, QR code, and delivery tracking.</p>
+    </div>
+
+    <div class="showcase-flow">
+      <div class="show-card">
+        <div class="show-label">01 / Capture</div>
+        <div class="phone-shell has-shot">
+          <div class="phone-top">SPOT BID</div>
+          <img class="phone-live-shot" src="/ui-crop-spotbid.png" alt=""/>
+          <div class="phone-photo"><div class="phone-house"></div></div>
+          <div class="phone-ui">
+            <div class="phone-field"></div>
+            <div class="phone-field short"></div>
+            <div class="phone-field"></div>
+            <div class="phone-btn">Send It</div>
+          </div>
+        </div>
+        <div class="show-caption">Snap the property<span>Contractor spots an opportunity from the truck.</span></div>
+      </div>
+
+      <div class="show-card">
+        <div class="show-label">02 / Render</div>
+        <div class="postcard-stage">
+          <div class="postcard-shadow"></div>
+          <div class="postcard-back">
+            <img class="postcard-img" src="/postcard-back-sanitized.png" alt="Generic SpotSend postcard back example"/>
+          </div>
+          <div class="postcard-render as-image">
+            <img class="postcard-img" src="/postcard-front-sanitized.png" alt="Generic SpotSend postcard front example"/>
+          </div>
+        </div>
+        <div class="show-caption">Brand the postcard<span>Photo stays the focal point. The offer, estimate range, QR code, and contact info are ready for the homeowner.</span></div>
+      </div>
+
+      <div class="show-card">
+        <div class="show-label">03 / Mailbox</div>
+        <div class="mailbox-scene">
+          <img class="mailbox-photo" src="/mailbox-postcard-realistic.png" alt="SpotSend postcard delivered inside a mailbox"/>
+        </div>
+        <div class="show-caption">Land at the house<span>Printed, addressed, and mailed through USPS with tracking in SpotSend.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Three-frame static sequence showing the actual product loop:               -->
 <!-- (1) contractor sees a property from truck → (2) snaps a photo →            -->
 <!-- (3) postcard lands at that house. Static SVG, mobile-friendly,             -->
@@ -803,34 +1096,7 @@ footer {
       <div class="loop-frame">
         <div class="loop-num">01</div>
         <div class="loop-frame-art" aria-hidden="true">
-          <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
-            <!-- sky -->
-            <rect width="200" height="80" fill="#2a2522"/>
-            <!-- horizon glow -->
-            <rect y="65" width="200" height="20" fill="#3d2a1f" opacity=".5"/>
-            <!-- ground -->
-            <rect y="80" width="200" height="60" fill="#1c1916"/>
-            <!-- road -->
-            <polygon points="80,80 120,80 200,140 0,140" fill="#0d0c0b"/>
-            <!-- road dashes -->
-            <line x1="100" y1="85" x2="100" y2="100" stroke="#dc5a1f" stroke-width="2" opacity=".5"/>
-            <line x1="100" y1="110" x2="100" y2="130" stroke="#dc5a1f" stroke-width="2" opacity=".3"/>
-            <!-- house with damaged driveway -->
-            <rect x="125" y="55" width="55" height="30" fill="#3a2f29"/>
-            <polygon points="125,55 152,38 180,55" fill="#2a221d"/>
-            <rect x="135" y="65" width="8" height="12" fill="#5a4a3d"/>
-            <rect x="155" y="65" width="8" height="8" fill="#5a4a3d"/>
-            <!-- driveway with cracks -->
-            <polygon points="125,85 180,85 175,100 130,100" fill="#5a5651"/>
-            <line x1="140" y1="87" x2="148" y2="98" stroke="#1c1916" stroke-width="1.2"/>
-            <line x1="158" y1="86" x2="165" y2="99" stroke="#1c1916" stroke-width="1"/>
-            <!-- spot indicator -->
-            <circle cx="152" cy="92" r="13" fill="none" stroke="#dc5a1f" stroke-width="1.5" stroke-dasharray="3 2"/>
-            <circle cx="152" cy="92" r="3" fill="#dc5a1f"/>
-            <!-- truck windshield framing (foreground) -->
-            <path d="M 0 0 L 30 0 L 18 50 L 0 50 Z" fill="#1c1916" opacity=".4"/>
-            <path d="M 200 0 L 170 0 L 182 50 L 200 50 Z" fill="#1c1916" opacity=".4"/>
-          </svg>
+          <img class="ui-shot spotbid" src="/ui-crop-spotbid.png" alt=""/>
         </div>
         <div class="loop-frame-cap">
           <div class="loop-frame-h">You spot it.</div>
@@ -841,8 +1107,8 @@ footer {
       <!-- Connector arrow -->
       <div class="loop-arrow" aria-hidden="true">
         <svg viewBox="0 0 40 12" xmlns="http://www.w3.org/2000/svg">
-          <line x1="0" y1="6" x2="34" y2="6" stroke="#dc5a1f" stroke-width="1.5" stroke-dasharray="2 2"/>
-          <polygon points="40,6 32,2 32,10" fill="#dc5a1f"/>
+          <line x1="0" y1="6" x2="34" y2="6" stroke="#ff5a13" stroke-width="1.5" stroke-dasharray="2 2"/>
+          <polygon points="40,6 32,2 32,10" fill="#ff5a13"/>
         </svg>
       </div>
 
@@ -850,35 +1116,7 @@ footer {
       <div class="loop-frame">
         <div class="loop-num">02</div>
         <div class="loop-frame-art" aria-hidden="true">
-          <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
-            <!-- phone outline -->
-            <rect x="60" y="10" width="80" height="120" rx="10" fill="#0a0908" stroke="#3d3631" stroke-width="1.5"/>
-            <!-- phone screen -->
-            <rect x="65" y="20" width="70" height="100" rx="3" fill="#1c1916"/>
-            <!-- camera viewfinder header -->
-            <rect x="65" y="20" width="70" height="14" fill="#dc5a1f" opacity=".15"/>
-            <text x="100" y="30" text-anchor="middle" font-family="monospace" font-size="6" fill="#dc5a1f" letter-spacing="1.5">SPOT IT</text>
-            <!-- preview photo of the house -->
-            <rect x="70" y="38" width="60" height="40" fill="#3a2f29"/>
-            <polygon points="70,38 100,28 130,38" fill="#2a221d"/>
-            <rect x="80" y="50" width="6" height="9" fill="#5a4a3d"/>
-            <polygon points="70,68 130,68 127,78 73,78" fill="#5a5651"/>
-            <!-- crosshair on photo -->
-            <circle cx="100" cy="73" r="6" fill="none" stroke="#dc5a1f" stroke-width="1"/>
-            <line x1="94" y1="73" x2="98" y2="73" stroke="#dc5a1f" stroke-width="1"/>
-            <line x1="102" y1="73" x2="106" y2="73" stroke="#dc5a1f" stroke-width="1"/>
-            <line x1="100" y1="67" x2="100" y2="71" stroke="#dc5a1f" stroke-width="1"/>
-            <line x1="100" y1="75" x2="100" y2="79" stroke="#dc5a1f" stroke-width="1"/>
-            <!-- AI copy preview -->
-            <rect x="70" y="84" width="60" height="3" fill="#f5f0e6" opacity=".5"/>
-            <rect x="70" y="89" width="48" height="3" fill="#f5f0e6" opacity=".3"/>
-            <rect x="70" y="94" width="55" height="3" fill="#f5f0e6" opacity=".3"/>
-            <!-- send button -->
-            <rect x="70" y="103" width="60" height="11" rx="2" fill="#dc5a1f"/>
-            <text x="100" y="111" text-anchor="middle" font-family="sans-serif" font-size="6" font-weight="700" fill="#fff" letter-spacing="1">SEND IT</text>
-            <!-- finger -->
-            <circle cx="115" cy="108" r="6" fill="#f5f0e6" opacity=".25"/>
-          </svg>
+          <img class="ui-shot pipeline" src="/ui-crop-pipeline-sanitized.png" alt=""/>
         </div>
         <div class="loop-frame-cap">
           <div class="loop-frame-h">You send it.</div>
@@ -889,8 +1127,8 @@ footer {
       <!-- Connector arrow -->
       <div class="loop-arrow" aria-hidden="true">
         <svg viewBox="0 0 40 12" xmlns="http://www.w3.org/2000/svg">
-          <line x1="0" y1="6" x2="34" y2="6" stroke="#dc5a1f" stroke-width="1.5" stroke-dasharray="2 2"/>
-          <polygon points="40,6 32,2 32,10" fill="#dc5a1f"/>
+          <line x1="0" y1="6" x2="34" y2="6" stroke="#ff5a13" stroke-width="1.5" stroke-dasharray="2 2"/>
+          <polygon points="40,6 32,2 32,10" fill="#ff5a13"/>
         </svg>
       </div>
 
@@ -898,37 +1136,11 @@ footer {
       <div class="loop-frame">
         <div class="loop-num">03</div>
         <div class="loop-frame-art" aria-hidden="true">
-          <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
-            <!-- door + porch ground -->
-            <rect width="200" height="140" fill="#3a2f29"/>
-            <rect y="100" width="200" height="40" fill="#5a4a3d"/>
-            <!-- door -->
-            <rect x="60" y="20" width="80" height="100" fill="#7a5e3d"/>
-            <rect x="62" y="22" width="76" height="96" fill="none" stroke="#5a4530" stroke-width="1.5"/>
-            <circle cx="128" cy="70" r="2" fill="#d4c8a8"/>
-            <!-- mail slot -->
-            <rect x="80" y="62" width="40" height="4" fill="#3d2f1f"/>
-            <rect x="80" y="62" width="40" height="2" fill="#1c1410"/>
-            <!-- postcard sticking out, partway through slot -->
-            <g>
-              <!-- shadow -->
-              <rect x="78" y="60" width="44" height="22" fill="#000" opacity=".3" rx="1"/>
-              <!-- card body -->
-              <rect x="78" y="58" width="44" height="22" fill="#f5f0e6" rx="1"/>
-              <!-- card band -->
-              <rect x="78" y="58" width="44" height="6" fill="#1c1916" rx="1"/>
-              <!-- accent bar -->
-              <rect x="78" y="74" width="20" height="6" fill="#dc5a1f"/>
-              <!-- text lines -->
-              <rect x="80" y="66" width="20" height="1" fill="#1c1916"/>
-              <rect x="80" y="69" width="16" height="1" fill="#1c1916" opacity=".6"/>
-              <rect x="80" y="71" width="22" height="1" fill="#1c1916" opacity=".6"/>
-            </g>
-          </svg>
+          <img class="ui-shot mailbox-shot" src="/mailbox-postcard-realistic.png" alt=""/>
         </div>
         <div class="loop-frame-cap">
-          <div class="loop-frame-h">They open it.</div>
-          <div class="loop-frame-t">A real photo of <em>their</em> property. Personalized note. Lands in 4–7 days. You get the call.</div>
+          <div class="loop-frame-h">It lands.</div>
+          <div class="loop-frame-t">A real postcard shows up in the mailbox with a property photo, clear next step, and trackable response.</div>
         </div>
       </div>
     </div>
@@ -994,7 +1206,7 @@ footer {
       <ul class="split-items bad">
         <li>You drive past the job. You keep going.</li>
         <li>EDDM blasts every address in a zip code</li>
-        <li>5,000 cards to strangers — 3 callbacks (0.06%)</li>
+        <li>5,000 cards to strangers — 3 callbacks (Mass)</li>
         <li>"Current Resident" on every card — tossed</li>
         <li>$3,500 spent. No idea what worked.</li>
         <li>Leads bought from Angi — shared with 4 others</li>
@@ -1027,14 +1239,14 @@ footer {
         <polygon points="200,450 400,450 430,700 170,700" fill="#171914"/>
         <!-- Exterior wear — general, any trade -->
         <!-- Siding gap on south wall -->
-        <rect x="420" y="260" width="3" height="40" fill="rgba(220,90,31,.25)" rx="1"/>
-        <rect x="440" y="275" width="2" height="30" fill="rgba(220,90,31,.15)" rx="1"/>
+        <rect x="420" y="260" width="3" height="40" fill="rgba(255,90,19,.25)" rx="1"/>
+        <rect x="440" y="275" width="2" height="30" fill="rgba(255,90,19,.15)" rx="1"/>
         <!-- Overgrown lawn edge -->
         <ellipse cx="200" cy="452" rx="30" ry="8" fill="#141a0a" opacity=".6"/>
         <ellipse cx="380" cy="452" rx="25" ry="7" fill="#141a0a" opacity=".5"/>
         <!-- Window issue highlight -->
         <rect x="120" y="250" width="110" height="80" rx="1" fill="#131e30" opacity=".8"/>
-        <line x1="120" y1="250" x2="230" y2="330" stroke="rgba(220,90,31,.12)" stroke-width="1"/>
+        <line x1="120" y1="250" x2="230" y2="330" stroke="rgba(255,90,19,.12)" stroke-width="1"/>
         <!-- Trees -->
         <rect x="40" y="310" width="10" height="150" fill="#0d0e0b"/>
         <ellipse cx="45" cy="295" rx="42" ry="55" fill="#0d0e0b"/>
@@ -1054,7 +1266,7 @@ footer {
         <div class="ch-scan"></div>
       </div>
       <!-- UI badges -->
-      <div style="position:absolute;top:28px;left:28px;background:rgba(15,17,20,.9);border:.5px solid rgba(220,90,31,.3);border-radius:3px;padding:5px 13px;display:flex;align-items:center;gap:7px;">
+      <div style="position:absolute;top:28px;left:28px;background:rgba(15,17,20,.9);border:.5px solid rgba(255,90,19,.3);border-radius:3px;padding:5px 13px;display:flex;align-items:center;gap:7px;">
         <div style="width:5px;height:5px;border-radius:50%;background:var(--cu);animation:glow 1.5s ease-in-out infinite;"></div>
         <span style="font-family:'DM Mono',monospace;font-size:8.5px;color:var(--cu);letter-spacing:2px;text-transform:uppercase;">AI Targeting</span>
       </div>
@@ -1067,8 +1279,8 @@ footer {
       <ul class="split-items good">
         <li>Spot any exterior job opportunity from your truck</li>
         <li>AI writes what you actually observed</li>
-        <li>50 targeted sends — 6–9 callbacks (12–18%)</li>
-        <li>Homeowner's name on every card — gets read</li>
+        <li>Targeted sends - track replies and callbacks</li>
+        <li>Personalized cards that feel specific — not like mass mail</li>
         <li>Every send tracked. Know what's working.</li>
         <li>You spotted it. No one else gets this lead.</li>
       </ul>
@@ -1078,19 +1290,19 @@ footer {
 
 <!-- ══════════ TIMELINE — REPLACES 3-STEP ══════════ -->
 <section id="how" style="position:relative;background:var(--bg2);padding:120px 48px;overflow:hidden;">
-  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(220,90,31,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(220,90,31,.015) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,90,19,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,90,19,.015) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;"></div>
 
   <div style="max-width:900px;margin:0 auto;position:relative;z-index:1;">
 
     <!-- Section label -->
     <div class="sec-tag reveal">What Actually Happens</div>
-    <h2 class="sec-h reveal reveal-d1" style="margin-bottom:72px;">Tuesday Morning.<br><span class="cu">Friday, Their Mailbox.</span></h2>
+    <h2 class="sec-h reveal reveal-d1" style="margin-bottom:72px;">Tuesday Morning.<br><span class="cu">Next Tuesday, Their Mailbox.</span></h2>
 
     <!-- Timeline -->
     <div style="position:relative;">
 
       <!-- Vertical line -->
-      <div style="position:absolute;left:110px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,rgba(220,90,31,.4),rgba(220,90,31,.15) 60%,transparent);"></div>
+      <div style="position:absolute;left:110px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,rgba(255,90,19,.4),rgba(255,90,19,.15) 60%,transparent);"></div>
 
       <!-- EVENT 1 -->
       <div class="reveal" style="display:grid;grid-template-columns:110px 1fr;gap:0;margin-bottom:56px;align-items:start;">
@@ -1100,7 +1312,7 @@ footer {
         </div>
         <div style="position:relative;padding-left:32px;">
           <!-- Dot on line -->
-          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(220,90,31,.15);"></div>
+          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(255,90,19,.15);"></div>
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--hi);margin-bottom:8px;">You Drive Past a Property</div>
           <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">You're between jobs. You see a fence that's falling apart, a roof with missing shingles, a yard that hasn't been touched in months. You pull over for 10 seconds. Open SpotSend. Snap the photo.</p>
           <div style="margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;">
@@ -1117,12 +1329,12 @@ footer {
           <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--hi);font-weight:500;">9:14 am<br><span style="color:var(--dim);font-size:9px;">+ 30 sec</span></div>
         </div>
         <div style="position:relative;padding-left:32px;">
-          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(220,90,31,.15);"></div>
+          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(255,90,19,.15);"></div>
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--hi);margin-bottom:8px;">AI Writes a Postcard — To That Person</div>
-          <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">SpotSend looks up who owns that property. Writes a note using your exact observation — not a template, not "Dear Homeowner." <em style="color:var(--hi);">Michael Ruiz at 1847 Elmwood Drive gets a card that says we drove past and noticed his specific situation.</em> Your logo. Your phone number. An estimate range for his property.</p>
+          <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">SpotSend helps turn the address and your observation into a focused mailer — not a generic "Dear Homeowner" blast. <em style="color:var(--hi);">The homeowner gets a card that references the specific issue you spotted and gives them a clear next step.</em> Your branding, your offer, and your estimate range are all included.</p>
           <div style="margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;">
             <div style="width:4px;height:4px;border-radius:50%;background:var(--cu);opacity:.6;"></div>
-            AI analysis · homeowner name · your estimate
+            AI analysis · property context · your estimate
           </div>
         </div>
       </div>
@@ -1134,9 +1346,9 @@ footer {
           <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--hi);font-weight:500;">9:15 am</div>
         </div>
         <div style="position:relative;padding-left:32px;">
-          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(220,90,31,.15);"></div>
+          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(255,90,19,.15);"></div>
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--hi);margin-bottom:8px;">You're Already Back on the Job</div>
-          <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">SpotSend sends the card to print. Full-color 6×9, on real cardstock. We address it to Michael by name, stamp it, and drop it in the USPS stream. You're already at your next job. You didn't knock on a door. You didn't make a cold call.</p>
+          <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">SpotSend sends the card to print. Full-color 6×9, on real cardstock. We address it, stamp it, and drop it in the USPS stream. You're already at your next job. You didn't knock on a door. You didn't make a cold call.</p>
           <div style="margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;">
             <div style="width:4px;height:4px;border-radius:50%;background:var(--cu);opacity:.6;"></div>
             $1.75 · print + postage included
@@ -1147,16 +1359,16 @@ footer {
       <!-- EVENT 4 -->
       <div class="reveal reveal-d3" style="display:grid;grid-template-columns:110px 1fr;gap:0;margin-bottom:56px;align-items:start;">
         <div style="text-align:right;padding-right:28px;padding-top:4px;">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--cu);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;">Thursday</div>
-          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--hi);font-weight:500;">Afternoon</div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--cu);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;">Following Tuesday</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--hi);font-weight:500;">Mailbox Day</div>
         </div>
         <div style="position:relative;padding-left:32px;">
-          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(220,90,31,.15);"></div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--hi);margin-bottom:8px;">Michael Gets the Card</div>
+          <div style="position:absolute;left:-5px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 4px rgba(255,90,19,.15);"></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--hi);margin-bottom:8px;">The Homeowner Gets the Card</div>
           <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">He pulls it from his mailbox. He sees a photo of his own property — the thing he's been meaning to deal with. A contractor already noticed. Already wrote up an estimate. Already made it easy to say yes. <em style="color:var(--hi);">He scans the QR code and calls you.</em></p>
           <div style="margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;">
             <div style="width:4px;height:4px;border-radius:50%;background:var(--cu);opacity:.6;"></div>
-            4–7 business day USPS delivery · 12–18% callback rate
+            About one week from spot to mailbox · USPS timing may vary
           </div>
         </div>
       </div>
@@ -1164,16 +1376,16 @@ footer {
       <!-- FINAL EVENT — the close -->
       <div class="reveal reveal-d4" style="display:grid;grid-template-columns:110px 1fr;gap:0;align-items:start;">
         <div style="text-align:right;padding-right:28px;padding-top:4px;">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--cu);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;">Friday</div>
-          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--hi);font-weight:500;">Morning</div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--cu);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;">Following Tuesday</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--hi);font-weight:500;">Follow-Up</div>
         </div>
         <div style="position:relative;padding-left:32px;">
           <!-- Final dot — bigger, brighter -->
-          <div style="position:absolute;left:-7px;top:5px;width:14px;height:14px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 5px rgba(220,90,31,.2),0 0 20px rgba(220,90,31,.3);"></div>
+          <div style="position:absolute;left:-7px;top:5px;width:14px;height:14px;border-radius:50%;background:var(--cu);box-shadow:0 0 0 5px rgba(255,90,19,.2),0 0 20px rgba(255,90,19,.3);"></div>
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;text-transform:uppercase;letter-spacing:-0.5px;color:var(--cu);margin-bottom:8px;">You Close the Job.</div>
-          <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">Tuesday morning you drove past a property. Friday morning you're closing a job. The entire pipeline — spot, send, call, close — ran while you were busy doing other work. That's SpotSend.</p>
+          <p style="font-size:14px;font-weight:300;color:var(--body);line-height:1.75;max-width:520px;">Last Tuesday morning you drove past a property. This Tuesday, the card is in their mailbox and you are following up with a warmer lead. The pipeline — spot, send, mail, call, close — kept moving while you were busy doing other work. That's SpotSend.</p>
           <div style="margin-top:16px;">
-            <a href="#access-form" class="btn-cu" style="font-size:12px;padding:11px 24px;">Request Early Access</a>
+            <a href="#access-form" class="btn-cu" style="font-size:12px;padding:11px 24px;">Start With 10 Free Sends</a>
           </div>
         </div>
       </div>
@@ -1186,7 +1398,7 @@ footer {
 <section id="econ">
   <div class="econ-top"></div>
 
-  <!-- Giant 48× -->
+  <!-- Giant ROI -->
   <div class="econ-hero">
     <div class="econ-grid"></div>
     <div class="econ-glow"></div>
@@ -1196,10 +1408,10 @@ footer {
         <div class="econ-ring" style="width:360px;height:360px;"></div>
         <div class="econ-ring" style="width:260px;height:260px;"></div>
         <div class="econ-ring" style="width:160px;height:160px;"></div>
-        <div class="econ-48" id="econ-counter">0<span class="econ-x">×</span></div>
+        <div class="econ-roi" id="econ-counter">0<span class="econ-x">×</span></div>
       </div>
-      <div class="econ-hl reveal reveal-d2">return on investment</div>
-      <div class="econ-note reveal reveal-d3">$186.50 in &nbsp;·&nbsp; $9,000 out &nbsp;·&nbsp; conservative 25% close rate</div>
+      <div class="econ-hl reveal reveal-d2">example return on investment</div>
+      <div class="econ-note reveal reveal-d3">$624 in &nbsp;·&nbsp; $27,000 out &nbsp;·&nbsp; 300 targeted Spot Bids/month</div>
     </div>
   </div>
 
@@ -1208,20 +1420,20 @@ footer {
     <div class="io-card reveal">
       <div class="io-head in">
         <div class="io-tag in">Your Investment</div>
-        <div class="io-total in">$186.50 <span style="font-size:18px;font-weight:400;color:var(--dim);letter-spacing:0;">/month</span></div>
+        <div class="io-total in">$624 <span style="font-size:18px;font-weight:400;color:var(--dim);letter-spacing:0;">/month</span></div>
       </div>
       <div class="io-row"><span>Platform fee</span><span class="io-row-v hi">$99.00</span></div>
-      <div class="io-row"><span>50 spot bids × $1.75</span><span class="io-row-v hi">$87.50</span></div>
+      <div class="io-row"><span>300 spot bids × $1.75</span><span class="io-row-v hi">$525.00</span></div>
       <div class="io-row"><span>Print + postage</span><span class="io-row-v cu">Included</span></div>
     </div>
     <div class="io-eq reveal reveal-d1"><div class="io-eq-sign">=</div></div>
     <div class="io-card reveal reveal-d2">
       <div class="io-head out">
         <div class="io-tag out">Your Revenue</div>
-        <div class="io-total out">$9,000</div>
+        <div class="io-total out">$27,000</div>
       </div>
-      <div class="io-row"><span>12–18% callback rate</span><span class="io-row-v hi">6–9 calls</span></div>
-      <div class="io-row"><span>Jobs closed (25% rate)</span><span class="io-row-v hi">2 jobs</span></div>
+      <div class="io-row"><span>example callback range</span><span class="io-row-v hi">24-36 calls</span></div>
+      <div class="io-row"><span>Jobs closed (20% rate)</span><span class="io-row-v hi">6 jobs</span></div>
       <div class="io-row"><span>Average job value</span><span class="io-row-v cu">$4,500</span></div>
     </div>
   </div>
@@ -1233,18 +1445,18 @@ footer {
       <div class="bar-row">
         <div class="bar-meta">
           <span class="bar-name dim">EDDM / Mass Mail</span>
-          <span class="bar-pct dim">0.06%</span>
+          <span class="bar-pct dim">Mass</span>
         </div>
         <div class="bar-track"><div class="bar-fill dim" style="--w:.4%;"></div></div>
         <div class="bar-sub">3 callbacks from 5,000 mailers · $3,500 spent · "Current Resident" on every card</div>
       </div>
       <div class="bar-row">
         <div class="bar-meta">
-          <span class="bar-name cu">◎ SpotSend Spot Bid</span>
-          <span class="bar-pct cu">12–18%</span>
+          <span class="bar-name cu">SpotSend Spot Bid</span>
+          <span class="bar-pct cu">Tracked</span>
         </div>
         <div class="bar-track"><div class="bar-fill cu" style="--w:85%;"></div></div>
-        <div class="bar-sub">6–9 callbacks from 50 targeted sends · $186.50 spent · Homeowner name on every card</div>
+        <div class="bar-sub">300 targeted Spot Bids - $624 example spend - 24 to 36 tracked callback opportunities</div>
       </div>
     </div>
   </div>
@@ -1253,22 +1465,22 @@ footer {
   <div class="econ-qs">
     <div class="eq reveal">
       <div class="eq-bg">"</div>
-      <div class="eq-txt">"It takes less than a minute to send a postcard any time we see a hazard tree. I'm getting 18% callback rate. Crazy good for direct mail."</div>
-      <div class="eq-attr"><div class="eq-line"></div><div class="eq-name">Cody Willard · Tree Love LLC</div></div>
+      <div class="eq-txt">"It takes less than a minute to send a postcard when we spot a property that needs work. The targeted approach gets attention because the card feels specific."</div>
+      <div class="eq-attr"><div class="eq-line"></div><div class="eq-name">Example contractor result</div></div>
     </div>
     <div class="eq reveal reveal-d1">
       <div class="eq-bg">"</div>
-      <div class="eq-txt">"I landed one $11K job off a single card. The picture and authenticity of the postcard is what sells it. The homeowner knew we'd been there."</div>
-      <div class="eq-attr"><div class="eq-line"></div><div class="eq-name">John Tomlinson · Southern Charm</div></div>
+      <div class="eq-txt">"The property photo is what makes it work. It doesn't feel like a coupon mailer. It feels like someone actually noticed the project."</div>
+      <div class="eq-attr"><div class="eq-line"></div><div class="eq-name">Example postcard feedback</div></div>
     </div>
   </div>
 
   <!-- Stats -->
   <div class="econ-stats reveal">
-    <div class="es"><div class="es-n">18%</div><div class="es-l">Callback Rate</div></div>
-    <div class="es"><div class="es-n">4-7 days</div><div class="es-l">Mailbox Delivery</div></div>
-    <div class="es"><div class="es-n">13×</div><div class="es-l">Better Than EDDM</div></div>
-    <div class="es"><div class="es-n">$35</div><div class="es-l">Cost Per Close</div></div>
+    <div class="es"><div class="es-n">24-36</div><div class="es-l">Example Callbacks</div></div>
+    <div class="es"><div class="es-n">~1 week</div><div class="es-l">Mailbox Delivery</div></div>
+    <div class="es"><div class="es-n">Targeted</div><div class="es-l">Better Than Blanketing</div></div>
+    <div class="es"><div class="es-n">Tracked</div><div class="es-l">Cost Per Lead</div></div>
   </div>
 </section>
 
@@ -1280,19 +1492,19 @@ footer {
     <div class="plat-grid reveal reveal-d2">
       <div class="pg feat">
         <div class="pg-tag" style="color:var(--cu);">◎ Hero Product</div>
-        <div class="pg-ico"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2L18 8V18H2V8Z" stroke="#dc5a1f" stroke-width="1.3" stroke-linejoin="round"/><circle cx="10" cy="8" r="3.5" stroke="#dc5a1f" stroke-width="1" stroke-dasharray="2 2.5"/><circle cx="10" cy="8" r="1.4" fill="#dc5a1f"/></svg></div>
+        <div class="pg-ico"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2L18 8V18H2V8Z" stroke="#ff5a13" stroke-width="1.3" stroke-linejoin="round"/><circle cx="10" cy="8" r="3.5" stroke="#ff5a13" stroke-width="1" stroke-dasharray="2 2.5"/><circle cx="10" cy="8" r="1.4" fill="#ff5a13"/></svg></div>
         <div class="pg-h">Spot Bid</div>
-        <p class="pg-b">See it. Snap it. Send it in 30 seconds. AI-personalized postcard — property photo, personal note, your estimate — mailed to that homeowner by Friday.</p>
+        <p class="pg-b">See it. Snap it. Send it in 30 seconds. AI-personalized postcard — property photo, personal note, your estimate — mailed to that homeowner in about a week.</p>
       </div>
       <div class="pg">
         <div class="pg-tag">Neighborhood</div>
         <div class="pg-ico"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="16" height="16" rx="2" stroke="rgba(232,213,192,.3)" stroke-width="1.1"/><line x1="10" y1="2" x2="10" y2="18" stroke="rgba(232,213,192,.3)" stroke-width=".8" stroke-dasharray="2 3"/><line x1="2" y1="10" x2="18" y2="10" stroke="rgba(232,213,192,.3)" stroke-width=".8" stroke-dasharray="2 3"/><circle cx="10" cy="10" r="2" stroke="rgba(232,213,192,.3)" stroke-width="1"/></svg></div>
         <div class="pg-h">Area Mailer</div>
-        <p class="pg-b">Just finished a job? Blanket the surrounding streets. Let the neighborhood know you're already working nearby. $0.82/home via USPS.</p>
+        <p class="pg-b">Just finished a job? Blanket the surrounding streets. Let the neighborhood know you're already working nearby. $0.95/card for smart campaign mailers.</p>
       </div>
       <div class="pg">
         <div class="pg-tag">Pipeline</div>
-        <div class="pg-ico"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><line x1="2" y1="15" x2="6" y2="8" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><line x1="6" y1="8" x2="10" y2="12" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><line x1="10" y1="12" x2="14" y2="6" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><line x1="14" y1="6" x2="18" y2="4" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><circle cx="14" cy="6" r="1.5" fill="#dc5a1f"/></svg></div>
+        <div class="pg-ico"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><line x1="2" y1="15" x2="6" y2="8" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><line x1="6" y1="8" x2="10" y2="12" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><line x1="10" y1="12" x2="14" y2="6" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><line x1="14" y1="6" x2="18" y2="4" stroke="rgba(232,213,192,.3)" stroke-width="1.2" stroke-linecap="round"/><circle cx="14" cy="6" r="1.5" fill="#ff5a13"/></svg></div>
         <div class="pg-h">Deal Tracker</div>
         <p class="pg-b">Every spot bid flows into your pipeline. Spotted → Sent → Called → Won. Know your cost per closed job to the penny.</p>
       </div>
@@ -1323,7 +1535,7 @@ footer {
   <div class="pricing-inner">
     <div class="sec-tag reveal">Pricing</div>
     <h2 class="sec-h reveal reveal-d1">Flat. Honest.<br><span class="cu">No Waste.</span></h2>
-    <p style="font-size:14px;color:var(--body);font-weight:300;line-height:1.8;max-width:440px;margin-top:0;" class="reveal reveal-d2">$99/month flat. Pay per send. One closed job returns 48× your monthly cost. First 10 sends on us — no credit card required.</p>
+    <p style="font-size:14px;color:var(--body);font-weight:300;line-height:1.8;max-width:440px;margin-top:0;" class="reveal reveal-d2">$99/month flat. Pay per send. One closed job can cover months of sends. First 10 sends on us — no credit card required.</p>
     <div class="price-cards reveal reveal-d3">
       <div class="pc feat">
         <div class="pc-tag cu">Platform · Monthly</div>
@@ -1344,18 +1556,18 @@ footer {
         <div class="pc-big cr">$1.75</div>
         <div class="pc-per">per spot bid · postage included</div>
         <div class="pc-items">
-          <div class="pc-i">Neighborhood mailer <span class="pc-iv cr">$0.82</span></div>
+          <div class="pc-i">Smart campaign mailer <span class="pc-iv cr">$0.95</span></div>
           <div class="pc-i">Print + postage included <span class="pc-iv cr">✓</span></div>
           <div class="pc-i">Real 6×9 full-color card <span class="pc-iv cr">✓</span></div>
-          <div class="pc-i">USPS delivery 4–7 business days <span class="pc-iv cr">✓</span></div>
+          <div class="pc-i">USPS delivery in about a week <span class="pc-iv cr">✓</span></div>
           <div class="pc-i">No minimums <span class="pc-iv cr">✓</span></div>
           <div class="pc-i">Cancel anytime <span class="pc-iv cr">✓</span></div>
-          <div class="pc-i">Homeowner name on every send <span class="pc-iv cr">✓</span></div>
+          <div class="pc-i">Personalized copy on every send <span class="pc-iv cr">✓</span></div>
         </div>
       </div>
     </div>
     <div class="price-cta reveal reveal-d4">
-      <a href="#access-form" class="btn-cu">Request Early Access</a>
+      <a href="#access-form" class="btn-cu">Start With 10 Free Sends</a>
       <span class="price-note">No credit card required · cancel anytime · no setup fees</span>
     </div>
   </div>
@@ -1366,32 +1578,24 @@ footer {
   <div class="cta-glow"></div>
   <div class="cta-grid"></div>
   <div class="cta-top"></div>
-  <svg class="cta-mark" width="80" height="80" viewBox="0 0 40 40" fill="none">
-    <path d="M20 4L36 16V38H4V16Z" fill="rgba(220,90,31,.06)" stroke="rgba(220,90,31,.4)" stroke-width="1.6" stroke-linejoin="round"/>
-    <path d="M12 38V26H28V38" stroke="rgba(220,90,31,.4)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="20" cy="17" r="6.5" stroke="rgba(220,90,31,.5)" stroke-width="1.2" stroke-dasharray="3 2.5"/>
-    <circle cx="20" cy="17" r="2.5" fill="#dc5a1f"/>
-    <line x1="20" y1="1" x2="20" y2="9" stroke="rgba(232,213,192,.4)" stroke-width="1.4" stroke-linecap="round"/>
-    <line x1="1" y1="20" x2="9" y2="20" stroke="rgba(232,213,192,.4)" stroke-width="1.4" stroke-linecap="round"/>
-    <line x1="31" y1="20" x2="39" y2="20" stroke="rgba(232,213,192,.4)" stroke-width="1.4" stroke-linecap="round"/>
-  </svg>
+  <img class="cta-mark" src="/spotsend-mark-transparent.png" width="92" height="92" alt="" aria-hidden="true"/>
   <h2 class="cta-h reveal">The Job Is<br>Already Out There.<br><span class="cu">Go Get It.</span></h2>
   <p class="cta-p reveal reveal-d1">Every route you drive, every property you pass — SpotSend turns that into a postcard, a phone call, and a signed job. Start with 10 free sends.</p>
   <div class="cta-btns reveal reveal-d2">
-    <a href="#access-form" class="btn-cu">Request Early Access</a>
+    <a href="#access-form" class="btn-cu">Start With 10 Free Sends</a>
     <a href="#how" class="btn-ghost">See How It Works →</a>
   </div>
   <p class="cta-note reveal reveal-d3">No credit card required · Cancel anytime · Postage always included</p>
 </section>
 
 <!-- ══════════ ACCESS REQUEST FORM ══════════ -->
-<section id="access-form" style="background:#0d0e10;padding:96px 24px 120px;border-top:1px solid rgba(220,90,31,0.12);position:relative;overflow:hidden;">
-  <div style="position:absolute;inset:0;background:radial-gradient(800px 400px at 50% 0%,rgba(220,90,31,0.08) 0%,transparent 70%);pointer-events:none;"></div>
+<section id="access-form" style="background:#0d0e10;padding:96px 24px 120px;border-top:1px solid rgba(255,90,19,0.12);position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(800px 400px at 50% 0%,rgba(255,90,19,0.08) 0%,transparent 70%);pointer-events:none;"></div>
   <div style="max-width:560px;margin:0 auto;position:relative;">
     <div style="text-align:center;margin-bottom:36px;">
-      <div style="font-size:11px;font-weight:700;letter-spacing:3px;color:#dc5a1f;text-transform:uppercase;margin-bottom:14px;">Early Access</div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:3px;color:#ff5a13;text-transform:uppercase;margin-bottom:14px;">Get Started</div>
       <h2 style="font-size:36px;line-height:1.1;color:#f5f0e6;font-weight:700;letter-spacing:-0.5px;margin:0 0 14px;">Tell us about your business</h2>
-      <p style="font-size:15px;color:rgba(232,213,192,0.65);line-height:1.6;margin:0;">We're onboarding contractors one at a time so we can get every account right.<br>Fill this out and we'll reach back within 24 hours.</p>
+      <p style="font-size:15px;color:rgba(232,213,192,0.65);line-height:1.6;margin:0;">Tell us your trade and market. We will help set up your first branded sends so the cards look like they came from you.</p>
     </div>
     <form id="access-request-form" style="display:flex;flex-direction:column;gap:14px;">
       <!-- honeypot — hidden from real users, bots fill it -->
@@ -1454,9 +1658,9 @@ footer {
 
       <div id="access-form-error" style="display:none;background:rgba(184,50,50,0.12);border:1px solid rgba(184,50,50,0.35);color:#f87171;padding:11px 14px;border-radius:8px;font-size:13px;line-height:1.5;"></div>
 
-      <button type="submit" id="access-submit-btn" style="background:linear-gradient(135deg,#dc5a1f,#dc5a1f);color:#fff;border:none;padding:16px 24px;border-radius:9px;font-size:15px;font-weight:700;letter-spacing:0.3px;cursor:pointer;transition:transform 0.15s,opacity 0.15s;font-family:inherit;margin-top:6px;box-shadow:0 4px 16px rgba(220,90,31,0.25);">Request Early Access →</button>
+      <button type="submit" id="access-submit-btn" style="background:linear-gradient(135deg,#ff5a13,#ff5a13);color:#fff;border:none;padding:16px 24px;border-radius:9px;font-size:15px;font-weight:700;letter-spacing:0.3px;cursor:pointer;transition:transform 0.15s,opacity 0.15s;font-family:inherit;margin-top:6px;box-shadow:0 4px 16px rgba(255,90,19,0.25);">Start With 10 Free Sends →</button>
 
-      <p style="text-align:center;font-size:11px;color:rgba(232,213,192,0.4);margin:6px 0 0;line-height:1.5;">No credit card required · We respond within 24 hours · Limited POC spots available</p>
+      <p style="text-align:center;font-size:11px;color:rgba(232,213,192,0.4);margin:6px 0 0;line-height:1.5;">No credit card required · We respond within 24 hours · We help you get set up before your first send</p>
     </form>
 
     <!-- success state, hidden by default -->
@@ -1478,7 +1682,7 @@ footer {
 
   // Pretty input focus styling
   document.querySelectorAll("#access-request-form input, #access-request-form textarea, #access-request-form select").forEach(function(el){
-    el.addEventListener("focus", function(){ this.style.borderColor = "rgba(220,90,31,0.5)"; });
+    el.addEventListener("focus", function(){ this.style.borderColor = "rgba(255,90,19,0.5)"; });
     el.addEventListener("blur", function(){ this.style.borderColor = "rgba(232,213,192,0.12)"; });
   });
 
@@ -1522,7 +1726,7 @@ footer {
         showErr(data.error || "Something went wrong — try again or email us directly.");
         submitBtn.disabled = false;
         submitBtn.style.opacity = "1";
-        submitBtn.textContent = "Request Early Access →";
+        submitBtn.textContent = "Start With 10 Free Sends →";
         return;
       }
       // Success — swap form for thank-you state
@@ -1534,7 +1738,7 @@ footer {
       showErr("Network error — check your connection and try again.");
       submitBtn.disabled = false;
       submitBtn.style.opacity = "1";
-      submitBtn.textContent = "Request Early Access →";
+      submitBtn.textContent = "Start With 10 Free Sends →";
     }
   });
 })();
@@ -1542,8 +1746,8 @@ footer {
 
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
-  <div style="display:flex;align-items:center;">
-    <img class="ft-lockup" src="/spotsend-lockup.png" width="112" height="28" alt="SpotSend"/>
+  <div class="ft-brand-lockup">
+    <img class="ft-lockup" src="/spotsend-lockup-transparent.png" alt="SpotSend"/>
   </div>
   <div class="ft-tag">Spot It · Send It · Win It</div>
   <div class="ft-copy">© 2026 SpotSend · AI-Powered Prospecting · Any Exterior Trade · spotsend.io</div>
@@ -1567,7 +1771,7 @@ footer {
   var done = false;
   function run(){
     if(done) return; done = true;
-    // 48x counter
+    // ROI counter
     var el = document.getElementById('econ-counter');
     if(el){
       var s = performance.now();
@@ -1575,7 +1779,7 @@ footer {
       (function tick(now){
         var p = Math.min((now-s)/dur,1);
         var ease = 1-Math.pow(1-p,3);
-        el.innerHTML = Math.round(ease*48) + '<span class="econ-x">\xd7</span>';
+        el.innerHTML = Math.round(ease*43) + '<span class="econ-x">\xd7</span>';
         if(p<1) requestAnimationFrame(tick);
       })(s);
     }
