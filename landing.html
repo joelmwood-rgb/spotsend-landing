@@ -928,11 +928,9 @@ footer {
   padding:24px 48px;
   display:flex; align-items:center; justify-content:space-between;
 }
-.ft-lockup { width:112px; height:28px; object-fit:contain; object-position:left center; display:block; opacity:.82; }
-.ft-brand-lockup { display:flex; align-items:center; gap:8px; opacity:.9; }
-.ft-lockup { width:146px; height:auto; display:block; object-fit:contain; filter:drop-shadow(0 0 10px rgba(255,90,19,.08)); }
-.ft-brand-lockup .brand-mark { width:24px; height:24px; }
-.ft-brand-lockup .brand-word { font-size:18px; }
+.ft-brand-lockup { display:flex; align-items:center; gap:8px; opacity:.96; min-width:185px; }
+.ft-brand-lockup .brand-mark { width:34px; height:34px; }
+.ft-brand-lockup .brand-word { font-size:23px; line-height:.82; letter-spacing:.4px; }
 .ft-brand-lockup .brand-tag { display:none; }
 .ft-brand { font-family:'Barlow Condensed',sans-serif; font-size:15px; font-weight:900; letter-spacing:2.5px; text-transform:uppercase; color:var(--dim); }
 .ft-brand em { color:var(--cu); font-style:normal; }
@@ -1753,7 +1751,8 @@ footer {
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
   <div class="ft-brand-lockup">
-    <img class="ft-lockup" src="/spotsend-lockup-transparent.png" alt="SpotSend"/>
+    <img class="brand-mark" src="/spotsend-mark-transparent.png" alt="" aria-hidden="true"/>
+    <div class="brand-word">Spot<span>Send</span></div>
   </div>
   <div class="ft-tag">Spot It · Send It · Win It</div>
   <div class="ft-copy">© 2026 SpotSend · AI-Powered Prospecting · Any Exterior Trade · spotsend.io</div>
