@@ -79,10 +79,10 @@ nav {
 .nav-logo { display:flex; align-items:center; text-decoration:none; min-width:0; }
 .nav-lockup { width:176px; height:44px; object-fit:contain; object-position:left center; display:block; image-rendering:auto; filter:drop-shadow(0 0 10px rgba(255,90,19,.12)); }
 .brand-lockup { display:flex; align-items:center; gap:9px; min-width:0; }
-.brand-mark { width:32px; height:32px; object-fit:contain; border-radius:4px; box-shadow:0 0 0 1px rgba(255,90,19,.18), 0 0 18px rgba(255,90,19,.12); }
-.brand-word { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:23px; line-height:.9; letter-spacing:1.1px; color:var(--hi); text-transform:uppercase; }
+.brand-mark { width:46px; height:46px; object-fit:contain; border-radius:6px; filter:drop-shadow(0 0 14px rgba(255,90,19,.2)); }
+.brand-word { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:32px; line-height:.82; letter-spacing:.5px; color:var(--hi); text-transform:uppercase; }
 .brand-word span { color:var(--cu); }
-.brand-tag { margin-top:4px; font-family:'DM Mono',monospace; font-size:5px; font-weight:700; letter-spacing:1px; color:rgba(245,240,230,.74); text-transform:uppercase; white-space:nowrap; }
+.brand-tag { margin-top:5px; font-family:'DM Mono',monospace; font-size:6.5px; font-weight:700; letter-spacing:1.35px; color:rgba(245,240,230,.72); text-transform:uppercase; white-space:nowrap; }
 .nav-mark { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:18px; letter-spacing:3px; text-transform:uppercase; color:var(--hi); }
 .nav-mark em { color:var(--cu); font-style:normal; }
 .nav-links { display:flex; gap:32px; }
@@ -968,8 +968,14 @@ footer {
 
 <!-- NAV -->
 <nav>
-  <a href="/" class="nav-logo">
-    <img class="nav-lockup" src="/spotsend-lockup-transparent.png" width="176" height="44" alt="SpotSend"/>
+  <a href="/" class="nav-logo" aria-label="SpotSend home">
+    <div class="brand-lockup">
+      <img class="brand-mark" src="/spotsend-mark-transparent.png" alt="" aria-hidden="true"/>
+      <div>
+        <div class="brand-word">Spot<span>Send</span></div>
+        <div class="brand-tag">Spot it · Send it · Win it</div>
+      </div>
+    </div>
   </a>
   <div class="nav-links">
     <a href="#loop" class="on">◎ The Loop</a>
