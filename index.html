@@ -1664,7 +1664,7 @@ footer {
 
       <button type="submit" id="access-submit-btn" style="background:linear-gradient(135deg,#ff5a13,#ff5a13);color:#fff;border:none;padding:16px 24px;border-radius:9px;font-size:15px;font-weight:700;letter-spacing:0.3px;cursor:pointer;transition:transform 0.15s,opacity 0.15s;font-family:inherit;margin-top:6px;box-shadow:0 4px 16px rgba(255,90,19,0.25);">Start With 10 Free Sends →</button>
 
-      <p style="text-align:center;font-size:11px;color:rgba(232,213,192,0.4);margin:6px 0 0;line-height:1.5;">No credit card required · We respond within 24 hours · We help you get set up before your first send</p>
+      <p style="text-align:center;font-size:11px;color:rgba(232,213,192,0.4);margin:6px 0 0;line-height:1.5;">No credit card required · We respond within 24 hours · Sales: <a href="mailto:hello@spotsend.io" style="color:#ff5a13;text-decoration:none;">hello@spotsend.io</a> or <a href="mailto:sales@spotsend.io" style="color:#ff5a13;text-decoration:none;">sales@spotsend.io</a></p>
     </form>
 
     <!-- success state, hidden by default -->
@@ -1727,7 +1727,7 @@ footer {
       });
       var data = await res.json().catch(function(){ return {}; });
       if (!res.ok) {
-        showErr(data.error || "Something went wrong — try again or email us directly.");
+        showErr(data.error || "Something went wrong — try again or email hello@spotsend.io directly.");
         submitBtn.disabled = false;
         submitBtn.style.opacity = "1";
         submitBtn.textContent = "Start With 10 Free Sends →";
